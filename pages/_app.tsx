@@ -10,9 +10,15 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
   <Navbar/>
   <Component {...pageProps} />
-
   <Footer/>
   
+
+
+
+
+
+
+
   <Script src="https://kit.fontawesome.com/628fde244b.js"></Script>
     </>
 

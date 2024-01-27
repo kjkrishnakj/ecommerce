@@ -9,7 +9,7 @@ const Footer = () => {
                 <div className=" px-5 py-12 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col shadow-2xl" style={{ boxShadow: "0 -20px 20px -30px rgba(0, 0, 0, 0.8)" }}>
                     <div className="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left">
                         <a className="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
-                            <Image src={logo} style={{ height: "4rem", width: "6rem" }}></Image>
+                            <Image src={logo} alt="" style={{ height: "4rem", width: "6rem" }}></Image>
 
                             <span className="ml-3 text-xl" style={{color:"#0097b2",fontFamily:"Georgia"}}>AmiKart</span>
                         </a>
