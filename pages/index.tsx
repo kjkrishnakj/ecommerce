@@ -66,7 +66,7 @@ export default function Home() {
               </a>
             </div>
             <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
-              <a className="block relative h-50 rounded overflow-hidden">
+              <a href="./product/hello" className="block relative h-50 rounded overflow-hidden">
                 <Image src={samsunggalaxys24plus} alt="" style={{ height: "16 rem", width: "17rem", border: "2px solid lightgrey", borderRadius: "1rem" }}></Image>
                 <div className="mt-4">
                   <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">Samsung</h3>

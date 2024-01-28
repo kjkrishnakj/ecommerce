@@ -45,78 +45,111 @@ const Navbar = () => {
             </header>
 
 
-            <div ref={ref} className=" w-72 sidecart absolute top-0 right-0 bg-blue-100 py-10 px-8 transition:transform transform translate-x-full" style={{borderRadius:"1rem",zIndex:1}}>
+            <div ref={ref} className=" w-72 h-full sidecart absolute top-0 right-0 bg-blue-100 py-10 px-8 transition:transform transform translate-x-full" style={{ borderRadius: "1rem", zIndex: 1 }}>
                 <h2 className="font-bold text-xl text-center">Shopping cart</h2>
-                <span onClick={toggleCart} className="absolute top-5 right-2 cursor-pointer text-xl"><i class="fa-solid fa-arrow-right-long"></i></span>
+                <span onClick={toggleCart} className="absolute top-5 right-2 cursor-pointer text-xl"><i className="fa-solid fa-arrow-right-long"></i></span>
 
                 <ol className="list-decimal">
                     <li>
-                        <div className="item-flex my-5 ">
-
-                            <div className="w-2/3 ">
+                        <div className="flex items-center justify-between my-5">
+                            <div className="w-2/3">
                                 Realme narzo 60
                             </div>
-
-                            <div className="w-1/3 flex items-center justify-center">1</div>
-
+                            <div className="w-1/3 flex items-center justify-center">
+                            <i className="fa-solid fa-circle-minus cursor-pointer mx-3"></i>  1 <i className="fa-solid fa-circle-plus mx-3 cursor-pointer"></i>
+                            </div>
                         </div>
+
                     </li>
+                   
+                   
                     <li>
-                        <div className="item-flex my-5 ">
-
-                            <div className="w-2/3 ">
+                        <div className="flex items-center justify-between my-5">
+                            <div className="w-2/3">
                                 Realme narzo 60
                             </div>
-
-                            <div className="w-1/3 flex items-center justify-center">1</div>
-
+                            <div className="w-1/3 flex items-center justify-center">
+                            <i className="fa-solid fa-circle-minus cursor-pointer mx-3"></i>  1 <i className="fa-solid fa-circle-plus mx-3 cursor-pointer"></i>
+                            </div>
                         </div>
+
                     </li>
+                   
+                   
                     <li>
-                        <div className="item-flex my-5 ">
-
-                            <div className="w-2/3 ">
+                        <div className="flex items-center justify-between my-5">
+                            <div className="w-2/3">
                                 Realme narzo 60
                             </div>
-
-                            <div className="w-1/3 flex items-center justify-center">1</div>
-
+                            <div className="w-1/3 flex items-center justify-center">
+                            <i className="fa-solid fa-circle-minus cursor-pointer mx-3"></i>  1 <i className="fa-solid fa-circle-plus mx-3 cursor-pointer"></i>
+                            </div>
                         </div>
+
                     </li>
+                   
+                   
                     <li>
-                        <div className="item-flex my-5 ">
-
-                            <div className="w-2/3 ">
+                        <div className="flex items-center justify-between my-5">
+                            <div className="w-2/3">
                                 Realme narzo 60
                             </div>
-
-                            <div className="w-1/3 flex items-center justify-center">1</div>
-
+                            <div className="w-1/3 flex items-center justify-center">
+                            <i className="fa-solid fa-circle-minus cursor-pointer mx-3"></i>  1 <i className="fa-solid fa-circle-plus mx-3 cursor-pointer"></i>
+                            </div>
                         </div>
+
                     </li>
+                   
+                   
                     <li>
-                        <div className="item-flex my-5 ">
-
-                            <div className="w-2/3 ">
+                        <div className="flex items-center justify-between my-5">
+                            <div className="w-2/3">
                                 Realme narzo 60
                             </div>
-
-                            <div className="w-1/3 flex items-center justify-center">1</div>
-
+                            <div className="w-1/3 flex items-center justify-center">
+                            <i className="fa-solid fa-circle-minus cursor-pointer mx-3"></i>  1 <i className="fa-solid fa-circle-plus mx-3 cursor-pointer"></i>
+                            </div>
                         </div>
+
                     </li>
+                   
+                   
                     <li>
-                        <div className="item-flex my-5 ">
-
-                            <div className="w-2/3 ">
+                        <div className="flex items-center justify-between my-5">
+                            <div className="w-2/3">
                                 Realme narzo 60
                             </div>
-
-                            <div className="w-1/3 flex items-center justify-center">1</div>
-
+                            <div className="w-1/3 flex items-center justify-center">
+                            <i className="fa-solid fa-circle-minus cursor-pointer mx-3"></i>  1 <i className="fa-solid fa-circle-plus mx-3 cursor-pointer"></i>
+                            </div>
                         </div>
+
                     </li>
+                   
+                   
+                    <li>
+                        <div className="flex items-center justify-between my-5">
+                            <div className="w-2/3">
+                                Realme narzo 60
+                            </div>
+                            <div className="w-1/3 flex items-center justify-center">
+                            <i className="fa-solid fa-circle-minus cursor-pointer mx-3"></i>  1 <i className="fa-solid fa-circle-plus mx-3 cursor-pointer"></i>
+                            </div>
+                        </div>
+
+                    </li>
+                   
+                   
+                    
                 </ol>
+                <div className="flex">
+
+                <button className="text-white flex mx-2 bg-indigo-500 border-0 py-2 px-3 focus:outline-none hover:bg-indigo-600 mt-4 rounded text-lg"> <span><i class="fa-solid fa-bag-shopping mr-3"></i></span>Checkout</button>
+      
+                <button className="text-white flex mx-2 bg-indigo-500 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 mt-4 rounded text-lg">Clear</button>
+      
+                </div>
 
             </div>
 
