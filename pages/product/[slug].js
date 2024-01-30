@@ -8,14 +8,14 @@ const Post = ({addToCart}) => {
 
     const router = useRouter();
     const { slug } = router.query
-    console.log(slug);
+    // console.log(slug);
     const [pin, setPin] = useState()
     const [service, setService] = useState()
 
     const checkService = async () => {
         let pins = await fetch("http://localhost:3000/api/pincode")
         let pinJson = await pins.json()
-        console.log(pin);
+        // console.log(pin);
         if (pinJson.includes(parseInt(pin))) {
             setService(true)
         } else {
