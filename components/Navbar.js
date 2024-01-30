@@ -23,7 +23,7 @@ const Navbar = ({cart,addToCart,removeFromCart,ClearCart,SubTotal}) => {
     return (
         <div>
             <header className="text-gray-600 body-font">
-                <div className=" mx-auto flex flex-wrap flex-col md:flex-row items-center shadow-xl">
+                <div className=" mx-auto flex flex-wrap flex-col md:flex-row items-center shadow-xl sticky top-0 bg-white z-10">
                     <a href="./" className="flex title-font p-1 font-medium items-center text-gray-900 mb-4 md:mb-0">
                         <Image src={logo} alt="" style={{ height: "4rem", width: "6rem" }}></Image>
 
@@ -45,7 +45,7 @@ const Navbar = ({cart,addToCart,removeFromCart,ClearCart,SubTotal}) => {
             </header>
 
 
-            <div ref={ref} className=" w-72 h-full sidecart absolute top-0 right-0 bg-blue-100 py-10 px-8 transition:transform transform translate-x-full" style={{ borderRadius: "1rem", zIndex: 1 }}>
+            <div ref={ref} className=" w-72 h-[100vh] sidecart absolute top-0 right-0 bg-blue-100 py-10 px-8 transition-transform transform translate-x-full" style={{ borderRadius: "1rem", zIndex: 1 }}>
                 <h2 className="font-bold text-xl text-center">Shopping cart</h2>
                 <span onClick={toggleCart} className="absolute top-5 right-2 cursor-pointer text-xl"><i className="fa-solid fa-arrow-right-long"></i></span>
 

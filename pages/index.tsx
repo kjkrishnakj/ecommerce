@@ -24,7 +24,7 @@ export default function Home() {
 
       <section className="text-gray-600 body-font">
         <div className="container px-5 py-24 mx-auto">
-          <div className="flex flex-wrap -m-4">
+          <div className="flex flex-wrap -m-4 justify-center" >
             <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
               <a className="block relative h-50 rounded overflow-hidden">
                 <Image src={iqooneo7pro5g} alt="" style={{ height: "16 rem", width: "17rem", border: "2px solid lightgrey", borderRadius: "1rem" }}></Image>
