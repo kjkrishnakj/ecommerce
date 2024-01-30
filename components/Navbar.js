@@ -37,7 +37,7 @@ const Navbar = ({cart,addToCart,removeFromCart,ClearCart,SubTotal}) => {
                     </nav>
                     <button onClick={toggleCart} className="cursor-pointer inline-flex items-center bg-gray-100 border-0 py-4 mr-3 px-4 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">
                         <i className="fa-solid fa-cart-shopping text-2xl"></i>
-                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" className="w-4 h-4 ml-1" viewBox="0 0 24 24">
+                        <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4 ml-1" viewBox="0 0 24 24">
                             <path d="M5 12h14M12 5l7 7-7 7"></path>
                         </svg>
                     </button>
@@ -75,7 +75,7 @@ const Navbar = ({cart,addToCart,removeFromCart,ClearCart,SubTotal}) => {
                 </ol>
                 <div className="flex">
 
-                <button className="text-white flex mx-2 bg-indigo-500 border-0 py-2 px-3 focus:outline-none hover:bg-indigo-600 mt-4 rounded text-lg"> <span><i class="fa-solid fa-bag-shopping mr-3"></i></span>Checkout</button>
+                <button className="text-white flex mx-2 bg-indigo-500 border-0 py-2 px-3 focus:outline-none hover:bg-indigo-600 mt-4 rounded text-lg"> <span><i className="fa-solid fa-bag-shopping mr-3"></i></span>Checkout</button>
       
                 <button onClick={ClearCart} className="text-white flex mx-2 bg-indigo-500 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 mt-4 rounded text-lg">Clear</button>
       
