@@ -1,7 +1,7 @@
 import React, { useRef } from "react"
 import Image from "next/image"
 // import logo from "../public/favicon (1).ico"
-import logo from "../public/ak_logo3.png"
+import logo from "../public/ak_logo4.png"
 import Link from "next/link"
 const Navbar = ({ cart, addToCart, removeFromCart, ClearCart, SubTotal }) => {
     // console.log(cart,addToCart,removeFromCart,ClearCart,SubTotal);
@@ -36,6 +36,11 @@ const Navbar = ({ cart, addToCart, removeFromCart, ClearCart, SubTotal }) => {
                         <a href="./contact" className="mr-10 hover:text-gray-900">Contact</a>
                         <a href="./order" className="mr-10 hover:text-gray-900">Orders</a>
                     </nav>
+                    <Link href='/login'><button className="rounded-full w-12 h-12 bg-gray-200 p-3 border-0 inline-flex items-center justify-center text-gray-500 mr-7   ">
+
+                        <i className="fa-regular fa-user w-5 h-5 ml-8 " style={{ marginRight: "2rem" }}></i>
+                    </button>
+                    </Link>
                     <button onClick={toggleCart} className="cursor-pointer inline-flex items-center bg-gray-100 border-0 py-4 mr-3 px-4 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">
                         <i className="fa-solid fa-cart-shopping text-2xl"></i>
                         <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4 ml-1" viewBox="0 0 24 24">
@@ -46,7 +51,8 @@ const Navbar = ({ cart, addToCart, removeFromCart, ClearCart, SubTotal }) => {
 
 
 
-                <div ref={ref} className={` w-59 h-[100vh] sidecart absolute top-0 right-0 bg-blue-100 py-10 px-8 transition-transform transform ${Object.keys(cart).length!==0? 'translate-x-0' : 'translate-x-full'}` }style={{ borderRadius: "1rem", zIndex: 1 }}>
+
+                <div ref={ref} className={` w-59 h-[100vh] sidecart absolute top-0 right-0 bg-blue-100 py-10 px-8 transition-transform transform ${Object.keys(cart).length !== 0 ? 'translate-x-0' : 'translate-x-full'}`} style={{ borderRadius: "1rem", zIndex: 1 }}>
                     <h2 className="font-bold text-xl text-center">Shopping cart</h2>
                     <span onClick={toggleCart} className="absolute top-5 right-2 cursor-pointer text-xl"><i className="fa-solid fa-arrow-right-long"></i></span>
 
@@ -83,7 +89,7 @@ const Navbar = ({ cart, addToCart, removeFromCart, ClearCart, SubTotal }) => {
                         <button onClick={ClearCart} className="text-white flex mx-2 bg-indigo-500 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 mt-4 rounded text-lg">Clear</button>
 
                     </div>
-                    <div className="my-5"><h4>SubTotal: {SubTotal}</h4></div>
+                    <div className="my-5"><h4>SubTotal: ₹{SubTotal}</h4></div>
 
                 </div>
             </header>
