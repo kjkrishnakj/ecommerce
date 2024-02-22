@@ -1,17 +1,22 @@
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image';
+import mongoose from "mongoose";
+
+import Product from "../../models/Product";
+
 import samsunggalaxys24plus from "../../public/img/samsunggalaxys24+.jpg"
 
 
-const Post = ({addToCart}) => {
-
+const Post = ({ addToCart, product, variants,buyNow }) => {
+    // console.log(product, variants);
     const router = useRouter();
     const { slug } = router.query
     // console.log(slug);
     const [pin, setPin] = useState()
     const [service, setService] = useState()
 
+   
     const checkService = async () => {
         let pins = await fetch("http://localhost:3000/api/pincode")
         let pinJson = await pins.json()
@@ -26,16 +31,17 @@ const Post = ({addToCart}) => {
     const onChangepin = (e) => {
         setPin(e.target.value)
     }
-    
+
 
     return <>
         <section className="text-gray-600 body-font overflow-hidden">
             <div className="container px-5 py-14 mx-auto">
                 <div className="lg:w-4/5 mx-auto flex flex-wrap">
-                    <Image src={samsunggalaxys24plus} alt="" style={{ height: "26rem", width: "25rem" }}></Image>
+
+                    <img src={product.img} alt="" style={{ height: "26rem", width: "25rem", margin: "5rem 0rem" }}></img>
                     <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
-                        <h2 className="text-sm title-font text-gray-500 tracking-widest">BRAND NAME</h2>
-                        <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">The Catcher in the Rye</h1>
+                        <h2 className="text-sm title-font text-gray-500 tracking-widest"> </h2>
+                        <h1 className="text-gray-900 text-3xl title-font font-medium mb-1"> {product.title}</h1>
                         <div className="flex mb-4">
                             <span className="flex items-center">
                                 <svg fill="currentColor" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4 text-indigo-500" viewBox="0 0 24 24">
@@ -73,43 +79,73 @@ const Post = ({addToCart}) => {
                                 </a>
                             </span>
                         </div>
-                        <p className="leading-relaxed">Fam locavore kickstarter distillery. Mixtape chillwave tumeric sriracha taximy chia microdosing tilde DIY. XOXO fam indxgo juiceramps cornhole raw denim forage brooklyn. Everyday carry +1 seitan poutine tumeric. Gastropub blue bottle austin listicle pour-over, neutra jean shorts keytar banjo tattooed umami cardigan.</p>
+                        <p className="leading-relaxed">{product.descr}</p>
                         <div className="flex mt-6 items-center pb-5 border-b-2 border-gray-100 mb-5">
                             <div className="flex">
                                 <span className="mr-3">Color</span>
-                                <button className="border-2 border-gray-300 rounded-full w-6 h-6 focus:outline-none"></button>
-                                <button className="border-2 border-gray-300 ml-1 bg-gray-700 rounded-full w-6 h-6 focus:outline-none"></button>
-                                <button className="border-2 border-gray-300 ml-1 bg-indigo-500 rounded-full w-6 h-6 focus:outline-none"></button>
-                            </div>
+                                {Object.keys(variants).includes('blue') && <button class="border-2 border-blue-200  bg-blue-700 rounded-full w-6 h-6 focus:outline-none"></button>}
+                                {Object.keys(variants).includes('orange') && <button class="border-2 border-blue-200 bg-orange-700 rounded-full w-6 h-6 focus:outline-none"></button>}
+                                {Object.keys(variants).includes('purple') && <button class="border-2 border-blue-200 bg-purple-700 rounded-full w-6 h-6 focus:outline-none"></button>}
+                                {Object.keys(variants).includes('black') && <button class="border-2 border-blue-200 bg-black-700 rounded-full w-6 h-6 focus:outline-none"></button>}
+                                {Object.keys(variants).includes('white') && <button class="border-2 border-blue-200 bg-white-700 rounded-full w-6 h-6 focus:outline-none"></button>}
+                                {Object.keys(variants).includes('pink') && <button class="border-2 border-blue-200 bg-pink-300 rounded-full w-6 h-6 focus:outline-none"></button>}
+                                {Object.keys(variants).includes('yellow') && <button class="border-2 border-blue-200 bg-yellow-700 rounded-full w-6 h-6 focus:outline-none"></button>}
+                                {Object.keys(variants).includes('red') && <button class="border-2 border-blue-200 bg-red-700 rounded-full w-6 h-6 focus:outline-none"></button>} </div>
 
                         </div>
                         <div className="flex">
-                            <span className="title-font font-medium text-2xl text-gray-900">$58.00</span>
-                            <button className="flex ml-10 text-white  bg-indigo-500 border-0 py-2 px-2 focus:outline-none hover:bg-indigo-600 rounded">Buy now</button>
-                            <button onClick={()=>{addToCart(slug,1,399,"Samsung Galaxy","24")}} className="flex ml-4 text-white bg-indigo-500 border-0 py-2 px-2 focus:outline-none hover:bg-indigo-600 rounded">Add to Cart</button>
+                            <span className="title-font font-medium text-2xl text-gray-900">₹{product.price}</span>
+                            <button onClick={() => { buyNow(slug, 1, product.price, product.title, product.color) }} className="flex ml-10 text-white  bg-indigo-500 border-0 py-2 px-2 focus:outline-none hover:bg-indigo-600 rounded">Buy now</button>
+                            <button onClick={() => { addToCart(slug, 1, product.price, product.title, product.color) }} className="flex ml-4 text-white bg-indigo-500 border-0 py-2 px-2 focus:outline-none hover:bg-indigo-600 rounded">Add to Cart</button>
                             <button className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
                                 <svg fill="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-5 h-5" viewBox="0 0 24 24">
                                     <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
                                 </svg>
                             </button>
-                        </div>   
+                        </div>
                         <div className="pin my-5 flex">
                             <input type="text" onChange={onChangepin} placeholder='Enter Pincode' className=" flex px-2 border-2 border-blue-500  rounded-lg" />
-                            <button  onClick={checkService} className="flex ml-2 text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">Check</button>
+                            <button onClick={checkService} className="flex ml-2 text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">Check</button>
 
                         </div>
-                        {!service && service!=null && <div className='text-red-900 text-sm mt-3'>
+                        {!service && service != null && <div className='text-red-900 text-sm mt-3'>
                             Sorry! We do not deliver to this pincode
                         </div>}
-                    
-                    {service && service!=null && <div className='text-green-900 text-sm mt-3'>
-                        Yay! This pincode is serviceable
-                    </div>}
+
+                        {service && service != null && <div className='text-green-900 text-sm mt-3'>
+                            Yay! This pincode is serviceable
+                        </div>}
+                    </div>
                 </div>
             </div>
-        </div>
-    </section >
+        </section >
     </>
 }
 
 export default Post
+
+
+export async function getServerSideProps(context) {
+    if (!mongoose.connections[0].readyState) {
+        await mongoose.connect(process.env.MONGO_URI)
+    }
+
+
+    let product = await Product.findOne({ slug: context.query.slug })
+    let variants = await Product.find({ title: product.title })
+    let colorSlug = {}
+    for (let item of variants) {
+        if (Object.keys(colorSlug).includes(item.color)) {
+            colorSlug[item.color] = { slug: item.slug }
+        }       
+        else {
+            colorSlug[item.color] = {}
+
+            colorSlug[item.color] = { slug: item.slug }
+        }
+    }
+
+    return {
+        props: { product: JSON.parse(JSON.stringify(product)), variants: JSON.parse(JSON.stringify(colorSlug)) }
+    }
+}

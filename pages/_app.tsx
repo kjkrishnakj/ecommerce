@@ -4,6 +4,7 @@ import Script from "next/script";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 type CartItem = {
   qty: number;
@@ -15,7 +16,7 @@ type CartItem = {
 export default function App({ Component, pageProps }: AppProps) {
   const [cart, setCart] = useState<Record<string, CartItem>>({});
   const [subTotal, setSubTotal] = useState<number>(0);
-
+  const router = useRouter()
   useEffect(() => {
     try {
       const storedCart = localStorage.getItem("cart");
@@ -50,6 +51,11 @@ export default function App({ Component, pageProps }: AppProps) {
     saveCart(newCart);
   };
 
+  const buyNow=(itemCode: string, qty: number, price: number, name: string, variant: string)=>{
+   
+     router.push("./checkout")
+}
+
   const removeFromCart = (itemCode: string, qty: number, price: number, name: string, variant: string) => {
     const newCart = { ...cart }; // Make a copy to avoid directly modifying the state
     if (itemCode in cart) {
@@ -70,7 +76,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Navbar key={subTotal} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} ClearCart={clearCart} SubTotal={subTotal} />
-      <Component cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} ClearCart={clearCart} SubTotal={subTotal} {...pageProps} />
+      <Component buyNow={buyNow} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} ClearCart={clearCart} SubTotal={subTotal} {...pageProps} />
       <Footer />
 
       <Script src="https://kit.fontawesome.com/628fde244b.js"></Script>

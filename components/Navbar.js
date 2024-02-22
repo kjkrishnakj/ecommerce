@@ -63,8 +63,9 @@ const Navbar = ({ cart, addToCart, removeFromCart, ClearCart, SubTotal }) => {
                             return <li key={k}>
                                 <div className="flex items-center justify-between my-5">
                                     <div className="w-2/3">
-                                        {cart[k].name}
+                                        {cart[k].name} 
                                     </div>
+                                     
                                     <div className="w-1/3 flex items-center justify-center">
                                         <i onClick={() => {
                                             removeFromCart(k, 1, cart[k].price, cart[k].name, cart[k].variant)
