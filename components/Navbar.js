@@ -1,10 +1,13 @@
-import React, { useRef } from "react"
+import React, { useRef, useState } from "react"
 import Image from "next/image"
 // import logo from "../public/favicon (1).ico"
 import logo from "../public/ak_logo4.png"
 import Link from "next/link"
-const Navbar = ({ user, cart, addToCart, removeFromCart, ClearCart, SubTotal }) => {
+
+
+const Navbar = ({ logout,user, cart, addToCart, removeFromCart, ClearCart, SubTotal }) => {
     // console.log(cart,addToCart,removeFromCart,ClearCart,SubTotal);
+    const [dropdown,setDropdown] = useState(false)
 
     const toggleCart = () => {
         if (ref.current.classList.contains("translate-x-full")) {
@@ -36,13 +39,22 @@ const Navbar = ({ user, cart, addToCart, removeFromCart, ClearCart, SubTotal }) 
                         <a href="./contact" className="mr-10 hover:text-gray-900">Contact</a>
                         <a href="./order" className="mr-10 hover:text-gray-900">Orders</a>
                     </nav>
-                    {user.value && <button className="rounded-full w-12 h-12 bg-gray-200 p-3 border-0 inline-flex items-center justify-center text-gray-500 mr-7   ">
+                    <a onMouseOver={()=>{setDropdown(true)}}  onMouseLeave={()=>{setDropdown(false)}} >
 
                         <i className="fa-regular fa-user w-5 h-5 ml-8 " style={{ marginRight: "2rem" }}></i>
-                    </button>}
+                    {dropdown && <div  onMouseOver={()=>{setDropdown(true)}}  onMouseLeave={()=>{setDropdown(false)}}
+                     className="absoulute  top-7 right-8 rounded-md px-5 w-36 bg-indigo-500">
+                        <ul>
+                            <Link href={'/myaccount'}><li className="py-1 hover:text-white text-sm">Orders</li></Link>
+                            <Link href={'/orders'}><li className="py-1 hover:text-white text-sm">My Account</li></Link>
+                            <li onClick={logout} className="py-1 hover:text-white text-sm">Logout</li>
+                        </ul>
+                    </div>}
+                    {user.value && <button className="rounded-full w-12 h-12 bg-gray-200 p-3 border-0 inline-flex items-center justify-center text-gray-500 mr-7   "></button>}
+                    </a>
+                   
                     {!user.value &&  <Link href='/login'>
                     <button className="cursor-pointer inline-flex items-center bg-gray-100 border-0 py-4 mr-3 px-4 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0" style={{marginRight:"1rem",fontWeight:"700"}}>Login</button></Link> }
-                   
                     <button onClick={toggleCart} className="cursor-pointer inline-flex items-center bg-gray-100 border-0 py-4 mr-3 px-4 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">
                         <i className="fa-solid fa-cart-shopping text-2xl"></i>
                         <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4 ml-1" viewBox="0 0 24 24">
@@ -51,6 +63,9 @@ const Navbar = ({ user, cart, addToCart, removeFromCart, ClearCart, SubTotal }) 
                     </button>
                 </div>
 
+                   
+                   
+                    
 
 
 
