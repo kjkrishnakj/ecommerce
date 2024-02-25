@@ -34,19 +34,18 @@ const router = useRouter()
     })
     let response = await res.json()
 
-    console.log(response);
     setEmail('')
     setPassword('')
 
     if (response.success) {
-      toast.success("Logged in successfully 👍")
+      toast.success("Logged in successfully 👍",{autoClose:1000})
       setTimeout(()=>{
 
         router.push("http://localhost:3000")
       },1000)
     }
     else{
-      toast.error("Invalid Credentials! 🥲")
+      toast.error("Invalid Credentials! 🥲",{autoClose:1000})
 
     }
   }

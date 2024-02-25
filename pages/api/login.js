@@ -5,7 +5,7 @@ const handler = async (req, res) => {
     if (req.method == 'POST') {
         let user = await User.findOne({ "email": req.body.email })
         if (user) {
-            if (req.body.email == user.email && req.body.password == user.passowrd) {
+            if (req.body.email == user.email && req.body.password == user.password) {
                 res.status(200).json({ success:true, email: user.email, name: user.name });
             }
             else{
