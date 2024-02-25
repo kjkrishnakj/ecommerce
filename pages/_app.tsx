@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import React from "react";
 type CartItem = {
   qty: number;
   price: number;
@@ -19,6 +20,10 @@ export default function App({ Component, pageProps }: AppProps) {
   const [cart, setCart] = useState<Record<string, CartItem>>({});
   const [subTotal, setSubTotal] = useState<number>(0);
   const router = useRouter()
+
+  const [user,setUser] = useState({value:null})
+  const [key,setKey] = useState()
+
   useEffect(() => {
     try {
       const storedCart = localStorage.getItem("cart");
@@ -29,6 +34,11 @@ export default function App({ Component, pageProps }: AppProps) {
     } catch (e) {
       console.error(e);
       localStorage.clear();
+    }
+    const token  =  localStorage.getItem('token');
+    if(token) {
+      setUser({value:token})
+      setKey(Math.random());
     }
   }, []);
 
@@ -80,7 +90,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
     <ToastContainer/>
-      <Navbar key={subTotal} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} ClearCart={clearCart} SubTotal={subTotal} />
+      <Navbar user={user} key={key} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} ClearCart={clearCart} SubTotal={subTotal} />
       <Component buyNow={buyNow} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} ClearCart={clearCart} SubTotal={subTotal} {...pageProps} />
       <Footer />
 

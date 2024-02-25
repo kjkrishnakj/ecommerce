@@ -28,16 +28,16 @@ export default function Home({ products }) {
                     <p className="mt-1">₹{products[item].price}</p>
                   </div>
                   <div className="mt-1">
-                    <div classaName="flex">
+                    <div className="flex">
 
-                      {products[item].color.includes('blue')&& <button classaName="border-2 border-blue-200  bg-blue-700 rounded-full w-6 h-6 focus:outline-none"></button>}
-                      {products[item].color.includes('orange')&& <button classaName="border-2 border-blue-200 bg-orange-700 rounded-full w-6 h-6 focus:outline-none"></button>}
-                      {products[item].color.includes('purple')&& <button classaName="border-2 border-blue-200 bg-purple-700 rounded-full w-6 h-6 focus:outline-none"></button>}
-                      {products[item].color.includes('black')&& <button classaName="border-2 border-blue-200 bg-black-700 rounded-full w-6 h-6 focus:outline-none"></button>}
-                      {products[item].color.includes('white')&& <button classaName="border-2 border-blue-200 bg-white-700 rounded-full w-6 h-6 focus:outline-none"></button>}
-                      {products[item].color.includes('pink')&& <button classaName="border-2 border-blue-200 bg-pink-300 rounded-full w-6 h-6 focus:outline-none"></button>}
-                      {products[item].color.includes('yellow')&& <button classaName="border-2 border-blue-200 bg-yellow-700 rounded-full w-6 h-6 focus:outline-none"></button>}
-                      {products[item].color.includes('red')&& <button classaName="border-2 border-blue-200 bg-red-700 rounded-full w-6 h-6 focus:outline-none"></button>}
+                      {products[item].color.includes('blue')&& <button className="border-2 border-blue-200  bg-blue-700 rounded-full w-6 h-6 focus:outline-none"></button>}
+                      {products[item].color.includes('orange')&& <button className="border-2 border-blue-200 bg-orange-700 rounded-full w-6 h-6 focus:outline-none"></button>}
+                      {products[item].color.includes('purple')&& <button className="border-2 border-blue-200 bg-purple-700 rounded-full w-6 h-6 focus:outline-none"></button>}
+                      {products[item].color.includes('black')&& <button className="border-2 border-blue-200 bg-black-700 rounded-full w-6 h-6 focus:outline-none"></button>}
+                      {products[item].color.includes('white')&& <button className="border-2 border-blue-200 bg-white-700 rounded-full w-6 h-6 focus:outline-none"></button>}
+                      {products[item].color.includes('pink')&& <button className="border-2 border-blue-200 bg-pink-300 rounded-full w-6 h-6 focus:outline-none"></button>}
+                      {products[item].color.includes('yellow')&& <button className="border-2 border-blue-200 bg-yellow-700 rounded-full w-6 h-6 focus:outline-none"></button>}
+                      {products[item].color.includes('red')&& <button className="border-2 border-blue-200 bg-red-700 rounded-full w-6 h-6 focus:outline-none"></button>}
                        </div>
                   </div>
                 </div>

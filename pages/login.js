@@ -38,6 +38,7 @@ const router = useRouter()
     setPassword('')
 
     if (response.success) {
+      localStorage.setItem('token',response.token)
       toast.success("Logged in successfully 👍",{autoClose:1000})
       setTimeout(()=>{
 

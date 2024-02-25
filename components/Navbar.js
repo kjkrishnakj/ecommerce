@@ -3,7 +3,7 @@ import Image from "next/image"
 // import logo from "../public/favicon (1).ico"
 import logo from "../public/ak_logo4.png"
 import Link from "next/link"
-const Navbar = ({ cart, addToCart, removeFromCart, ClearCart, SubTotal }) => {
+const Navbar = ({ user, cart, addToCart, removeFromCart, ClearCart, SubTotal }) => {
     // console.log(cart,addToCart,removeFromCart,ClearCart,SubTotal);
 
     const toggleCart = () => {
@@ -26,7 +26,7 @@ const Navbar = ({ cart, addToCart, removeFromCart, ClearCart, SubTotal }) => {
             <header className=" body-font fixed w-full z-10">
                 <div className=" text-gray-600 mx-auto flex flex-wrap flex-col md:flex-row items-center shadow-xl sticky top-0 bg-white z-10">
                     <a href="./" className="flex title-font p-1 font-medium items-center text-gray-900 mb-4 md:mb-0">
-                        <Image src={logo}    alt="" style={{ height: "4rem", width: "6rem" }}></Image>
+                        <Image src={logo} alt="" style={{ height: "4rem", width: "6rem" }}></Image>
 
                         <span className="ml-3 text-xl " style={{ color: "#0097b2", fontFamily: "Georgia" }}>AmiKart</span>
                     </a>
@@ -36,11 +36,13 @@ const Navbar = ({ cart, addToCart, removeFromCart, ClearCart, SubTotal }) => {
                         <a href="./contact" className="mr-10 hover:text-gray-900">Contact</a>
                         <a href="./order" className="mr-10 hover:text-gray-900">Orders</a>
                     </nav>
-                    <Link href='/login'><button className="rounded-full w-12 h-12 bg-gray-200 p-3 border-0 inline-flex items-center justify-center text-gray-500 mr-7   ">
+                    {user.value && <button className="rounded-full w-12 h-12 bg-gray-200 p-3 border-0 inline-flex items-center justify-center text-gray-500 mr-7   ">
 
                         <i className="fa-regular fa-user w-5 h-5 ml-8 " style={{ marginRight: "2rem" }}></i>
-                    </button>
-                    </Link>
+                    </button>}
+                    {!user.value &&  <Link href='/login'>
+                    <button className="cursor-pointer inline-flex items-center bg-gray-100 border-0 py-4 mr-3 px-4 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0" style={{marginRight:"1rem",fontWeight:"700"}}>Login</button></Link> }
+                   
                     <button onClick={toggleCart} className="cursor-pointer inline-flex items-center bg-gray-100 border-0 py-4 mr-3 px-4 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">
                         <i className="fa-solid fa-cart-shopping text-2xl"></i>
                         <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4 ml-1" viewBox="0 0 24 24">
@@ -63,9 +65,9 @@ const Navbar = ({ cart, addToCart, removeFromCart, ClearCart, SubTotal }) => {
                             return <li key={k}>
                                 <div className="flex items-center justify-between my-5">
                                     <div className="w-2/3">
-                                        {cart[k].name} 
+                                        {cart[k].name}
                                     </div>
-                                     
+
                                     <div className="w-1/3 flex items-center justify-center">
                                         <i onClick={() => {
                                             removeFromCart(k, 1, cart[k].price, cart[k].name, cart[k].variant)
