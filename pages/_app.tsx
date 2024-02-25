@@ -6,6 +6,8 @@ import Footer from "../components/Footer";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 type CartItem = {
   qty: number;
   price: number;
@@ -41,6 +43,7 @@ export default function App({ Component, pageProps }: AppProps) {
   };
 
   const addToCart = (itemCode: string, qty: number, price: number, name: string, variant: string) => {
+    // toast.success("Added to cart👍",{autoClose:1000,position:'bottom-center'})
     const newCart = { ...cart }; // Make a copy to avoid directly modifying the state
     if (itemCode in cart) {
       newCart[itemCode].qty = cart[itemCode].qty + qty;
@@ -49,6 +52,7 @@ export default function App({ Component, pageProps }: AppProps) {
     }
     setCart(newCart);
     saveCart(newCart);
+
   };
 
   const buyNow=(itemCode: string, qty: number, price: number, name: string, variant: string)=>{
@@ -75,6 +79,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <>
+    <ToastContainer/>
       <Navbar key={subTotal} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} ClearCart={clearCart} SubTotal={subTotal} />
       <Component buyNow={buyNow} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} ClearCart={clearCart} SubTotal={subTotal} {...pageProps} />
       <Footer />

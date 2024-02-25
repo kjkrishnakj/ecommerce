@@ -4,10 +4,8 @@ import Image from 'next/image';
 import mongoose from "mongoose";
 
 import Product from "../../models/Product";
-
-import samsunggalaxys24plus from "../../public/img/samsunggalaxys24+.jpg"
-
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const Post = ({ addToCart, product, variants,buyNow }) => {
     // console.log(product, variants);
     const router = useRouter();
@@ -22,8 +20,10 @@ const Post = ({ addToCart, product, variants,buyNow }) => {
         let pinJson = await pins.json()
         // console.log(pin);
         if (pinJson.includes(parseInt(pin))) {
+            toast.success("Pincode is Serviceable!",{autoClose:1000,position:'bottom-center'})
             setService(true)
         } else {
+            toast.error("sorry! Pincode is not Serviceable",{autoClose:1000,position:'bottom-center'})
             setService(false)
 
         }
@@ -35,6 +35,8 @@ const Post = ({ addToCart, product, variants,buyNow }) => {
 
     return <>
         <section className="text-gray-600 body-font overflow-hidden">
+           <ToastContainer/>
+
             <div className="container px-5 py-14 mx-auto">
                 <div className="lg:w-4/5 mx-auto flex flex-wrap">
 
