@@ -45,8 +45,8 @@ const Navbar = ({ logout,user, cart, addToCart, removeFromCart, ClearCart, SubTo
                     {dropdown && <div  onMouseOver={()=>{setDropdown(true)}}  onMouseLeave={()=>{setDropdown(false)}}
                      className="absoulute  top-7 right-8 rounded-md px-5 w-36 bg-indigo-500">
                         <ul>
-                            <Link href={'/myaccount'}><li className="py-1 hover:text-white text-sm">Orders</li></Link>
-                            <Link href={'/orders'}><li className="py-1 hover:text-white text-sm">My Account</li></Link>
+                            <Link href={'/myaccount'}><li className="py-1 hover:text-white text-sm">My Account</li></Link>
+                            <Link href={'/order'}><li className="py-1 hover:text-white text-sm">Orders</li></Link>
                             <li onClick={logout} className="py-1 hover:text-white text-sm">Logout</li>
                         </ul>
                     </div>}

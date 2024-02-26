@@ -1,9 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import logo from "../public/ak_logo4.png"
+import { useRouter } from 'next/router'
 
 const forgot = () => {
+  const router = useRouter()
+
+  useEffect(() => {
+    if (localStorage.getItem('token')) {
+      router.push('/')
+    }
+  }, [])
   return (
     <div>
        <div>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import logo from "../public/ak_logo4.png"
 import Image from 'next/image'
 import Link from 'next/link'
@@ -6,7 +6,15 @@ import { useState } from 'react'
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useRouter } from 'next/router'
 const Signup = () => {
+  const router = useRouter()
+
+    useEffect(() => {
+        if (localStorage.getItem('token')) {
+          router.push('/')
+        }
+      }, [])
     const [name, setName] = useState();
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
@@ -39,6 +47,7 @@ const Signup = () => {
         setName('')
         setPassword('')
         toast.success("welcome " + name+ " 🙃")
+        router.push('/login')
     }
 
     return (

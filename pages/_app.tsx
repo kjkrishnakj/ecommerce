@@ -6,7 +6,7 @@ import Footer from "../components/Footer";
 import { useEffect, useState } from "react";
 // import { useRouter } from "next/navigation";
 import { useRouter } from 'next/router';
-
+import LoadingBar from 'react-top-loading-bar'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import React from "react";
@@ -21,11 +21,21 @@ export default function App({ Component, pageProps }: AppProps) {
   const [cart, setCart] = useState<Record<string, CartItem>>({});
   const [subTotal, setSubTotal] = useState<number>(0);
   const router = useRouter()
+  const [user, setUser] = useState<{ value: string | null }>({ value: null });
 
-  const [user,setUser] = useState({value:null})
-  const [key,setKey] = useState()
+  const [key,setKey] = useState<number>()
+  const [progress,setProgress] = useState(0)
+
+
+
 
   useEffect(() => {
+    router.events.on('routeChangeStart',()=>{
+      setProgress(40)
+    })
+    router.events.on('routeChangeComplete',()=>{
+      setProgress(100)
+    })
     try {
       const storedCart = localStorage.getItem("cart");
       if (storedCart) {
@@ -46,6 +56,7 @@ export default function App({ Component, pageProps }: AppProps) {
   const logout=()=>{
     localStorage.removeItem('token')
     setUser({value:null})
+    
     setKey(Math.random())
   }
   const saveCart = (myCart: Record<string, CartItem>) => {
@@ -95,6 +106,13 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <>
+     <LoadingBar
+      color="#6366F1"
+      progress={progress}
+      waitingTime={200}
+      onLoaderFinished={()=>setProgress(0)}
+      />
+      
     <ToastContainer/>
       <Navbar logout={logout} user={user} key={key} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} ClearCart={clearCart} SubTotal={subTotal} />
       <Component buyNow={buyNow} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} ClearCart={clearCart} SubTotal={subTotal} {...pageProps} />

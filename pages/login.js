@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import React from 'react'
+import React, { useEffect } from 'react'
 import logo from "../public/ak_logo4.png"
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -8,9 +8,16 @@ import { useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 const Login = () => {
-const router = useRouter()
+  const router = useRouter()
+  useEffect(() => {
+    if (localStorage.getItem('token')) {
+      router.push('/')
+    }
+  }, [])
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+
+
 
   const handleChange = (e) => {
 
@@ -38,15 +45,15 @@ const router = useRouter()
     setPassword('')
 
     if (response.success) {
-      localStorage.setItem('token',response.token)
-      toast.success("Logged in successfully 👍",{autoClose:1000})
-      setTimeout(()=>{
+      localStorage.setItem('token', response.token)
+      toast.success("Logged in successfully 👍", { autoClose: 1000 })
+      setTimeout(() => {
 
         router.push("http://localhost:3000")
-      },1000)
+      }, 1000)
     }
-    else{
-      toast.error("Invalid Credentials! 🥲",{autoClose:1000})
+    else {
+      toast.error("Invalid Credentials! 🥲", { autoClose: 1000 })
 
     }
   }
