@@ -15,9 +15,9 @@ const Signup = () => {
           router.push('/')
         }
       }, [])
-    const [name, setName] = useState();
-    const [email, setEmail] = useState();
-    const [password, setPassword] = useState();
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
     const handleChange = (e) => {
         if (e.target.name == 'name') {
@@ -34,7 +34,7 @@ const Signup = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         const data = {name: name,  email, password }
-        let res = await fetch("http://localhost:3000/api/signup", {
+        let res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/signup`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -42,14 +42,16 @@ const Signup = () => {
             body: JSON.stringify(data),
         })
         let response = await res.json()
-        console.log(response);
+        // console.log(response);
         setEmail('')
         setName('')
         setPassword('')
-        toast.success("welcome " + name+ " 🙃")
-        router.push('/login')
+        toast.success("welcome " + name+ " 🙃",{ autoClose: 1000 })
+        setTimeout(() => {
+            router.push('/login')
+          }, 1000)
     }
-
+    
     return (
         <div>
             <ToastContainer/>

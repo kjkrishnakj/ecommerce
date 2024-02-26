@@ -1,7 +1,8 @@
 import Image from 'next/image'
 import React from 'react'
 import samsunggalaxys24plus from "../public/img/samsunggalaxys24+.jpg"
-
+import mongoose from 'mongoose'
+import Orders from "../models/Order"
 const Order = ({ cart, addToCart, removeFromCart, ClearCart, SubTotal }) => {
   return (
     <div>
@@ -9,7 +10,7 @@ const Order = ({ cart, addToCart, removeFromCart, ClearCart, SubTotal }) => {
   <div className="container px-5 py-24 mx-auto">
     <div className="lg:w-4/5 mx-auto flex flex-wrap">
       <div className="lg:w-1/2 w-full lg:pr-10 lg:py-6 mb-6 lg:mb-0">
-        <h2 className="text-sm title-font text-gray-500 tracking-widest">Samsung</h2>
+        <h2 className="text-sm title-font text-gray-500 tracking-widest">{}</h2>
         <h1 className="text-gray-900 text-3xl title-font font-medium mb-4">Order Id - #89777</h1>
         <p className="leading-relaxed text-green-600 mb-4">Yay! Your order has been succesfully placed</p>
             <div class="flex mb-4">
@@ -57,3 +58,17 @@ const Order = ({ cart, addToCart, removeFromCart, ClearCart, SubTotal }) => {
 
 export default Order
  
+
+export async function getServerSideProps(context) {
+  if (!mongoose.connections[0].readyState) {
+      await mongoose.connect(process.env.MONGO_URI)
+  }
+
+
+  let orders = await Orders.find({    })
+   
+
+  return { 
+      props: { orders:orders }
+  }
+}

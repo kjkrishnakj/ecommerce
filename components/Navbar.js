@@ -1,14 +1,15 @@
-import React, { useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import Image from "next/image"
 // import logo from "../public/favicon (1).ico"
 import logo from "../public/ak_logo4.png"
 import Link from "next/link"
+import { useRouter } from "next/router"
 
 
-const Navbar = ({ logout,user, cart, addToCart, removeFromCart, ClearCart, SubTotal }) => {
+const Navbar = ({ logout, user, cart, addToCart, removeFromCart, ClearCart, SubTotal }) => {
     // console.log(cart,addToCart,removeFromCart,ClearCart,SubTotal);
-    const [dropdown,setDropdown] = useState(false)
-
+    const [dropdown, setDropdown] = useState(false)
+    const router = useRouter();
     const toggleCart = () => {
         if (ref.current.classList.contains("translate-x-full")) {
             ref.current.classList.remove("translate-x-full");
@@ -20,7 +21,13 @@ const Navbar = ({ logout,user, cart, addToCart, removeFromCart, ClearCart, SubTo
 
         }
     }
+    useEffect(()=>{
 
+        const name = localStorage.getItem('name')
+        // console.log(name);
+        const email = localStorage.getItem('email')
+        // console.log(email);
+    },[router.query])
     const ref = useRef()
 
 
@@ -34,27 +41,43 @@ const Navbar = ({ logout,user, cart, addToCart, removeFromCart, ClearCart, SubTo
                         <span className="ml-3 text-xl " style={{ color: "#0097b2", fontFamily: "Georgia" }}>AmiKart</span>
                     </a>
                     <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
-                        <a href="./" className="mr-10 hover:text-gray-900">Home</a>
-                        <a href="./about" className="mr-10 hover:text-gray-900">About</a>
-                        <a href="./contact" className="mr-10 hover:text-gray-900">Contact</a>
-                        <a href="./order" className="mr-10 hover:text-gray-900">Orders</a>
+                        <a href="/" className="mr-10 hover:text-gray-900">Home</a>
+                        <a href="/about" className="mr-10 hover:text-gray-900">About</a>
+                        <a href="/contact" className="mr-10 hover:text-gray-900">Contact</a>
+                        <a href="/order" className="mr-10 hover:text-gray-900">Orders</a>
                     </nav>
-                    <a onMouseOver={()=>{setDropdown(true)}}  onMouseLeave={()=>{setDropdown(false)}} >
+                    <a onMouseOver={() => { setDropdown(true) }} onMouseLeave={() => { setDropdown(false) }} >
 
-                        <i className="fa-regular fa-user w-5 h-5 ml-8 " style={{ marginRight: "2rem" }}></i>
-                    {dropdown && <div  onMouseOver={()=>{setDropdown(true)}}  onMouseLeave={()=>{setDropdown(false)}}
-                     className="absoulute  top-7 right-8 rounded-md px-5 w-36 bg-indigo-500">
-                        <ul>
-                            <Link href={'/myaccount'}><li className="py-1 hover:text-white text-sm">My Account</li></Link>
-                            <Link href={'/order'}><li className="py-1 hover:text-white text-sm">Orders</li></Link>
-                            <li onClick={logout} className="py-1 hover:text-white text-sm">Logout</li>
-                        </ul>
-                    </div>}
-                    {user.value && <button className="rounded-full w-12 h-12 bg-gray-200 p-3 border-0 inline-flex items-center justify-center text-gray-500 mr-7   "></button>}
+                        {user.value && <button className="rounded-full w-12 h-12 bg-gray-200 p-3 border-0 inline-flex items-center justify-center text-gray-500 mr-7   "><i className="fa-regular fa-user w-5 h-5 ml-8 " style={{ marginRight: "2rem" }}></i></button>}
+
                     </a>
-                   
-                    {!user.value &&  <Link href='/login'>
-                    <button className="cursor-pointer inline-flex items-center bg-gray-100 border-0 py-4 mr-3 px-4 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0" style={{marginRight:"1rem",fontWeight:"700"}}>Login</button></Link> }
+                    {dropdown && <div
+                        onMouseOver={() => { setDropdown(true) }}
+                        onMouseLeave={() => { setDropdown(false) }}
+                        className="relative" // Make sure the parent container is relative
+                    >
+                        <div className="absolute top-7 right-8 rounded-md px-5 w-50 bg-indigo-500">
+                            <ul>
+                                <div className="px-4 py-4 text-sm text-gray-900 dark:text-white " >
+                                    <div style={{fontWeight:"500"}}>{localStorage.getItem('name')}</div>
+                                    <div className="font-medium truncate">{localStorage.getItem('email')}</div>
+                                </div>
+                                <hr />
+                                <Link href="/myaccount"><li className="cursor-pointer py-1 pt-3 dark:text-white hover:text-indigo-200 text-sm" >My Account</li></Link>
+                                <Link href="/order"><li className="cursor-pointer py-1 dark:text-white hover:text-indigo-200 text-sm" >Orders</li></Link>
+                                <li onClick={logout} className="cursor-pointer py-1 pb-3 dark:text-white hover:text-indigo-200 text-sm" >Logout</li>
+                            </ul>
+                        </div>
+                    </div>}
+
+ 
+
+
+
+
+
+                    {!user.value && <Link href='/login'>
+                        <button className="cursor-pointer inline-flex items-center bg-gray-100 border-0 py-4 mr-3 px-4 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0" style={{ marginRight: "1rem", fontWeight: "700" }}>Login</button></Link>}
                     <button onClick={toggleCart} className="cursor-pointer inline-flex items-center bg-gray-100 border-0 py-4 mr-3 px-4 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">
                         <i className="fa-solid fa-cart-shopping text-2xl"></i>
                         <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4 ml-1" viewBox="0 0 24 24">
@@ -63,9 +86,9 @@ const Navbar = ({ logout,user, cart, addToCart, removeFromCart, ClearCart, SubTo
                     </button>
                 </div>
 
-                   
-                   
-                    
+
+
+
 
 
 

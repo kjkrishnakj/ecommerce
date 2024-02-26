@@ -58,6 +58,7 @@ export default function App({ Component, pageProps }: AppProps) {
     setUser({value:null})
     
     setKey(Math.random())
+    router.push('/')
   }
   const saveCart = (myCart: Record<string, CartItem>) => {
     localStorage.setItem("cart", JSON.stringify(myCart));
@@ -71,7 +72,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
   const addToCart = (itemCode: string, qty: number, price: number, name: string, variant: string) => {
     // toast.success("Added to cart👍",{autoClose:1000,position:'bottom-center'})
-    const newCart = { ...cart }; // Make a copy to avoid directly modifying the state
+    const newCart = { ...cart };  
     if (itemCode in cart) {
       newCart[itemCode].qty = cart[itemCode].qty + qty;
     } else {
@@ -103,6 +104,7 @@ export default function App({ Component, pageProps }: AppProps) {
     setCart({});
     saveCart({});
   };
+ 
 
   return (
     <>
@@ -114,8 +116,8 @@ export default function App({ Component, pageProps }: AppProps) {
       />
       
     <ToastContainer/>
-      <Navbar logout={logout} user={user} key={key} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} ClearCart={clearCart} SubTotal={subTotal} />
-      <Component buyNow={buyNow} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} ClearCart={clearCart} SubTotal={subTotal} {...pageProps} />
+      {key && <Navbar logout={logout} user={user} key={key} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} ClearCart={clearCart} SubTotal={subTotal} />
+      }<Component buyNow={buyNow} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} ClearCart={clearCart} SubTotal={subTotal} {...pageProps} />
       <Footer />
 
       <Script src="https://kit.fontawesome.com/628fde244b.js"></Script>
