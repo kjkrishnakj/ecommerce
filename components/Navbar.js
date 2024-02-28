@@ -46,6 +46,7 @@ const Navbar = ({ logout, user, cart, addToCart, removeFromCart, ClearCart, SubT
                         <a href="/contact" className="mr-10 hover:text-gray-900">Contact</a>
                         <a href="/order" className="mr-10 hover:text-gray-900">Orders</a>
                     </nav>
+                    
                     <a onMouseOver={() => { setDropdown(true) }} onMouseLeave={() => { setDropdown(false) }} >
 
                         {user.value && <button className="rounded-full w-12 h-12 bg-gray-200 p-3 border-0 inline-flex items-center justify-center text-gray-500 mr-7   "><i className="fa-regular fa-user w-5 h-5 ml-8 " style={{ marginRight: "2rem" }}></i></button>}
