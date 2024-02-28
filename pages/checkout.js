@@ -11,19 +11,33 @@ import Script from 'next/script';
 import samsunggalaxys24plus from "../public/img/samsunggalaxys24+.jpg"
 
 
-const Checkout = ({ cart, addToCart, removeFromCart, ClearCart, SubTotal, products }) => {
+const Checkout = ({ cart, addToCart, removeFromCart, ClearCart, SubTotal, products}) => {
 
-  const intiatePayment = () => {
-    let txnToken
-    let amount;
+  const intiatePayment = async() => {
+    
+    let oid=Math.floor(Math.random()* Date.now());
+
+    const data = {cart,SubTotal,oid,email:"email"}
+
+
+    let a = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pretransaction`,{
+      method:"POST",
+      headers:{
+        'Content-Type': 'application/json',
+      },
+      body:JSON.stringify(data)
+    })
+    let txnRes= await a.json();
+    console.log(txnRes);
+    let txnToken = txnRes.txnToken
     var config = {
       "root": "",
       "flow": "DEFAULT",
       "data": {
-        "orderId": "Math.random()", /* update order id */
+        "orderId": oid, /* update order id */
         "token": txnToken, /* update token value */
         "tokenType": "TXN_TOKEN",
-        "amount": "amount" /* update amount */
+        "amount": SubTotal /* update amount */
       },
       "handler": {
         "notifyMerchant": function (eventName, data) {
@@ -46,7 +60,7 @@ const Checkout = ({ cart, addToCart, removeFromCart, ClearCart, SubTotal, produc
     <div>
       <Head><meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" /></Head>
 
-      <Script type="application/javascript" src={`${process.env.PAYTM_HOST}/merchantpgpui/checkoutjs/merchants/${process.env.PAYTM_MID}.js`} onload="onScriptLoad();" crossorigin="anonymous">
+      <Script type="application/javascript" src={`${process.env.NEXT_PUBLIC_HOST}/merchantpgpui/checkoutjs/merchants/${process.env.NEXT_PUBLIC_PAYTM_MID}.js`}   crossorigin="anonymous">
 
       </Script>
 
@@ -83,15 +97,9 @@ const Checkout = ({ cart, addToCart, removeFromCart, ClearCart, SubTotal, produc
                 {Object.keys(cart).map((k) => {
                   return <li key={k}>
                     <div className="flex flex-col rounded-lg bg-white sm:flex-row">
-                      {/* {/* <img className="m-2 h-24 w-28 rounded-md border object-cover object-center" src={cart[k].img} alt="" />
-                    <Image></Image> */}
+                 
                       <img src={cart[k].img} alt="" className="m-2 h-24 w-28 rounded-md border object-cover object-center" style={{}}></img>
-
-                      {/* <img className="m-2 h-24 w-28 rounded-md border object-cover object-center" src={samsunggalaxys24plus} alt="" /> */}
-                      {/* <Image src={samsunggalaxys24plus} alt="" style={{ height: "26rem", width: "25rem" }}></Image> */}
-                      {/* <div className="w-2/3">
-                        {cart[k].price} {cart[k].name}
-                      </div> */}
+ 
                       <div className="flex w-full flex-col px-4 py-4">
                         <div className="font-semibold">{cart[k].name}</div>
                         <div className="text-gray-500">{cart[k].variant}</div>
@@ -101,9 +109,9 @@ const Checkout = ({ cart, addToCart, removeFromCart, ClearCart, SubTotal, produc
                       <div className="w-1/3 flex items-center justify-center">
                         <i onClick={() => {
                           removeFromCart(k, 1, cart[k].price, cart[k].name, cart[k].variant)
-                        }} className="fa-solid fa-circle-minus cursor-pointer mx-3"></i>  {cart[k].qty} <i onClick={() => {
+                        }} className="fa-solid fa-square-minus cursor-pointer mx-3"></i>  {cart[k].qty} <i onClick={() => {
                           addToCart(k, 1, cart[k].price, cart[k].name, cart[k].variant)
-                        }} className="fa-solid fa-circle-plus mx-3 cursor-pointer"></i>
+                        }} className="fa-solid fa-square-plus mx-3 cursor-pointer"></i>
                       </div>
                     </div>
 
@@ -121,7 +129,7 @@ const Checkout = ({ cart, addToCart, removeFromCart, ClearCart, SubTotal, produc
 
 
 
-            <form className="max-w-md mx-auto">
+            <form className="max-w-md my-3 mx-auto">
               <div className="relative z-0 w-full mb-5 group">
                 <input type="email" name="floating_email" id="floating_email" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
                 <label htmlFor="floating_email" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Full Name</label>

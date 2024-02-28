@@ -109,9 +109,9 @@ const Navbar = ({ logout, user, cart, addToCart, removeFromCart, ClearCart, SubT
                                     <div className="w-1/3 flex items-center justify-center">
                                         <i onClick={() => {
                                             removeFromCart(k, 1, cart[k].price, cart[k].name, cart[k].variant)
-                                        }} className="fa-solid fa-circle-minus cursor-pointer mx-3"></i>  {cart[k].qty} <i onClick={() => {
+                                        }} className="fa-solid fa-square-minus cursor-pointer mx-3"></i>  {cart[k].qty} <i onClick={() => {
                                             addToCart(k, 1, cart[k].price, cart[k].name, cart[k].variant)
-                                        }} className="fa-solid fa-circle-plus mx-3 cursor-pointer"></i>
+                                        }} className="fa-solid fa-square-plus mx-3 cursor-pointer"></i>
                                     </div>
                                 </div>
 

@@ -15,6 +15,7 @@ type CartItem = {
   price: number;
   name: string;
   variant: string;
+  img:string;
 };
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -70,25 +71,25 @@ export default function App({ Component, pageProps }: AppProps) {
     setSubTotal(subt);
   };
 
-  const addToCart = (itemCode: string, qty: number, price: number, name: string, variant: string) => {
+  const addToCart = (itemCode: string, qty: number, price: number, name: string, variant: string,img:string) => {
     // toast.success("Added to cart👍",{autoClose:1000,position:'bottom-center'})
     const newCart = { ...cart };  
     if (itemCode in cart) {
       newCart[itemCode].qty = cart[itemCode].qty + qty;
     } else {
-      newCart[itemCode] = { qty: 1, price, name, variant };
+      newCart[itemCode] = { qty: 1, price, name, variant,img };
     }
     setCart(newCart);
     saveCart(newCart);
 
   };
 
-  const buyNow=(itemCode: string, qty: number, price: number, name: string, variant: string)=>{
+  const buyNow=(itemCode: string, qty: number, price: number, name: string, variant: string,img:string)=>{
    
      router.push("./checkout")
 }
 
-  const removeFromCart = (itemCode: string, qty: number, price: number, name: string, variant: string) => {
+  const removeFromCart = (itemCode: string, qty: number, price: number, name: string, variant: string,img:string) => {
     const newCart = { ...cart }; // Make a copy to avoid directly modifying the state
     if (itemCode in cart) {
       newCart[itemCode].qty = cart[itemCode].qty - qty;
