@@ -1,11 +1,25 @@
+import connectDb from "../../middleware/mongoose";
+import Order from "../../models/Order";
 const https = require('https');
 
 const PaytmChecksum = require('paytmchecksum');
 
-export default async function handler(req, res) {
+const handler=async(req, res)=> {
 
     if (req.method == "POST") {
 
+        let order=new Order({
+            email:req.body.email,
+            orderId:req.body.oid,
+            address:req.body.address,
+            amount:req.body.SubTotal,
+            products:req.body.cart,
+        })
+        await order.save();
+
+
+        
+        
 
         var paytmParams = {};
 
@@ -71,3 +85,5 @@ export default async function handler(req, res) {
 
     }
 }
+
+export default connectDb(handler)
