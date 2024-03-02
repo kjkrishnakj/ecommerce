@@ -15,7 +15,7 @@ type CartItem = {
   price: number;
   name: string;
   variant: string;
-  img:string;
+  img: string;
 };
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -24,17 +24,17 @@ export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter()
   const [user, setUser] = useState<{ value: string | null }>({ value: null });
 
-  const [key,setKey] = useState<number>()
-  const [progress,setProgress] = useState(0)
+  const [key, setKey] = useState<number>()
+  const [progress, setProgress] = useState(0)
 
 
 
 
   useEffect(() => {
-    router.events.on('routeChangeStart',()=>{
+    router.events.on('routeChangeStart', () => {
       setProgress(40)
     })
-    router.events.on('routeChangeComplete',()=>{
+    router.events.on('routeChangeComplete', () => {
       setProgress(100)
     })
     try {
@@ -47,17 +47,17 @@ export default function App({ Component, pageProps }: AppProps) {
       console.error(e);
       localStorage.clear();
     }
-    const token  =  localStorage.getItem('token');
-    if(token) {
-      setUser({value:token})
+    const token = localStorage.getItem('token');
+    if (token) {
+      setUser({ value: token })
     }
     setKey(Math.random());
   }, [router.query]);
-  
-  const logout=()=>{
+
+  const logout = () => {
     localStorage.removeItem('token')
-    setUser({value:null})
-    
+    setUser({ value: null })
+
     setKey(Math.random())
     router.push('/')
   }
@@ -71,25 +71,26 @@ export default function App({ Component, pageProps }: AppProps) {
     setSubTotal(subt);
   };
 
-  const addToCart = (itemCode: string, qty: number, price: number, name: string, variant: string,img:string) => {
+  const addToCart = (itemCode: string, qty: number, price: number, name: string, variant: string, img: string) => {
     // toast.success("Added to cart👍",{autoClose:1000,position:'bottom-center'})
-    const newCart = { ...cart };  
+    const newCart = { ...cart };
     if (itemCode in cart) {
       newCart[itemCode].qty = cart[itemCode].qty + qty;
     } else {
-      newCart[itemCode] = { qty: 1, price, name, variant,img };
+      newCart[itemCode] = { qty: 1, price, name, variant, img };
     }
     setCart(newCart);
     saveCart(newCart);
 
   };
 
-  const buyNow=(itemCode: string, qty: number, price: number, name: string, variant: string,img:string)=>{
-   
-     router.push("./checkout")
-}
+  const buyNow = (itemCode: string, qty: number, price: number, name: string, variant: string, img: string) => {
+    const newCart: Record<string, CartItem> = {}; // Define type for newCart
+    newCart[itemCode] = { qty: 1, price, name, variant, img }; // Add type annotation for itemCode
+    router.push("./checkout")
+  }
 
-  const removeFromCart = (itemCode: string, qty: number, price: number, name: string, variant: string,img:string) => {
+  const removeFromCart = (itemCode: string, qty: number, price: number, name: string, variant: string, img: string) => {
     const newCart = { ...cart }; // Make a copy to avoid directly modifying the state
     if (itemCode in cart) {
       newCart[itemCode].qty = cart[itemCode].qty - qty;
@@ -105,18 +106,18 @@ export default function App({ Component, pageProps }: AppProps) {
     setCart({});
     saveCart({});
   };
- 
+
 
   return (
     <>
-     <LoadingBar
-      color="#6366F1"
-      progress={progress}
-      waitingTime={200}
-      onLoaderFinished={()=>setProgress(0)}
+      <LoadingBar
+        color="#6366F1"
+        progress={progress}
+        waitingTime={200}
+        onLoaderFinished={() => setProgress(0)}
       />
-      
-    <ToastContainer/>
+
+      <ToastContainer />
       {key && <Navbar logout={logout} user={user} key={key} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} ClearCart={clearCart} SubTotal={subTotal} />
       }<Component buyNow={buyNow} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} ClearCart={clearCart} SubTotal={subTotal} {...pageProps} />
       <Footer />

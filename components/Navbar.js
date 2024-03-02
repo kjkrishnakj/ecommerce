@@ -32,9 +32,9 @@ const Navbar = ({ logout, user, cart, addToCart, removeFromCart, ClearCart, SubT
 
 
     return (
-        <div>
-            <header className=" body-font fixed w-full z-10">
-                <div className=" text-gray-600 mx-auto flex flex-wrap flex-col md:flex-row items-center shadow-xl sticky top-0 bg-white z-10">
+        <div >
+            <header className=" body-font fixed w-full  z-10">
+                <div className=" text-gray-600 mx-auto flex flex-wrap  flex-col md:flex-row items-center shadow-xl sticky top-0 bg-white z-10">
                     <a href="./" className="flex title-font p-1 font-medium items-center text-gray-900 mb-4 md:mb-0">
                         <Image src={logo} alt="" style={{ height: "4rem", width: "6rem" }}></Image>
 
@@ -65,7 +65,7 @@ const Navbar = ({ logout, user, cart, addToCart, removeFromCart, ClearCart, SubT
                                 </div>
                                 <hr />
                                 <Link href="/myaccount"><li className="cursor-pointer py-1 pt-3 dark:text-white hover:text-indigo-200 text-sm" >My Account</li></Link>
-                                <Link href="/order"><li className="cursor-pointer py-1 dark:text-white hover:text-indigo-200 text-sm" >Orders</li></Link>
+                                <Link href="/orders"><li className="cursor-pointer py-1 dark:text-white hover:text-indigo-200 text-sm" >Orders</li></Link>
                                 <li onClick={logout} className="cursor-pointer py-1 pb-3 dark:text-white hover:text-indigo-200 text-sm" >Logout</li>
                             </ul>
                         </div>
