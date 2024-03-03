@@ -1,25 +1,42 @@
 import connectDb from "../../middleware/mongoose";
 import Order from "../../models/Order";
+import Product from "../../models/Product";
 const https = require('https');
 
 const PaytmChecksum = require('paytmchecksum');
 
-const handler=async(req, res)=> {
+const handler = async (req, res) => {
 
     if (req.method == "POST") {
 
-        let order=new Order({
-            email:req.body.email,
-            orderId:req.body.oid,
-            address:req.body.address,
-            amount:req.body.SubTotal,
-            products:req.body.cart,
+
+        let product, sumTotal = 0;
+        let cart = req.body.cart
+        for (let item in cart) {
+            // console.log(item);
+            sumTotal += cart[item].price * cart[item].qty
+            product = await Product.findOne({ slug: item })
+            if (product.price != cart[item].price) {
+                res.status(200).json( {success:false, "error": "something went wrong!" } )
+                return
+            }
+        }
+        if (sumTotal !== req.body.subTotal) {
+            res.status(200).json( { success:false, "error": "something went wrong!"} )
+            return
+        }
+        let order = new Order({
+            email: req.body.email,
+            orderId: req.body.oid,
+            address: req.body.address,
+            amount: req.body.SubTotal,
+            products: req.body.cart,
         })
         await order.save();
 
 
-        
-        
+
+
 
         var paytmParams = {};
 
@@ -28,7 +45,7 @@ const handler=async(req, res)=> {
             "mid": process.env.NEXT_PUBLIC_PAYTM_MID,
             "websiteName": "YOUR_WEBSITE_NAME",
             "orderId": req.body.oid,
-            "callbackUrl": `${ process.env.NEXT_PUBLIC_HOST}/api/posttransaction`,
+            "callbackUrl": `${process.env.NEXT_PUBLIC_HOST}/api/posttransaction`,
             "txnAmount": {
                 "value": req.body.SubTotal,
                 "currency": "INR",
@@ -71,7 +88,9 @@ const handler=async(req, res)=> {
 
                     post_res.on('end', function () {
                         console.log('Response: ', response);
-                        resolve(JSON.parse(response).body)
+                        let ress = JSON.parse(response).body
+                        ress.success = true 
+                        resolve(ress);
                     });
                 });
 

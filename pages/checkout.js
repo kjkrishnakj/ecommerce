@@ -1,16 +1,11 @@
-import Image from 'next/image'
 import React, { useCallback, useState } from 'react'
-// import logo from "../public/ak_logo4.png"
 import Link from 'next/link'
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import mongoose from "mongoose";
 
-import Product from "../models/Product";
 import Head from 'next/head';
 import Script from 'next/script';
-import samsunggalaxys24plus from "../public/img/samsunggalaxys24+.jpg"
 
 
 const Checkout = ({ cart, addToCart, removeFromCart, ClearCart, SubTotal, products}) => {
@@ -28,6 +23,9 @@ const Checkout = ({ cart, addToCart, removeFromCart, ClearCart, SubTotal, produc
 
 
   const handleChange=async(e)=>{
+
+   
+
     if(e.target.name=='name'){
       setName(e.target.value);
     }
@@ -54,6 +52,19 @@ const Checkout = ({ cart, addToCart, removeFromCart, ClearCart, SubTotal, produc
     
     else if(e.target.name=='pincode'){
       setPincode(e.target.value);
+      if(e.target.value.length==6){
+ 
+        let pins = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pincode`)
+        let pinJson = await pins.json()
+        if(Object.keys(pinJson).includes(e.target.value)){
+          setState(pinJson[e.target.value][0])
+          setCity(pinJson[e.target.value][1])
+        }
+      }
+      else{
+        setState('')
+        setCity('')
+      }
     }
     
     setTimeout(()=>{
@@ -87,7 +98,8 @@ const Checkout = ({ cart, addToCart, removeFromCart, ClearCart, SubTotal, produc
       body:JSON.stringify(data)
     })
     let txnRes= await a.json();
-    console.log(txnRes);
+    // console.log(txnRes);
+    if(txnRes.success){
     let txnToken = txnRes.txnToken
     var config = {
       "root": "",
@@ -115,6 +127,12 @@ const Checkout = ({ cart, addToCart, removeFromCart, ClearCart, SubTotal, produc
     });
 
   }
+  else{
+        toast.error(txnRes.error, { autoClose: 1000 })
+
+  }
+ 
+}
   return (
     <div>
       <ToastContainer/>
@@ -200,12 +218,12 @@ const Checkout = ({ cart, addToCart, removeFromCart, ClearCart, SubTotal, produc
               </div>
               <div className="grid md:grid-cols-2 md:gap-6">
                 <div className="relative z-0 w-full mb-5 group">
-                   <input value={city}  readOnly={true} style={{color:'black'}} type="text" name="state" id="state" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                   <input value={state}  onChange={handleChange}  style={{color:'black'}} type="text" name="state" id="state" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
                   <label htmlFor="state" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-7">State</label>
                 </div>
                 <div className="relative z-0 w-full mb-5 group">
-                   <input value={state} readOnly={true} style={{color:'black'}} type="text" name="city" id="city" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-                  <label htmlFor="city" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-7">City</label>
+                   <input value={city}  style={{color:'black'}} type="text" name="city" id="city" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                  <label htmlFor="city" onChange={handleChange} className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-7">City</label>
                 </div>
               </div>
             </form>
