@@ -26,11 +26,12 @@ export default function App({ Component, pageProps }: AppProps) {
 
   const [key, setKey] = useState<number>()
   const [progress, setProgress] = useState(0)
-
-
-
-
+  // const [email,setEmail]=useState<{ value: string | null }>({value: null})
+  
+  
   useEffect(() => {
+    // const em = localStorage.getItem('email')
+    // setEmail(em)
     router.events.on('routeChangeStart', () => {
       setProgress(40)
     })
@@ -59,7 +60,7 @@ export default function App({ Component, pageProps }: AppProps) {
     setUser({ value: null })
 
     setKey(Math.random())
-    router.push('/')
+    router.push('/login')
   }
   const saveCart = (myCart: Record<string, CartItem>) => {
     localStorage.setItem("cart", JSON.stringify(myCart));
@@ -119,7 +120,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
       <ToastContainer />
       {key && <Navbar logout={logout} user={user} key={key} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} ClearCart={clearCart} SubTotal={subTotal} />
-      }<Component buyNow={buyNow} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} ClearCart={clearCart} SubTotal={subTotal} {...pageProps} />
+      }<Component buyNow={buyNow}  user={user} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} ClearCart={clearCart} SubTotal={subTotal} {...pageProps} />
       <Footer />
 
       <Script src="https://kit.fontawesome.com/628fde244b.js"></Script>

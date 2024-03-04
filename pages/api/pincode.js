@@ -13,7 +13,7 @@ export default function handler(req, res) {
         "110009": ["New Delhi", "Delhi"],
         "110010": ["New Delhi", "Delhi"],
         "301019": ["Bhiwadi", "Rajasthan"],
-        "496001": ["Raigarh", "chhattisgarh"],
+        "496001": ["Raigarh", "Chhattisgarh"],
         "600127": ["Chennai", "Tamil Nadu"],
         "400001": ["Mumbai", "Maharashtra"],
         "400002": ["Mumbai", "Maharashtra"],

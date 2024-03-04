@@ -9,7 +9,11 @@ import { useRouter } from "next/router"
 const Navbar = ({ logout, user, cart, addToCart, removeFromCart, ClearCart, SubTotal }) => {
     // console.log(cart,addToCart,removeFromCart,ClearCart,SubTotal);
     const [dropdown, setDropdown] = useState(false)
+    const [disable, setDisable] = useState(false)      
+    const [clear, setclear] = useState(true)      
     const router = useRouter();
+
+   
     const toggleCart = () => {
         if (ref.current.classList.contains("translate-x-full")) {
             ref.current.classList.remove("translate-x-full");
@@ -21,13 +25,27 @@ const Navbar = ({ logout, user, cart, addToCart, removeFromCart, ClearCart, SubT
 
         }
     }
-    useEffect(()=>{
-
+    useEffect(() => {
+        
         const name = localStorage.getItem('name')
         // console.log(name);
         const email = localStorage.getItem('email')
         // console.log(email);
-    },[router.query])
+    }, [router.query])
+    useEffect(()=>{
+        if (SubTotal == 0) {
+            setDisable(true)
+            setclear(true)
+        }
+        else{
+            
+            setDisable(false)
+            setclear(false)
+        }
+    
+        
+    })
+
     const ref = useRef()
 
 
@@ -46,7 +64,7 @@ const Navbar = ({ logout, user, cart, addToCart, removeFromCart, ClearCart, SubT
                         <a href="/contact" className="mr-10 hover:text-gray-900">Contact</a>
                         <a href="/order" className="mr-10 hover:text-gray-900">Orders</a>
                     </nav>
-                    
+
                     <a onMouseOver={() => { setDropdown(true) }} onMouseLeave={() => { setDropdown(false) }} >
 
                         {user.value && <button className="rounded-full w-12 h-12 bg-gray-200 p-3 border-0 inline-flex items-center justify-center text-gray-500 mr-7   "><i className="fa-regular fa-user w-5 h-5 ml-8 " style={{ marginRight: "2rem" }}></i></button>}
@@ -60,7 +78,7 @@ const Navbar = ({ logout, user, cart, addToCart, removeFromCart, ClearCart, SubT
                         <div className="absolute top-7 right-8 rounded-md px-5 w-50 bg-indigo-500">
                             <ul>
                                 <div className="px-4 py-4 text-sm text-gray-900 dark:text-white " >
-                                    <div style={{fontWeight:"500"}}>{localStorage.getItem('name')}</div>
+                                    <div style={{ fontWeight: "500" }}>{localStorage.getItem('name')}</div>
                                     <div className="font-medium truncate">{localStorage.getItem('email')}</div>
                                 </div>
                                 <hr />
@@ -71,7 +89,7 @@ const Navbar = ({ logout, user, cart, addToCart, removeFromCart, ClearCart, SubT
                         </div>
                     </div>}
 
- 
+
 
 
 
@@ -126,9 +144,9 @@ const Navbar = ({ logout, user, cart, addToCart, removeFromCart, ClearCart, SubT
                     </ol>
                     <div className="flex">
 
-                        <Link href="/checkout"><button className="text-white flex mx-2 bg-indigo-500 border-0 py-2 px-3 focus:outline-none hover:bg-indigo-600 mt-4 rounded text-lg"> <span><i className="fa-solid fa-bag-shopping mr-3"></i></span>Checkout</button>
+                        <Link href="/checkout"><button disabled={disable} className="text-white  disabled:bg-indigo-400 flex mx-2 bg-indigo-600 border-0 py-2 px-3 focus:outline-none hover:bg-indigo-700 mt-4 rounded text-lg"> <span><i className="fa-solid fa-bag-shopping mr-3"></i></span>Checkout</button>
                         </Link>
-                        <button onClick={ClearCart} className="text-white flex mx-2 bg-indigo-500 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 mt-4 rounded text-lg">Clear</button>
+                        <button onClick={ClearCart} disabled={clear}  className="text-white flex mx-2 disabled:bg-indigo-400 bg-indigo-600 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-700 mt-4 rounded text-lg">Clear</button>
 
                     </div>
                     <div className="my-5"><h4>SubTotal: ₹{SubTotal}</h4></div>

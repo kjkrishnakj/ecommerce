@@ -1,18 +1,16 @@
-import Image from 'next/image'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useRouter } from 'next/router';
-import samsunggalaxys24plus from "../public/img/samsunggalaxys24+.jpg"
 import mongoose from 'mongoose'
 import Order from "../models/Order"
 const MyOrder = ({ cart, addToCart, order, removeFromCart, ClearCart, SubTotal }) => {
   const router = useRouter()
-  const products = order.products;
-  // console.log("product:",products.name);
-
-  // const {id}=router.query
-  // console.log("ID from query:", id);
-  console.log("ordeR:", order);
-
+  // const products = order.products;
+  useEffect(()=>{
+    
+    if(router.query.clearCart==1){
+      ClearCart()
+    }
+   })
   return (
     <div>
       <section className="text-gray-600 body-font overflow-hidden">
