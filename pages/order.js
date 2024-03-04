@@ -4,7 +4,7 @@ import mongoose from 'mongoose'
 import Order from "../models/Order"
 const MyOrder = ({ cart, addToCart, order, removeFromCart, ClearCart, SubTotal }) => {
   const router = useRouter()
-  // const products = order.products;
+  const products = order.products;
   useEffect(()=>{
     
     if(router.query.clearCart==1){
