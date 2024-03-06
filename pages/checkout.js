@@ -1,12 +1,12 @@
 import React, { useCallback, useState } from 'react'
 import Link from 'next/link'
+import pincodes from '../pinodes.json'
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import Head from 'next/head';
 import Script from 'next/script';
-import { userInfo } from 'os';
 
 
 const Checkout = ({ user, cart, addToCart, removeFromCart, ClearCart, SubTotal, products }) => {
@@ -24,7 +24,7 @@ const Checkout = ({ user, cart, addToCart, removeFromCart, ClearCart, SubTotal, 
 
   const vname = () => {
 
-    if (myform.name.value.match(/[0-9]/g )) {
+    if (myform.name.value.match(/[0-9]/g)) {
       toast.error("Enter valid name🥲", { autoClose: 1000 });
       setName('')
     }
@@ -51,8 +51,8 @@ const Checkout = ({ user, cart, addToCart, removeFromCart, ClearCart, SubTotal, 
   }
 
   const vpincode = () => {
-    if (!myform.phone.value.match(/[0-9]/g)) {
-      toast.error("Enter valid pincode🥲", { autoClose: 1000 });
+    if (!myform.pincode.value.match(/[0-9]/g) || !Object.keys(pincodes).includes(pincode)) {
+      toast.error("Either pincode is invalid or not serviceable!🥲", { autoClose: 1000 });
       setPincode('')
     }
   }
@@ -255,18 +255,18 @@ const Checkout = ({ user, cart, addToCart, removeFromCart, ClearCart, SubTotal, 
                   <label htmlFor="phone" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-7">Phone number</label>
                 </div>
                 <div className="relative z-0 w-full mb-5 group">
-                  <input onBlur={vpin} onChange={handleChange} value={pincode} style={{ color: 'black' }} type="text" name="pincode" id="pincode" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                  <input onBlur={vpincode} onChange={handleChange} value={pincode} style={{ color: 'black' }} type="text" name="pincode" id="pincode" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
                   <label htmlFor="pincode" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-7">Pincode</label>
                 </div>
               </div>
               <div className="grid md:grid-cols-2 md:gap-6">
                 <div className="relative z-0 w-full mb-5 group">
-                  <input value={state}  style={{ color: 'black' }} readOnly={true} type="text" name="state" id="state" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                  <input value={state} style={{ color: 'black' }} readOnly={true} type="text" name="state" id="state" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
                   <label htmlFor="state" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-7">State</label>
                 </div>
                 <div className="relative z-0 w-full mb-5 group">
                   <input value={city} style={{ color: 'black' }} readOnly={true} type="text" name="city" id="city" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-                  <label htmlFor="city"  className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-7">City</label>
+                  <label htmlFor="city" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-7">City</label>
                 </div>
               </div>
             </form>
@@ -291,8 +291,13 @@ const Checkout = ({ user, cart, addToCart, removeFromCart, ClearCart, SubTotal, 
               </div>
             </div>}
             {/* <Link href={'/checkout'}><button disabled={disabled} onClick={intiatePayment} className="mt-4 mb-8 w-full disabled:bg-gray-600 rounded-md bg-gray-900 px-6 py-3 font-medium text-white">Place Order</button> */}
-            <Link href={'/orders'}><button disabled={disabled} onClick={intiatePayment} className="mt-4 mb-8 w-full disabled:bg-indigo-400  bg-indigo-600 border-0 rounded-md hover:bg-indigo-700 px-6 py-3 font-medium text-white">Place Order</button>
-            </Link></div>
+            {/* {(Object.keys(pincodes)).includes(pincode) ?
+              <Link href={'/orders'}><button disabled={disabled} onClick={intiatePayment} className="mt-4 mb-8 w-full disabled:bg-indigo-400  bg-indigo-600 border-0 rounded-md hover:bg-indigo-700 px-6 py-3 font-medium text-white">Place Order</button>
+              </Link> : <Link href={'/checkout'}><button disabled={disabled} onClick={intiatePayment} className="mt-4 mb-8 w-full disabled:bg-indigo-400  bg-indigo-600 border-0 rounded-md hover:bg-indigo-700 px-6 py-3 font-medium text-white">Place Order</button>
+              </Link>  } */}
+              <Link href={'/orders'}><button disabled={disabled} onClick={intiatePayment} className="mt-4 mb-8 w-full disabled:bg-indigo-400  bg-indigo-600 border-0 rounded-md hover:bg-indigo-700 px-6 py-3 font-medium text-white">Place Order</button>
+              </Link>
+          </div>
         </div>
 
 
@@ -303,17 +308,4 @@ const Checkout = ({ user, cart, addToCart, removeFromCart, ClearCart, SubTotal, 
 }
 export default Checkout
 
-
-// export async function getServerSideProps(context) {
-//   if (!mongoose.connections[0].readyState) {
-//     await mongoose.connect(process.env.MONGO_URI)
-//   }
-
-
-//   let products= await Product.find({})
-
-
-//   return {
-//     props: { products: products }
-//   }
-// }
+ 

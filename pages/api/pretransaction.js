@@ -1,15 +1,24 @@
+import { useRouter } from "next/router";
 import connectDb from "../../middleware/mongoose";
 import Order from "../../models/Order";
 import Product from "../../models/Product";
+import pincodes from '../../pinodes.json'
+
 const https = require('https');
 
-const PaytmChecksum = require('paytmchecksum');
+// const PaytmChecksum = require('paytmchecksum');
 
 const handler = async (req, res) => {
-
+    const router =  useRouter();
     if (req.method == "POST") {
 
-
+        if(!(Object.keys(pincodes)).includes(req.body.pincode)){
+            
+            res.status(200).json( {success:false, "error": "Entered pincode is not serviceable!" } )
+            // router.push("/checkout")
+            return
+            
+        }
         let product, sumTotal = 0;
         let cart = req.body.cart
         for (let item in cart) {

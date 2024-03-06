@@ -74,6 +74,10 @@ export default function App({ Component, pageProps }: AppProps) {
 
   const addToCart = (itemCode: string, qty: number, price: number, name: string, variant: string, img: string) => {
     // toast.success("Added to cart👍",{autoClose:1000,position:'bottom-center'})
+    if(Object.keys(cart).length==0){
+      
+      setKey(Math.random())
+    }
     const newCart = { ...cart };
     if (itemCode in cart) {
       newCart[itemCode].qty = cart[itemCode].qty + qty;

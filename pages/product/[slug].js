@@ -2,18 +2,23 @@ import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image';
 import mongoose from "mongoose";
-
+import Error from 'next/error'
 import Product from "../../models/Product";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-const Post = ({ addToCart, product, variants,buyNow }) => {
+// import next from 'next/types';
+const Post = ({ addToCart,error, product, variants,buyNow }) => {
     // console.log(product, variants);
     const router = useRouter();
     const { slug } = router.query
     // console.log(slug);
     const [pin, setPin] = useState()
     const [service, setService] = useState()
-
+    // useEffect(()=>{
+    //     if(error==404){
+    //         return<Error statusCode={404}/>
+    //     }
+    // })
    
     const checkService = async () => {
         let pins = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pincode`)
@@ -31,7 +36,9 @@ const Post = ({ addToCart, product, variants,buyNow }) => {
         setPin(e.target.value)
     }
 
-
+    if(error==404){ 
+        return<Error statusCode={404}/>
+    }
     return <>
         <section className="text-gray-600 body-font overflow-hidden">
            <ToastContainer/>
@@ -84,20 +91,21 @@ const Post = ({ addToCart, product, variants,buyNow }) => {
                         <div className="flex mt-6 items-center pb-5 border-b-2 border-gray-100 mb-5">
                             <div className="flex">
                                 <span className="mr-3">Color</span>
-                                {Object.keys(variants).includes('blue') && <button className="border-2 border-blue-200  bg-blue-700 rounded-full w-6 h-6 focus:outline-none"></button>}
-                                {Object.keys(variants).includes('orange') && <button className="border-2 border-blue-200 bg-orange-700 rounded-full w-6 h-6 focus:outline-none"></button>}
-                                {Object.keys(variants).includes('purple') && <button className="border-2 border-blue-200 bg-purple-700 rounded-full w-6 h-6 focus:outline-none"></button>}
-                                {Object.keys(variants).includes('black') && <button className="border-2 border-blue-200 bg-black-700 rounded-full w-6 h-6 focus:outline-none"></button>}
-                                {Object.keys(variants).includes('white') && <button className="border-2 border-blue-200 bg-white-700 rounded-full w-6 h-6 focus:outline-none"></button>}
-                                {Object.keys(variants).includes('pink') && <button className="border-2 border-blue-200 bg-pink-300 rounded-full w-6 h-6 focus:outline-none"></button>}
-                                {Object.keys(variants).includes('yellow') && <button className="border-2 border-blue-200 bg-yellow-700 rounded-full w-6 h-6 focus:outline-none"></button>}
-                                {Object.keys(variants).includes('red') && <button className="border-2 border-blue-200 bg-red-700 rounded-full w-6 h-6 focus:outline-none"></button>} </div>
+                                {product.color && Object.keys(variants).includes('blue') && <button className="border-2 border-blue-200  bg-blue-700 rounded-full w-6 h-6 focus:outline-none"></button>}
+                                {product.color && Object.keys(variants).includes('orange') && <button className="border-2 border-blue-200 bg-orange-700 rounded-full w-6 h-6 focus:outline-none"></button>}
+                                {product.color && Object.keys(variants).includes('purple') && <button className="border-2 border-blue-200 bg-purple-700 rounded-full w-6 h-6 focus:outline-none"></button>}
+                                {product.color && Object.keys(variants).includes('black') && <button className="border-2 border-blue-200 bg-black-700 rounded-full w-6 h-6 focus:outline-none"></button>}
+                                {product.color && Object.keys(variants).includes('white') && <button className="border-2 border-blue-200 bg-white-700 rounded-full w-6 h-6 focus:outline-none"></button>}
+                                {product.color && Object.keys(variants).includes('pink') && <button className="border-2 border-blue-200 bg-pink-300 rounded-full w-6 h-6 focus:outline-none"></button>}
+                                {product.color && Object.keys(variants).includes('yellow') && <button className="border-2 border-blue-200 bg-yellow-700 rounded-full w-6 h-6 focus:outline-none"></button>}
+                                {product.color && Object.keys(variants).includes('red') && <button className="border-2 border-blue-200 bg-red-700 rounded-full w-6 h-6 focus:outline-none"></button>} </div>
 
                         </div>
                         <div className="flex">
-                            <span className="title-font font-medium text-2xl text-gray-900">₹{product.price}</span>
-                            <button onClick={() => { buyNow(slug, 1, product.price, product.title, product.color,product.img) }} className="flex ml-10 text-white  bg-indigo-600 border-0 py-2 px-2 focus:outline-none hover:bg-indigo-700 rounded">Buy now</button>
-                            <button onClick={() => { addToCart(slug, 1, product.price, product.title, product.color,product.img) }} className="flex ml-4 text-white bg-indigo-600 border-0 py-2 px-2 focus:outline-none hover:bg-indigo-700 rounded">Add to Cart</button>
+                            {product.availableQty<=0?<span className="title-font font-medium text-2xl text-gray-900">Out Of Stock!</span>:
+                            <span className="title-font font-medium text-2xl text-gray-900">₹{product.price}</span>}
+                            <button onClick={() => { buyNow(slug, 1, product.price, product.title, product.color,product.img) }} disbaled={product.availableQty <=0 ? true:false} className="flex ml-10 disabled:bg-indigo-500 text-white  bg-indigo-600 border-0 py-2 px-2 focus:outline-none hover:bg-indigo-700 rounded">Buy now</button>
+                            <button onClick={() => { addToCart(slug, 1, product.price, product.title, product.color,product.img) }} disbaled={product.availableQty <=0 ? true:false} className="flex ml-4 disabled:bg-indigo-500 text-white bg-indigo-600 border-0 py-2 px-2 focus:outline-none hover:bg-indigo-700 rounded">Add to Cart</button>
                             <button className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
                                 <svg fill="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-5 h-5" viewBox="0 0 24 24">
                                     <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
@@ -135,18 +143,24 @@ export async function getServerSideProps(context) {
     let product = await Product.findOne({ slug: context.query.slug })
     let variants = await Product.find({ title: product.title })
     let colorSlug = {}
+    let error=null;
+    if(product==null){
+        return {
+            props: {error:404}
+        }
+    }
     for (let item of variants) {
         if (Object.keys(colorSlug).includes(item.color)) {
             colorSlug[item.color] = { slug: item.slug }
         }       
         else {
             colorSlug[item.color] = {}
-
+ 
             colorSlug[item.color] = { slug: item.slug }
         }
     }
 
     return {
-        props: { product: JSON.parse(JSON.stringify(product)), variants: JSON.parse(JSON.stringify(colorSlug)) }
+        props: {error:error, product: JSON.parse(JSON.stringify(product)), variants: JSON.parse(JSON.stringify(colorSlug)) }
     }
 }

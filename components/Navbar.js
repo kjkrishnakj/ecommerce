@@ -12,19 +12,26 @@ const Navbar = ({ logout, user, cart, addToCart, removeFromCart, ClearCart, SubT
     const [disable, setDisable] = useState(false)      
     const [clear, setclear] = useState(true)      
     const router = useRouter();
-
+    const [sidebar,setSidebar]= useState(false)
    
     const toggleCart = () => {
-        if (ref.current.classList.contains("translate-x-full")) {
-            ref.current.classList.remove("translate-x-full");
-            ref.current.classList.add("translate-x-0");
-        }
-        else if (!ref.current.classList.contains("translate-x-full")) {
-            ref.current.classList.remove("translate-x-0");
-            ref.current.classList.add("translate-x-full");
+        // if (ref.current.classList.contains("translate-x-full")) {
+        //     ref.current.classList.remove("translate-x-full");
+        //     ref.current.classList.add("translate-x-0");
+        // }
+        // else if (!ref.current.classList.contains("translate-x-full")) {
+        //     ref.current.classList.remove("translate-x-0");
+        //     ref.current.classList.add("translate-x-full");
 
-        }
+        // }
+        setSidebar(!sidebar)
     }
+    useEffect(()=>{
+        Object.keys(cart).length !==0 && setSidebar(true)
+        if(router.pathname=="/checkout" || router.pathname=="/myaccount"|| router.pathname=="/order" || router.pathname=="/orders"){
+            setSidebar(false)
+        }
+    },[])
     useEffect(() => {
         
         const name = localStorage.getItem('name')
@@ -111,7 +118,7 @@ const Navbar = ({ logout, user, cart, addToCart, removeFromCart, ClearCart, SubT
 
 
 
-                <div ref={ref} className={` w-59 h-[100vh] sidecart absolute top-0 right-0 bg-blue-100 py-10 px-8 transition-transform transform ${Object.keys(cart).length !== 0 ? 'translate-x-0' : 'translate-x-full'}`} style={{ borderRadius: "1rem", zIndex: 1 }}>
+                <div ref={ref} className={` w-59 h-[100vh] sidecart absolute top-0  bg-blue-100 py-10 px-8 transition-all ${sidebar ? 'right-0' : '-right-96'}`} style={{ borderRadius: "1rem", zIndex: 1 }}>
                     <h2 className="font-bold text-xl text-center">Shopping cart</h2>
                     <span onClick={toggleCart} className="absolute top-5 right-2 cursor-pointer text-xl"><i className="fa-solid fa-arrow-right-long"></i></span>
 
