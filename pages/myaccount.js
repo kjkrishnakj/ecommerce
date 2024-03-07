@@ -10,6 +10,7 @@ const MyAccount = () => {
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [user, setUser] = useState({value:null});
   const [phone, setPhone] = useState('');
   const [state, setState] = useState('');
   const [city, setCity] = useState('');
@@ -57,8 +58,8 @@ const MyAccount = () => {
     }
   }
 
-
-
+  
+  
   const handleChange = async (e) => {
 
 
@@ -106,15 +107,16 @@ const MyAccount = () => {
           setCity(pinJson[e.target.value][1])
         }
       }
-      else {
+       else {
         setState('')
         setCity('')
       }
     }
-
+    // console.log(password,cpassword);
+    
     setTimeout(() => {
-
-      if (name.length > 3 && address.length > 3 && pincode.length > 3 && phone.length > 3 && password == cpassword) {
+      //pending do verifu pass and cpass
+      if (name.length > 3 && address.length > 3 && pincode.length > 3 && phone.length > 3 ) {
         setDisabled(false)
         // toast.error("Please fill the details", { autoClose: 1000 })
 
@@ -126,10 +128,37 @@ const MyAccount = () => {
     }, 100)
 
   }
-  const tclick=()=>{
+ 
+  useEffect(()=>{
+    const user = (localStorage.getItem('token'))
+    if(!user){
+      router.push('/')
+      console.log("hjeheh");
+    }
+    if(user && user.token){
+      console.log("hjeheh");
+      setUser(user)
+      // setEmail(user.email)
+    }
+  },[])
   
-  toast.success("Details saved successfully 👍",{autoClose:1000})
+  const handleUserSubmit = async()=>{
+    let data = {token:user.token}
+    console.log(token);
+
+    let a = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/getuser`, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data)
+    })
+    console.log(data);
+    let txnRes = await a.json();
+    toast.success("Details saved successfully 👍",{autoClose:1000})
   }
+
+
   return (
     <div>
       <ToastContainer />
@@ -157,17 +186,17 @@ const MyAccount = () => {
 
                       <div className="md:col-span-5">
                         <label htmlFor="email">Email Address</label>
-                        <input onBlur={vemail}  value={localStorage.getItem('email')} readOnly={true} type="text" name="email" id="email" className="h-10 border mt-1 rounded px-4 w-full bg-gray-50" placeholder="email@domain.com" />
+                        <input defaultValue={localStorage.getItem('email')} readOnly={true} type="text" name="email" id="email" className="h-10 border mt-1 rounded px-4 w-full bg-gray-50" placeholder="email@domain.com" />
                       </div>
 
                       <div className="md:col-span-2">
                         <label htmlFor="password">Password</label>
-                        <input onBlur={vemail}  value={localStorage.getItem('password')} onChange={handleChange} type="password" name="password" id="password" className="h-10 border mt-1 rounded px-4 w-full bg-gray-50" />
+                        <input value={password} onChange={handleChange} type="password" name="password" id="password" className="h-10 border mt-1 rounded px-4 w-full bg-gray-50" />
                       </div>
 
                       <div className="md:col-span-2">
                         <label htmlFor="cpassword">Confirm Password</label>
-                        <input onBlur={vemail}  value={localStorage.getItem('cpassword')} onBlur={vcpassword} onChange={handleChange} type="password" name="cpassword" id="cpassword" className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"  />
+                        <input value={cpassword} onBlur={vcpassword} onChange={handleChange} type="password" name="cpassword" id="cpassword" className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"  />
                       </div>
 
                       <div className="md:col-span-1">
@@ -188,7 +217,7 @@ const MyAccount = () => {
                       </div>
                       <div className="md:col-span-2">
                         <label htmlFor="state">State</label>
-                        <input oonChange={handleChange} value={state} type="text" name="state" id="state" className="transition-all flex items-center h-10 border mt-1 rounded px-4 w-full bg-gray-50" placeholder="" />
+                        <input onChange={handleChange} value={state} type="text" name="state" id="state" className="transition-all flex items-center h-10 border mt-1 rounded px-4 w-full bg-gray-50" placeholder="" />
                       </div>
                       <div className="md:col-span-2">
                         <label htmlFor="city">City</label>
@@ -200,7 +229,7 @@ const MyAccount = () => {
 
 
                       <div className="md:col-span-5 text-right">
-                        <Link href={'/'}><button disabled={disabled} onClick={tclick}  className="mt-4 mb-8 w-full disabled:bg-indigo-400  bg-indigo-600 border-0 rounded-md hover:bg-indigo-700 px-6 py-3 font-medium text-white">Submit</button>
+                        <Link href={'/'}><button disabled={disabled} onClick={handleUserSubmit}  className="mt-4 mb-8 w-full disabled:bg-indigo-400  bg-indigo-600 border-0 rounded-md hover:bg-indigo-700 px-6 py-3 font-medium text-white">Submit</button>
                         </Link>
                       </div>
 
