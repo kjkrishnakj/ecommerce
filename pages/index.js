@@ -10,7 +10,7 @@ export default function Home({ products }) {
 
       <Head>
         <title>Amikart</title>
-        <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet' />
+        <link href='https://fonts.googleapis.com/css?family=Nunito' />
 
       </Head>
 

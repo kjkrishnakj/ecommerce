@@ -55,7 +55,7 @@ const Signup = () => {
     return (
         <div>
             <ToastContainer/>
-            <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+            <div className="flex min-h-screen flex-col justify-center px-6 py-12 lg:px-8">
                 <div className="mt-16  sm:mx-auto sm:w-full sm:max-w-sm">
                     <Image className='mx-auto' src={logo} alt="" style={{ height: "4rem", width: "6rem" }}></Image>
                     <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign up for your account</h2>
