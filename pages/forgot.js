@@ -4,6 +4,8 @@ import Image from 'next/image'
 import logo from "../public/ak_logo4.png"
 import { useRouter } from 'next/router'
 
+import Head from "next/head";
+
 const forgot = () => {
   const router = useRouter()
   const [email,setEmail] = useState('')
@@ -70,6 +72,7 @@ const handleChange=(e)=>{
   }, [])
   return (
     <div>
+      <Head><title>Amikart | Forgot</title></Head>
       <div>
         <div className="flex min-h-screen flex-col justify-center px-6 py-12 lg:px-8">
           <div className="mt-16  sm:mx-auto sm:w-full sm:max-w-sm">

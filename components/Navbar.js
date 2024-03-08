@@ -28,7 +28,7 @@ const Navbar = ({ logout, user, cart, addToCart, removeFromCart, ClearCart, SubT
     }
     useEffect(()=>{
         Object.keys(cart).length !==0 && setSidebar(true)
-        if(router.pathname=="/checkout" || router.pathname=="/myaccount"|| router.pathname=="/order" || router.pathname=="/orders"){
+        if(router.pathname=="/checkout"||  router.pathname=="/myaccount"|| router.pathname=="/contact"|| router.pathname=="/about"|| router.pathname=="/order" || router.pathname=="/orders"){
             setSidebar(false)
         }
     },[])

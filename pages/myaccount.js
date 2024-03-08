@@ -2,6 +2,7 @@ import pincodes from '../pinodes.json'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 
+import Head from "next/head";
 import React, { useEffect, useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -205,11 +206,12 @@ const fetchData  =async(token)=>{
   return (
     <div>
       <ToastContainer />
+<Head><title>Amikart | Account</title></Head>
       <div className="min-h-screen p-6 flex items-center justify-center">
         <div className="container px-5 py-12 mx-auto">
           <div className="w-full mx-auto flex flex-wrap">
             <div className=" w-full  lg:pr-10 lg:py-6 mb-6 lg:mb-0">
-              <h2 className="font-semibold text-xl text-gray-600 flex items-center justify-center">My Account</h2>
+              <h2 className="font-semibold  text-gray-800 flex items-center justify-center" style={{fontSize:"1cm"}}>My Account</h2>
               <p className="text-gray-500 mb-6 flex items-center justify-center">Your details help us make your experience better</p>
 
               <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">

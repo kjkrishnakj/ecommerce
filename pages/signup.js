@@ -4,17 +4,19 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
 
+import Head from "next/head";
+
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/router'
 const Signup = () => {
-  const router = useRouter()
+    const router = useRouter()
 
     useEffect(() => {
         if (localStorage.getItem('token')) {
-          router.push('/')
+            router.push('/')
         }
-      }, [])
+    }, [])
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -33,7 +35,7 @@ const Signup = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const data = {name: name,  email, password }
+        const data = { name: name, email, password }
         let res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/signup`, {
             method: 'POST',
             headers: {
@@ -46,15 +48,16 @@ const Signup = () => {
         setEmail('')
         setName('')
         setPassword('')
-        toast.success("welcome " + name+ " 🙃",{ autoClose: 1000 })
+        toast.success("welcome " + name + " 🙃", { autoClose: 1000 })
         setTimeout(() => {
             router.push('/login')
-          }, 1000)
+        }, 1000)
     }
-    
+
     return (
         <div>
-            <ToastContainer/>
+            <ToastContainer />
+            <Head><title>Amikart | Signup</title></Head>
             <div className="flex min-h-screen flex-col justify-center px-6 py-12 lg:px-8">
                 <div className="mt-16  sm:mx-auto sm:w-full sm:max-w-sm">
                     <Image className='mx-auto' src={logo} alt="" style={{ height: "4rem", width: "6rem" }}></Image>
@@ -66,13 +69,13 @@ const Signup = () => {
                         <div>
                             <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">Name</label>
                             <div className="mt-2">
-                                <input value ={name} onChange={handleChange} id="name" name="name" type="text" autoComplete="name" required className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                <input value={name} onChange={handleChange} id="name" name="name" type="text" autoComplete="name" required className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                             </div>
                         </div>
                         <div>
                             <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">Email address</label>
                             <div className="mt-2">
-                                <input  value ={email} onChange={handleChange} id="email" name="email" type="email" autoCmplete="email" required className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                <input value={email} onChange={handleChange} id="email" name="email" type="email" autoCmplete="email" required className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                             </div>
                         </div>
 
@@ -81,7 +84,7 @@ const Signup = () => {
                                 <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">Password</label>
                             </div>
                             <div className="mt-2">
-                                <input  value={password} onChange={handleChange} id="password" name="password" type="password" autoComplete="current-password" required className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                <input value={password} onChange={handleChange} id="password" name="password" type="password" autoComplete="current-password" required className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                             </div>
 
 

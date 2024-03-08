@@ -9,8 +9,9 @@ export default function Home({ products }) {
     <div >
 
       <Head>
-        <title>Amikart</title>
+        {/* <title>Amikart</title> */}
         <link href='https://fonts.googleapis.com/css?family=Nunito' />
+        <title>Amikart | Home</title>
 
       </Head>
 

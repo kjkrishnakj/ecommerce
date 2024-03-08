@@ -1,10 +1,11 @@
 import React from 'react'
-
+import Head from "next/head";
 const About = () => {
   return (
     <div className='min-h-screen text-gray-700 ' style={{fontSize:"0.45cm"}}>
       <div className="container py-24 ">
         <div className="lg:w-4/5 mx-auto ">
+          <Head><title>Amikart | About</title></Head>
           {/* <div className="lg:w-1/2 w-full lg:pr-10 lg:py-6 mb-6 lg:mb-0"></div> */}
           <h1 className ="flex justify-center text-center text-gray-800" style={{fontSize:"1cm",alignItems:"center"}}>About Amikart</h1>
           <p>Welcome to Amikart, your one-stop destination for all your smartphone needs. At Amikart, we offer a wide range of smartphones with multiple models to choose from.</p>

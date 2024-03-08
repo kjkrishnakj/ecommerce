@@ -2,6 +2,8 @@ import React, { useEffect } from 'react'
 import { useRouter } from 'next/router';
 import mongoose from 'mongoose'
 import Order from "../models/Order"
+
+import Head from "next/head";
 const MyOrder = ({ cart, addToCart, order, removeFromCart, ClearCart, SubTotal }) => {
   const router = useRouter()
   const products = order.products;
@@ -14,6 +16,7 @@ const MyOrder = ({ cart, addToCart, order, removeFromCart, ClearCart, SubTotal }
   return (
     <div>
       <section className="text-gray-600 body-font overflow-hidden">
+<Head><title>Amikart | Order</title></Head>
         <div className="container px-5 py-24 mx-auto">
           <div className="w-full mx-auto flex flex-wrap">
             <div className=" w-full  lg:pr-10 lg:py-6 mb-6 lg:mb-0">

@@ -2,6 +2,8 @@ import Image from 'next/image'
 import React, { useEffect } from 'react'
 import logo from "../public/ak_logo4.png"
 import Link from 'next/link'
+
+import Head from "next/head";
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
@@ -46,7 +48,7 @@ const Login = () => {
     if (response.success) {
       localStorage.setItem('token', response.token)
       localStorage.setItem('email', email);
- 
+
 
 
       toast.success("Logged in successfully 👍", { autoClose: 1000 })
@@ -63,6 +65,7 @@ const Login = () => {
   return (
     <div>
       <ToastContainer />
+      <Head><title>Amikart | Login</title></Head>
       <div className="flex min-h-screen flex-col justify-center px-6 py-12 lg:px-8">
         <div className="mt-16  sm:mx-auto sm:w-full sm:max-w-sm">
           <Image className='mx-auto' src={logo} alt="" style={{ height: "4rem", width: "6rem" }}></Image>
