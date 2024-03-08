@@ -12,12 +12,14 @@ const handler = async (req,res)=>{
         
         // let user = jsonwebtoken.verify(token,process.env.JWT_SECRET,{expiresIn:"2d"})
         // let dbuser = User.find({email:req.body.email})
-        let dbuser = await User.findOne({ "email": req.body.email })
+        let dbuser = await User.findOneAndUpdate({ "email": req.body.email },{address:req.body.address,pincode:req.body.pincode,name:req.body.name,phone:req.body.phone})
 
         // console.log("user : "+dbuser);
-        const {name,email,address,pincode,phone} = dbuser
+        // const {name,email,address,pincode,phone} = dbuser
         // console.log(name,email,address,pincode);
-        res.status(200).json({name,email,address,pincode,phone})
+        console.log(dbuser);
+        // res.status(200).json({dbuser})
+        res.status(200).json({success:true})
     }
     else{
 

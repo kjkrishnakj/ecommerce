@@ -44,6 +44,11 @@ const handler = async (req, res) => {
             email: req.body.email,
             orderId: req.body.oid,
             address: req.body.address,
+            city: req.body.city,
+            state: req.body.state,
+            name: req.body.name,
+            phone: req.body.phone,
+            address: req.body.address,
             amount: req.body.SubTotal,
             products: req.body.cart,
         })

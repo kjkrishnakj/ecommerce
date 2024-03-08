@@ -5,12 +5,12 @@ import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-const MyAccount = () => {
+const MyAccount = ( ) => {
   const router = useRouter();
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [user, setUser] = useState({value:null});
+  // const [user, setUser] = useState({value:null});
   const [phone, setPhone] = useState('');
   const [state, setState] = useState('');
   const [city, setCity] = useState('');
@@ -58,6 +58,7 @@ const MyAccount = () => {
     }
   }
 
+  
   
   
   const handleChange = async (e) => {
@@ -129,33 +130,75 @@ const MyAccount = () => {
 
   }
  
-  useEffect(()=>{
-    const user = (localStorage.getItem('token'))
-    if(!user){
-      router.push('/')
-      console.log("hjeheh");
-    }
-    if(user && user.token){
-      console.log("hjeheh");
-      setUser(user)
-      // setEmail(user.email)
-    }
-  },[])
-  
-  const handleUserSubmit = async()=>{
-    let data = {token:user.token}
-    console.log(token);
+  // useEffect(()=>{
+  //   const user = JSON.parse(localStorage.getItem('token'))
+  //   if(!user){
+  //     router.push('/')
+  //     console.log("hjeheh");
+  //   }
+  //   if(user && user.token){
+  //     console.log("hjeheh");
+  //     setUser(user)
+  //     // setEmail(user.email)
+  //   }
+  // },[])
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    // if (!token) {
+    //     router.push('/');
+    //     console.log("Token not found in localStorage.");
+    // } else {
+    //     setUser(token);
+    //     // setEmail(user.email); // Uncomment this line if needed
+    // }
+    setEmail(localStorage.getItem('email'))
+    // fetchData(token)
+}, []);
+useEffect(()=>{
+  // fetchData(localStorage.getItem('token'))
+},[router.query])
 
-    let a = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/getuser`, {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data)
-    })
-    console.log(data);
-    let txnRes = await a.json();
-    toast.success("Details saved successfully 👍",{autoClose:1000})
+
+const fetchData  =async(token)=>{
+  let data = {token:token,name,address,phone,pincode}
+  // console.log("user "+data);
+  console.log("data + "+JSON.stringify(data));
+  let a = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/updateuser`, {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data)
+  })
+  let res = await a.json();
+  console.log(res);
+  // toast.success("Details Updated successfully 👍",{autoClose:1000})
+  setName(res.name);
+  setAddress(res.address);
+  setPincode(res.pincode);
+  setPhone(res.phone);
+
+}
+
+  // console.log(user);
+  const handleUserSubmit = async()=>{
+    let data = {email,name,address,phone,pincode}
+  // console.log("user "+data);
+  console.log("data + "+JSON.stringify(data));
+  let a = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/updateuser`, {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data)
+  })
+  let res = await a.json();
+  console.log(res);
+  toast.success("Details Updated successfully 👍",{autoClose:1000})
+  setName(res.name);
+  setAddress(res.address);
+  setPincode(res.pincode);
+  setPhone(res.phone);
   }
 
 
@@ -186,7 +229,7 @@ const MyAccount = () => {
 
                       <div className="md:col-span-5">
                         <label htmlFor="email">Email Address</label>
-                        <input defaultValue={localStorage.getItem('email')} readOnly={true} type="text" name="email" id="email" className="h-10 border mt-1 rounded px-4 w-full bg-gray-50" placeholder="email@domain.com" />
+                        <input defaultValue={email} readOnly={true} type="text" name="email" id="email" className="h-10 border mt-1 rounded px-4 w-full bg-gray-50" placeholder="email@domain.com" />
                       </div>
 
                       <div className="md:col-span-2">
