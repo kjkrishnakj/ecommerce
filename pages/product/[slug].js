@@ -19,7 +19,7 @@ const Post = ({ addToCart,error, product, variants,buyNow }) => {
     //         return<Error statusCode={404}/>
     //     }
     // })
-   
+   //pending buynow
     const checkService = async () => {
         let pins = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pincode`)
         let pinJson = await pins.json()

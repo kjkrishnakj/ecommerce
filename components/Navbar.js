@@ -28,7 +28,7 @@ const Navbar = ({ logout, user, cart, addToCart, removeFromCart, ClearCart, SubT
     }
     useEffect(()=>{
         Object.keys(cart).length !==0 && setSidebar(true)
-        if(router.pathname=="/checkout"||  router.pathname=="/myaccount"|| router.pathname=="/contact"|| router.pathname=="/about"|| router.pathname=="/order" || router.pathname=="/orders"){
+        if(router.pathname=="/checkout"||router.pathname=="/login"||router.pathname=="/signup"||router.pathname=="/forgot"||  router.pathname=="/myaccount"|| router.pathname=="/contact"|| router.pathname=="/about"|| router.pathname=="/order" || router.pathname=="/orders"){
             setSidebar(false)
         }
     },[])
@@ -69,7 +69,7 @@ const Navbar = ({ logout, user, cart, addToCart, removeFromCart, ClearCart, SubT
                         <a href="/" className="mr-10 hover:text-gray-900">Home</a>
                         <a href="/about" className="mr-10 hover:text-gray-900">About</a>
                         <a href="/contact" className="mr-10 hover:text-gray-900">Contact</a>
-                        <a href="/order" className="mr-10 hover:text-gray-900">Orders</a>
+                        <a href="/orders" className="mr-10 hover:text-gray-900">Orders</a>
                     </nav>
 
                     <a onMouseOver={() => { setDropdown(true) }} onMouseLeave={() => { setDropdown(false) }} >

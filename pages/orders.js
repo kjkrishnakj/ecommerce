@@ -15,7 +15,7 @@ const Orders = () => {
 
 
             let a = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/myorders`, {
-                method: "POST",
+            method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
                 },

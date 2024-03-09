@@ -144,10 +144,10 @@ const Checkout = ({ user, cart, addToCart, removeFromCart, ClearCart, SubTotal, 
         "root": "",
         "flow": "DEFAULT",
         "data": {
-          "orderId": oid, /* update order id */
-          "token": txnToken, /* update token value */
+          "orderId": oid, 
+          "token": txnToken,  
           "tokenType": "TXN_TOKEN",
-          "amount": SubTotal /* update amount */
+          "amount": SubTotal    
         },
         "handler": {
           "notifyMerchant": function (eventName, data) {
