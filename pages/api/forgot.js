@@ -1,4 +1,4 @@
-import Forgot from "../../models/forgot"
+import Forgot from "../../models/Forgot"
 import User from "../../models/User"
 
 export default function handler(req, res) {
