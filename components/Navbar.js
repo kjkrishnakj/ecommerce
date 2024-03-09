@@ -60,7 +60,7 @@ const Navbar = ({ logout, user, cart, addToCart, removeFromCart, ClearCart, SubT
         <div >
             <header className=" body-font fixed w-full  z-10">
                 <div className=" text-gray-600 mx-auto flex flex-wrap  flex-col md:flex-row items-center shadow-xl sticky top-0 bg-white z-10">
-                    <a href="./" className="flex title-font p-1 font-medium items-center text-gray-900 mb-4 md:mb-0">
+                    <a href="/" className="flex title-font p-1 font-medium items-center text-gray-900 mb-4 md:mb-0">
                         <Image src={logo} alt="" style={{ height: "4rem", width: "6rem" }}></Image>
 
                         <span className="ml-3 text-xl " style={{ color: "#0097b2", fontFamily: "Georgia" }}>AmiKart</span>
