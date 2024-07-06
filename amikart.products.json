@@ -1,0 +1,180 @@
+[{
+  "_id": {
+    "$oid": "65bfe18a51ffd3d3c1c864e1"
+  },
+  "brand": "IQOO",
+  "title": "NEO 7 PRO 5g",
+  "slug": "IQOONEO7PRO5G",
+  "descr": "\nSnapdragon 8+ Gen 1 Mobile Platform adopts TSMC 4nm Process & has Superior Flagship Grade Performance with LPDDR5 RAM & UFS 3.1 Storage",
+  "img": "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/6/m/e/neo-7-pro-i2217-iqoo-original-imagrhs69jx3g2sy.jpeg?q=70",
+  "color": "blue",
+  "price": 33490,
+  "availableQty": 1,
+  "createdAt": {
+    "$date": "2024-02-04T19:12:10.265Z"
+  },
+  "updatedAt": {
+    "$date": "2024-02-04T19:12:10.265Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "661563f11c8319543ed51c37"
+  },
+  "brand": "Samsung",
+  "title": "Galaxy S24+",
+  "slug": "samsaunggalaxys24+",
+  "descr": "ake a look at the Samsung Galaxy S24+ smartphone, a remarkable combination of amazing technology and advanced sophistication. Discover the beauty of picture editing with AI power. You can now easily edit your images to make sure each one is flawless. These cameras will make sure you leave with a picture that is pixel-perfect, whether you're zooming in, snapping a particularly lovely selfie, or capturing wide-angle photos. An impressive pixel powerhouse that promises no letdown. At all. Take high-resolution pictures that will surely survive the test of time for many years to come.blue",
+  "img": "https://m.media-amazon.com/images/I/71yliZMICyL._AC_UY218_.jpg",
+  "color": "purple",
+  "price": 79999,
+  "availableQty": 1,
+  "createdAt": {
+    "$date": "2024-02-04T19:12:10.265Z"
+  },
+  "updatedAt": {
+    "$date": "2024-02-04T19:12:10.265Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "661564611c8319543ed51c38"
+  },
+  "brand": "OnePlus",
+  "title": "OnePlus 11 5G",
+  "slug": "OnePlus115g",
+  "descr": "Global Version. No Warranty. This device is globally unlocked and ready to be used with your preferred GSM Carrier. THIS DEVICE IS NOT COMPATIBLE with CDMA carriers such as Cricket, Verizon, Sprint, Boost Mobile, US Cellular, etc. SIM CARD NOT INCLUDED. Please confirm device compatibility with your service provider before placing your order Storage: 64GB 4GB RAM Display: 6.56 inches, 103.4 cm2 (~84.2% screen-to-body ratio) Platform: Android 12, OxygenOS 12.1 Camera: 50 MP, f/1.8, (wide), 1/2.76\", 0.64µm, PDAF Battery: Li-Po 5000 mAh, non-removable\nSpecificationsblue",
+  "img": "https://m.media-amazon.com/images/I/61amb0CfMGL._AC_UY218_.jpg",
+  "color": "green",
+  "price": "50999",
+  "availableQty": 1,
+  "createdAt": {
+    "$date": "2024-02-04T19:12:10.265Z"
+  },
+  "updatedAt": {
+    "$date": "2024-02-04T19:12:10.265Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "661564c71c8319543ed51c39"
+  },
+  "brand": "Google",
+  "title": "Pixel 8a",
+  "slug": "googlepixel8a",
+  "descr": "Meet the Pixel 8a, engineered by Google. Take amazing photos with the Pixel Camera. Do more, even faster with Google AI – like fix blurry images and learn new things. Top-rated security features help protect your data. Pixel 8a is bright and bold, and feels great in your hand. And it's built to last.",
+  "img": "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/s/8/d/pixel-8a-ga04988-in-google-original-imahyn3mskjbwphw.jpeg?q=70",
+  "color": "pink",
+  "price": "52999",
+  "availableQty": 1,
+  "createdAt": {
+    "$date": "2024-02-04T19:12:10.265Z"
+  },
+  "updatedAt": {
+    "$date": "2024-02-04T19:12:10.265Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6615650c1c8319543ed51c3a"
+  },
+  "brand": "Redmi",
+  "title": "Note 13 PRO 5G",
+  "slug": "redminote13peo5g",
+  "descr": "The Redmi Note 13 Pro+ 5G is a symphony of innovation, luxury, and power. With Fusion Design, a 3D Curved AMOLED Display, In-Display Fingerprint Sensor, Sharp 1.5K Resolution, Flagship IP68 Protection, Elegance Meets Endurance, True 200 MP With OIS, 120 W HyperCharge, and the Global Debut of the MediaTek Dimensity 7200 Ultra-5G, this SuperNote transcends the realm of smartphones. It's a masterpiece that blends art and technology seamlessly, offering an unparalleled experience that goes beyond expectations. Elevate your mobile journey with the Redmi Note 13 Pro+ 5G – where innovation meets perfection.blue",
+  "img": "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/p/8/i/-original-imagwu89u7fgsq4b.jpeg?q=70",
+  "color": "white",
+  "price": "28999",
+  "availableQty": 1,
+  "createdAt": {
+    "$date": "2024-02-04T19:12:10.265Z"
+  },
+  "updatedAt": {
+    "$date": "2024-02-04T19:12:10.265Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "661565571c8319543ed51c3b"
+  },
+  "brand": "Realme",
+  "title": "Narzo 70X 5G",
+  "slug": "realmenarzo70x5g",
+  "descr": "The phone comes with a 6.72-inch touchscreen display offering a resolution of 2400x1080 pixels (FHD+). It comes with 4GB, 6GB of RAM. The Realme Narzo 70x 5G runs Android 14 and is powered by a 5000mAh battery. The Realme Narzo 70x 5G supports Super VOOC fast charging. As far as the cameras are concerned, the Realme Narzo 70x 5G on the rear packs a dual camera setup featuring a 50-megapixel primary camera, and a 2-megapixel camera. It has a single front camera setup for selfies, featuring an 8-megapixel sensor. The Realme Narzo 70x 5G runs Realme UI 5.1 is based on Android 14 and packs 128GB of inbuilt storage (up to 2000GB). It features an IP54 rating for dust and water protection. Connectivity options on the Realme Narzo 70x 5G include Wi-Fi, GPS, Bluetooth v5.20, and USB Type-C with active 4G on both SIM cards. Sensors on the phone include temperature sensor and in-display fingerprint sensor.blue",
+  "img": "https://m.media-amazon.com/images/I/41899X6W0cL._SX300_SY300_QL70_FMwebp_.jpg",
+  "color": "green",
+  "price": "11999",
+  "availableQty": 1,
+  "createdAt": {
+    "$date": "2024-02-04T19:12:10.265Z"
+  },
+  "updatedAt": {
+    "$date": "2024-02-04T19:12:10.265Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "666018b79f75c33e297f0c6f"
+  },
+  "brand": "Realme",
+  "title": "Realme 12 PRO 5G",
+  "slug": "realme12pro5g",
+  "descr": "In a world dominated by innovation, the realme 12 Pro 5G stands out as a beacon of excellence. It's not just a smartphone; it's a testament to realme's dedication to pushing the boundaries of what's possible. Elevate your mobile experience, capture moments with unprecedented clarity, and indulge in a device that seamlessly blends performance, design, and cutting-edge technology. Choose realme – where every feature is a step toward a future of limitless possibilities.\n\n",
+  "img": "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/l/x/c/-original-imagx6rdpmhuq5ba.jpeg?q=70",
+  "color": "blue",
+  "price": "24999",
+  "availableQty": 1,
+  "createdAt": {
+    "$date": "2024-02-04T19:12:10.265Z"
+  },
+  "updatedAt": {
+    "$date": "2024-02-04T19:12:10.265Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "666019189f75c33e297f0c70"
+  },
+  "brand": "OnePlus",
+  "title": "Nord CE 3 lite",
+  "slug": "oneplustnordce3lite+",
+  "descr": "blue",
+  "img": "https://m.media-amazon.com/images/I/6175SlKKECL._AC_UY218_.jpg",
+  "color": "green",
+  "price": "18999",
+  "availableQty": 1,
+  "createdAt": {
+    "$date": "2024-02-04T19:12:10.265Z"
+  },
+  "updatedAt": {
+    "$date": "2024-02-04T19:12:10.265Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6660197c9f75c33e297f0c71"
+  },
+  "brand": "HONOR",
+  "title": "X9B 5G",
+  "slug": "honorx9b5g",
+  "descr": "Honor has officially launched the X9b in India, a mid-range smartphone boasting impressive specifications. The device features a 6.78-inch Curved AMOLED display with 120Hz refresh rate and 1200 nits peak brightness, offering robust protection with 360-degree anti-drop technology. Powered by the Qualcomm Snapdragon 6 Gen 1 processor and Adreno 710 GPU, it offers 8GB of RAM and 256GB of onboard storage, supplemented by 8GB of Turbo RAM for enhanced performance. The X9b showcases a versatile camera setup, including a 108MP primary sensor, a 5MP ultra-wide-angle lens, a 2MP macro sensor, and a 16MP front camera for selfies. It houses a large 5,800mAh battery with 35W fast charging support and runs on MagicOS 7.2 based on Android 13. Additional features include IP53 water resistance, Bluetooth 5.1, an in-display fingerprint sensor, face mask unlocking, and Magic Text for efficient word extraction. Available in Midnight Black and Sunrise Orange variants, the latter features a vegan leather back.blue",
+  "img": "https://m.media-amazon.com/images/I/71H5JOOMacL._AC_UY218_.jpg",
+  "color": "black",
+  "price": "22999",
+  "availableQty": 1,
+  "createdAt": {
+    "$date": "2024-02-04T19:12:10.265Z"
+  },
+  "updatedAt": {
+    "$date": "2024-02-04T19:12:10.265Z"
+  },
+  "__v": 0
+}]
