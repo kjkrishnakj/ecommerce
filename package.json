@@ -14,7 +14,10 @@
   "dependencies": {
     "@babel/core": "^7.23.9",
     "crypto-js": "^4.2.0",
+<<<<<<< HEAD
     "dotenv": "^16.4.5",
+=======
+>>>>>>> ec997c8d0740eb93fbf37e2c9b14ffbf0eb08b17
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.1.1",
     "next": "^14.1.0",
