@@ -18,6 +18,7 @@ mongoose
     console.error("Database connection error:", err);
   });
 
+// seeds
 // Function to preprocess the JSON data
 const preprocessData = (data) => {
   return data.map((item) => {
