@@ -1,6 +1,8 @@
-import React from 'react';
+import React from "react";
 import Slider from "react-slick";
-import Link from 'next/link';
+import Link from "next/link";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const SlidingMenu = ({ products }) => {
   const settings = {
@@ -11,7 +13,8 @@ const SlidingMenu = ({ products }) => {
     slidesToScroll: 1,
     arrows: true,
     className: "custom-slider",
-  
+    nextArrow: <SampleNextArrow />,
+    prevArrow: <SamplePrevArrow />,
   };
 
   return (
@@ -20,33 +23,45 @@ const SlidingMenu = ({ products }) => {
         <Slider {...settings}>
           {Object.keys(products).map((item) => {
             const product = products[item];
-            const colors = ["blue", "orange", "purple", "black", "white", "pink", "yellow", "red"];
+            const colors = [
+              "blue",
+              "orange",
+              "purple",
+              "black",
+              "white",
+              "pink",
+              "yellow",
+              "red",
+            ];
             return (
-              <div key={product._id} className="p-2" style={{ width: "6cm", margin: "0.5cm 2cm" }}>
+              <div
+                key={product._id}
+                className="p-2"
+                style={{ width: "100%", margin: "0.5cm 2cm" }}
+              >
                 <Link passHref={true} href={`/product/${product.slug}`}>
                   <div>
-                    <img
-                      src={product.img || "/default-image.jpg"}
-                      alt={product.title}
-                      className="w-full h-full object-cover"
-                      style={{ height: "16rem", width: "16rem" }}
-                    />
-                    <div className="mt-4">
-                      <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">{product.brand}</h3>
-                      <h2 className="text-gray-900 title-font text-lg font-medium">{product.title}</h2>
-                      <p className="mt-1">₹{product.price}</p>
-                    </div>
-                    <div className="mt-1">
-                      <div className="flex">
-                        {colors.map((color) => (
-                          product.color.includes(color) && (
-                            <button
-                              key={color}
-                              className={`border-2 border-${color}-200 bg-${color}-700 rounded-full w-6 h-6 focus:outline-none`}
-                            ></button>
-                          )
-                        ))}
-                      </div>
+                    <div
+                      style={{
+                        height: "16rem",
+                        width: "16rem",
+                        overflow: "hidden",
+                        position: "relative",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <img
+                        src={product.img || "/default-image.jpg"}
+                        alt={product.title}
+                        className="object-cover w-full h-full"
+                        style={{
+                          objectFit: "contain",
+                          height: "100%",
+                          width: "100%",
+                        }}
+                      />
                     </div>
                   </div>
                 </Link>
@@ -58,5 +73,43 @@ const SlidingMenu = ({ products }) => {
     </section>
   );
 };
+
+function SampleNextArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{
+        ...style,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        background: "black",
+        right: "10px",
+        zIndex: 1,
+      }}
+      onClick={onClick}
+    />
+  );
+}
+
+function SamplePrevArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{
+        ...style,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        background: "black",
+        left: "10px",
+        zIndex: 1,
+      }}
+      onClick={onClick}
+    />
+  );
+}
 
 export default SlidingMenu;
