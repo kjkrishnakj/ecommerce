@@ -2,9 +2,11 @@ import Head from "next/head";
 import Product from "../models/Product";
 import mongoose from "mongoose";
 import Link from "next/link";
+import SlidingMenu from "../components/slidingMenu";
 
 
 export default function Home({ products }) {
+  
   return (
     <div >
 
@@ -39,7 +41,7 @@ export default function Home({ products }) {
                       {products[item].color.includes('pink')&& <button className="border-2 border-blue-200 bg-pink-300 rounded-full w-6 h-6 focus:outline-none"></button>}
                       {products[item].color.includes('yellow')&& <button className="border-2 border-blue-200 bg-yellow-700 rounded-full w-6 h-6 focus:outline-none"></button>}
                       {products[item].color.includes('red')&& <button className="border-2 border-blue-200 bg-red-700 rounded-full w-6 h-6 focus:outline-none"></button>}
-                       </div>
+                    </div>
                   </div>
                 </div>
               </Link>
@@ -48,8 +50,9 @@ export default function Home({ products }) {
           </div>
         </div>
       </section>
-
-    </div>
+      <SlidingMenu products={products} />
+      <SlidingMenu products={products} />
+      </div>
   );
 
 }
@@ -81,5 +84,4 @@ export async function getServerSideProps(context) {
     props: { products: JSON.parse(JSON.stringify(phones)) }
   }
 }
-
 
