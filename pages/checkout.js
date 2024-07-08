@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 
 import { ToastContainer, toast } from "react-toastify";
@@ -57,6 +57,19 @@ const Checkout = ({
     }
   };
 
+  useEffect(() => {
+    if (
+      name.length > 3 &&
+      address.length > 3 &&
+      pincode.length === 6 &&
+      phone.length === 10
+    ) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
+  }, [name, address, pincode, phone]);
+
   const handleChange = async (e) => {
     if (e.target.name == "name") {
       setName(e.target.value);
@@ -111,19 +124,6 @@ const Checkout = ({
         setCity("");
       }
     }
-
-    setTimeout(() => {
-      if (
-        name.length > 3 &&
-        address.length > 3 &&
-        pincode.length === 6 &&
-        phone.length === 10
-      ) {
-        setDisabled(false);
-      } else {
-        setDisabled(true);
-      }
-    }, 100);
   };
 
   const intiatePayment = async () => {
