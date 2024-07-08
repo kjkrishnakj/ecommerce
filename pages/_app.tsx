@@ -94,7 +94,7 @@ export default function App({ Component, pageProps }: AppProps) {
     newCart[itemCode] = { qty: 1, price, name, variant, img };  
     setCart(newCart);
     saveCart(newCart);
-    router.push(`${process.env.NEXT_PUBLIC_HOST}/checkout`)
+    router.push(`/checkout`)
   }
 
   const removeFromCart = (itemCode: string, qty: number, price: number, name: string, variant: string, img: string) => {
