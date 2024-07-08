@@ -90,15 +90,15 @@ export default function App({ Component, pageProps }: AppProps) {
   };
   
   const buyNow = (itemCode: string, qty: number, price: number, name: string, variant: string, img: string) => {
-    const newCart: Record<string, CartItem> = {}; // Define type for newCart
-    newCart[itemCode] = { qty: 1, price, name, variant, img }; // Add type annotation for itemCode
+    const newCart: Record<string, CartItem> = {};  
+    newCart[itemCode] = { qty: 1, price, name, variant, img };  
     setCart(newCart);
     saveCart(newCart);
-    router.push("./checkout")
+    router.push(`${process.env.NEXT_PUBLIC_HOST}/checkout`)
   }
 
   const removeFromCart = (itemCode: string, qty: number, price: number, name: string, variant: string, img: string) => {
-    const newCart = { ...cart }; // Make a copy to avoid directly modifying the state
+    const newCart = { ...cart }; 
     if (itemCode in cart) {
       newCart[itemCode].qty = cart[itemCode].qty - qty;
     }
