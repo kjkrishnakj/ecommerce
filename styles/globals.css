@@ -1,0 +1,89 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    font-family: 'Nunito', Georgia, 'Times New Roman', Times, serif;
+    
+}
+
+.custom-slider .slick-prev,
+.custom-slider .slick-next {
+    width: 40px;
+    height: 40px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black; /* Ensuring sufficient contrast */
+    font-size: 20px;
+    transition: background-color 0.3s ease;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+.custom-slider .slick-prev:hover,
+.custom-slider .slick-next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.custom-slider .slick-prev {
+    left: 10px; /* Adjust as needed */
+}
+
+.custom-slider .slick-next {
+    right: 10px; /* Adjust as needed */
+}
+
+.custom-slider .slick-dots li button:before {
+    color: #000;
+}
+
+.custom-slider .slick-dots li.slick-active button:before {
+    color: #555;
+}
+
+@media (max-width: 768px) {
+    .custom-slider .slick-prev,
+    .custom-slider .slick-next {
+        width: 30px;
+        height: 30px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 576px) {
+    .custom-slider .slick-prev,
+    .custom-slider .slick-next {
+        width: 25px;
+        height: 25px;
+        font-size: 14px;
+    }
+}
+@media (max-width: 768px) {
+    .dropdown-menu {
+        width: 100%;
+        left: 0;
+    }
+}
+
+
+
+/* Custom CSS if needed */
+@media (max-width: 768px) {
+    .dropdown-menu {
+        width: 100%;
+        left: 0;
+    }
+}
+
+
+
+
+
+
+

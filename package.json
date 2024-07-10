@@ -1,0 +1,42 @@
+{
+  "name": "amikart",
+  "version": "0.1.0",
+  "private": true,
+  "presets": [
+    "next/babel"
+  ],
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@babel/core": "^7.23.9",
+    "crypto-js": "^4.2.0",
+    "dotenv": "^16.4.5",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.1.1",
+    "next": "^14.1.0",
+    "node-fetch": "^3.3.2",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-multi-carousel": "^2.8.5",
+    "react-slick": "^0.30.2",
+    "react-toastify": "^10.0.4",
+    "react-top-loading-bar": "^2.3.1",
+    "slick-carousel": "^1.8.1",
+    "vercel": "^34.2.7"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "18.3.3",
+    "@types/react-dom": "^18",
+    "autoprefixer": "^10.4.17",
+    "eslint": "^8",
+    "eslint-config-next": "14.1.0",
+    "postcss": "^8.4.33",
+    "tailwindcss": "^3.4.1",
+    "typescript": "5.5.3"
+  }
+}
