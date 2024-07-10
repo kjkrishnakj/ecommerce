@@ -69,7 +69,7 @@ const Navbar = ({
             <Image
               src={logo}
               alt="logo"
-              className="h-10 w-10 md:h-16 md:w-24 "
+              className="h-10 w-10 ml-4 md:h-16 md:w-24 "
             />
             <span
               className="ml-3 text-lg"
