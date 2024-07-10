@@ -2,8 +2,6 @@ import Head from "next/head";
 import Product from "../models/Product";
 import mongoose from "mongoose";
 import Link from "next/link";
-import SlidingMenu from "../components/slidingMenu";
-
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 
@@ -102,10 +100,6 @@ export default function Home({ products }) {
         </Carousel>
       </div>
       </section>
-      
-      
-      {/* <SlidingMenu products={products} /> */ }
-  {/* <SlidingMenu products={products} /> */ }
     </ >
   );
 
