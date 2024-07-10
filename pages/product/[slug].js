@@ -106,10 +106,10 @@ const Post = ({ addToCart,error, product, variants,buyNow }) => {
                                 </svg>
                             </button>
                             
-                        </div>
-                        <div className="pin my-5 flex flex-row">
-                            <input type="text" onChange={onChangepin} placeholder='Enter  Pincode' className=" flex px-2 border-2 border-blue-500  rounded-lg" />
-                            <button onClick={checkService} className=" ml-2  text-white bg-indigo-600 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-700 rounded">Check</button>
+                        {/* </div>
+                        <div className="pin my-5 flex flex-row"> */}
+                            {/* <input type="text" onChange={onChangepin} placeholder='Enter  Pincode' className=" flex px-2 border-2 border-blue-500  rounded-lg" />
+                            <button onClick={checkService} className=" ml-2  text-white bg-indigo-600 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-700 rounded">Check</button> */}
 
                         {/* {!service && service != null && <div className='text-red-900 text-sm mt-3'>
                             Sorry! We do not deliver to this pincode
