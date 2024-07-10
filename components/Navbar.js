@@ -78,41 +78,62 @@ const Navbar = ({
               AmiKart
             </span>
           </Link>
-          <nav className="md:ml-auto md:mr-auto flex items-center text-base justify-center flex-grow">
-            <Link href="/" className="hover:text-gray-900 mx-2">
-              Home
-            </Link>
+          <nav className="md:ml-auto md:mr-auto flex items-center transition-all text-base justify-center flex-grow">
             <div className="relative">
               <button
-                className="hover:text-gray-900 mx-2 md:hidden"
+                className="hover:text-gray-900  mx-2 md:hidden"
                 onClick={() => setMenuOpen(!menuOpen)}
               >
-                Menu
+                <span className=" sr-only">Open main menu</span>
+                <svg
+                  className="w-5 h-5"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 17 14"
+                >
+                  <path
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M1 1h15M1 7h15M1 13h15"
+                  />
+                </svg>
               </button>
-              {menuOpen && (
-                <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-20">
-                  <Link
-                    href="/about"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                  >
-                    About
-                  </Link>
-                  <Link
-                    href="/contact"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                  >
-                    Contact
-                  </Link>
-                  <Link
-                    href="/orders"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                  >
-                    Orders
-                  </Link>
-                </div>
-              )}
+              <div
+                className={`absolute right-0 mt-5 w-48 bg-indigo-600 rounded-md shadow-lg py-1 z-20 transition-all duration-300 ${
+                  menuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+                }`}
+              >
+                <Link href="/" className="block px-4 py-2 text-white hover:bg-gray-900">
+                  Home
+                </Link>
+                <Link
+                  href="/about"
+                  className="block px-4 py-2 text-white hover:bg-gray-900"
+                >
+                  About
+                </Link>
+                <Link
+                  href="/contact"
+                  className="block px-4 py-2 text-white hover:bg-gray-900"
+                >
+                  Contact
+                </Link>
+                <Link
+                  href="/orders"
+                  className="block px-4 py-2 text-white hover:bg-gray-900"
+                >
+                  Orders
+                </Link>
+              </div>
             </div>
+
             <div className="hidden md:flex space-x-4">
+              <Link href="/" className="hover:text-gray-900 mx-2">
+                Home
+              </Link>
               <Link href="/about" className="hover:text-gray-900">
                 About
               </Link>
@@ -190,7 +211,7 @@ const Navbar = ({
 
         <div
           ref={ref}
-          className={`w-80 h-[100vh] sidecart absolute top-0 bg-blue-100 py-10 px-8 transition-all ${
+          className={`w-80 h-[100vh] sidecart absolute top-0 bg-blue-100 py-10 px-8 transition-all duration-300 ${
             sidebar ? "right-0" : "-right-96"
           }`}
           style={{ borderRadius: "1rem", zIndex: 400 }}
