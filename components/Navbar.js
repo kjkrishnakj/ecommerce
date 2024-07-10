@@ -146,18 +146,22 @@ const Navbar = ({
                     </div>
                   </div>
                   <hr />
-                  <Link
-                    href="/myaccount"
-                    className="cursor-pointer py-1 pt-3 dark:text-white hover:text-indigo-200 text-sm"
-                  >
-                    My Account
-                  </Link>
-                  <Link
-                    href="/orders"
-                    className="cursor-pointer py-1 dark:text-white hover:text-indigo-200 text-sm"
-                  >
-                    Orders
-                  </Link>
+                  <li>
+                    <Link
+                      href="/myaccount"
+                      className="cursor-pointer py-1 pt-3 dark:text-white hover:text-indigo-200 text-sm"
+                    >
+                      My Account
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/orders"
+                      className="cursor-pointer py-1 dark:text-white hover:text-indigo-200 text-sm"
+                    >
+                      Orders
+                    </Link>
+                  </li>
                   <li
                     onClick={logout}
                     className="cursor-pointer py-1 pb-3 dark:text-white hover:text-indigo-200 text-sm"
