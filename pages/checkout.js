@@ -192,7 +192,7 @@ const Checkout = ({
           name="viewport"
           content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0"
         />
-        <title>KnowledgeHub | Checkout</title>
+        <title>Amikart | Checkout</title>
       </Head>
 
       <Script
