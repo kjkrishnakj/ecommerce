@@ -102,7 +102,7 @@ const Navbar = ({
                 </svg>
               </button>
               <div
-                className={`absolute right-0 mt-5 w-48 bg-indigo-600 rounded-md shadow-lg py-1 z-20 transition-all duration-300 ${
+                className={`absolute right-0 mt-5 bg-indigo-600 rounded-md shadow-lg py-1 z-20 transition-all duration-300 ${
                   menuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
                 }`}
               >
@@ -194,16 +194,13 @@ const Navbar = ({
             )}
           </div>
           {!user.value && (
-            <Link
-              href="/login"
-              className="cursor-pointer inline-flex items-center bg-gray-100 border-0 py-2 px-4 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0"
-            >
+            <Link href="/login" className="cursor-pointer inline-flex items-center mr-3 bg-gray-100 border-0 py-3 px-4  focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">
               Login
             </Link>
           )}
           <button
             onClick={toggleCart}
-            className="cursor-pointer inline-flex items-center bg-gray-100 border-0 py-2 px-4 focus:outline-none hover:bg-gray-200 rounded text-base mt-0 md:mt-0"
+            className="cursor-pointer inline-flex items-center bg-gray-100 mr-4 border-0 py-3 px-5 focus:outline-none hover:bg-gray-200 rounded text-base mt-0 md:mt-0"
           >
             <i className="fa-solid fa-cart-shopping text-2xl"></i>
           </button>
