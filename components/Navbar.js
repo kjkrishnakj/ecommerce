@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-// import logo from "../public/favicon (1).ico"
 import logo from "../public/ak_logo4.png";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -14,49 +13,41 @@ const Navbar = ({
   ClearCart,
   SubTotal,
 }) => {
-  // console.log(cart,addToCart,removeFromCart,ClearCart,SubTotal);
   const [dropdown, setDropdown] = useState(false);
   const [disable, setDisable] = useState(false);
   const [clear, setclear] = useState(true);
+  const [menuOpen, setMenuOpen] = useState(false);
   const router = useRouter();
   const [sidebar, setSidebar] = useState(false);
 
   const toggleCart = () => {
-    // if (ref.current.classList.contains("translate-x-full")) {
-    //     ref.current.classList.remove("translate-x-full");
-    //     ref.current.classList.add("translate-x-0");
-    // }
-    // else if (!ref.current.classList.contains("translate-x-full")) {
-    //     ref.current.classList.remove("translate-x-0");
-    //     ref.current.classList.add("translate-x-full");
-
-    // }
     setSidebar(!sidebar);
   };
+
   useEffect(() => {
     Object.keys(cart).length !== 0 && setSidebar(true);
     if (
-      router.pathname == "/checkout" ||
-      router.pathname == "/login" ||
-      router.pathname == "/signup" ||
-      router.pathname == "/forgot" ||
-      router.pathname == "/myaccount" ||
-      router.pathname == "/contact" ||
-      router.pathname == "/about" ||
-      router.pathname == "/order" ||
-      router.pathname == "/orders"
+      router.pathname === "/checkout" ||
+      router.pathname === "/login" ||
+      router.pathname === "/signup" ||
+      router.pathname === "/forgot" ||
+      router.pathname === "/myaccount" ||
+      router.pathname === "/contact" ||
+      router.pathname === "/about" ||
+      router.pathname === "/order" ||
+      router.pathname === "/orders"
     ) {
       setSidebar(false);
     }
   }, []);
+
   useEffect(() => {
     const name = localStorage.getItem("name");
-    // console.log(name);
     const email = localStorage.getItem("email");
-    // console.log(email);
   }, [router.query]);
+
   useEffect(() => {
-    if (SubTotal == 0) {
+    if (SubTotal === 0) {
       setDisable(true);
       setclear(true);
     } else {
@@ -69,70 +60,84 @@ const Navbar = ({
 
   return (
     <div className="">
-      <header className=" body-font fixed w-full   z-10">
-        <div className=" text-gray-600  mx-auto flex flex-wrap  flex-col md:flex-row items-center shadow-xl sticky top-0 bg-white z-10">
-          <a
+      <header className="body-font fixed w-full md:h-24 md:mb-24 z-10 ">
+        <div className="text-gray-600 mx-auto flex flex-row justify-evenly md:flex-nowrap items-center shadow-xl top-0 bg-white z-10">
+          <Link
             href="/"
-            className="flex title-font p-1 font-medium items-center text-gray-900 mb-4 md:mb-0"
+            className="flex title-font p-1 font-medium items-center justify-center text-gray-900 mb-4 md:mb-0 mt-2"
           >
             <Image
               src={logo}
-              alt=""
-              style={{ height: "4rem", width: "6rem" }}
-            ></Image>
-
+              alt="logo"
+              className="h-10 w-10 md:h-16 md:w-24 "
+            />
             <span
-              className="ml-3 text-xl "
+              className="ml-3 text-lg"
               style={{ color: "#0097b2", fontFamily: "Georgia" }}
             >
               AmiKart
             </span>
-          </a>
-          <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
-            <a href="/" className="mr-10 hover:text-gray-900">
+          </Link>
+          <nav className="md:ml-auto md:mr-auto flex items-center text-base justify-center flex-grow">
+            <Link href="/" className="hover:text-gray-900 mx-2">
               Home
-            </a>
-            <a href="/about" className="mr-10 hover:text-gray-900">
-              About
-            </a>
-            <a href="/contact" className="mr-10 hover:text-gray-900">
-              Contact
-            </a>
-            <a href="/orders" className="mr-10 hover:text-gray-900">
-              Orders
-            </a>
+            </Link>
+            <div className="relative">
+              <button
+                className="hover:text-gray-900 mx-2 md:hidden"
+                onClick={() => setMenuOpen(!menuOpen)}
+              >
+                Menu
+              </button>
+              {menuOpen && (
+                <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-20">
+                  <Link
+                    href="/about"
+                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+                  >
+                    About
+                  </Link>
+                  <Link
+                    href="/contact"
+                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+                  >
+                    Contact
+                  </Link>
+                  <Link
+                    href="/orders"
+                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+                  >
+                    Orders
+                  </Link>
+                </div>
+              )}
+            </div>
+            <div className="hidden md:flex space-x-4">
+              <Link href="/about" className="hover:text-gray-900">
+                About
+              </Link>
+              <Link href="/contact" className="hover:text-gray-900">
+                Contact
+              </Link>
+              <Link href="/orders" className="hover:text-gray-900">
+                Orders
+              </Link>
+            </div>
           </nav>
-
-          <a
-            onMouseOver={() => {
-              setDropdown(true);
-            }}
-            onMouseLeave={() => {
-              setDropdown(false);
-            }}
+          <div
+            className="relative"
+            onMouseOver={() => setDropdown(true)}
+            onMouseLeave={() => setDropdown(false)}
           >
             {user.value && (
-              <button className="rounded-full w-12 h-12 bg-gray-200 p-3 border-0 inline-flex items-center justify-center text-gray-500 mr-7   ">
-                <i
-                  className="fa-regular fa-user w-5 h-5 ml-8 "
-                  style={{ marginRight: "2rem" }}
-                ></i>
+              <button className="rounded-full w-10 h-10 bg-gray-200 p-2 border-0 inline-flex items-center justify-center text-gray-500 mr-2">
+                <i className="fa-regular fa-user w-5 h-5"></i>
               </button>
             )}
-          </a>
-          {dropdown && (
-            <div
-              onMouseOver={() => {
-                setDropdown(true);
-              }}
-              onMouseLeave={() => {
-                setDropdown(false);
-              }}
-              className="relative" // Make sure the parent container is relative
-            >
-              <div className="absolute top-7 right-8 rounded-md px-5 w-50 bg-indigo-500">
+            {dropdown && (
+              <div className="absolute top-12 right-0 rounded-md px-5 w-50 bg-indigo-500">
                 <ul>
-                  <div className="px-4 py-4 text-sm text-gray-900 dark:text-white ">
+                  <div className="px-4 py-4 text-sm text-gray-900 dark:text-white">
                     <div style={{ fontWeight: "500" }}>
                       {localStorage.getItem("name")}
                     </div>
@@ -141,15 +146,17 @@ const Navbar = ({
                     </div>
                   </div>
                   <hr />
-                  <Link href="/myaccount">
-                    <li className="cursor-pointer py-1 pt-3 dark:text-white hover:text-indigo-200 text-sm">
-                      My Account
-                    </li>
+                  <Link
+                    href="/myaccount"
+                    className="cursor-pointer py-1 pt-3 dark:text-white hover:text-indigo-200 text-sm"
+                  >
+                    My Account
                   </Link>
-                  <Link href="/orders">
-                    <li className="cursor-pointer py-1 dark:text-white hover:text-indigo-200 text-sm">
-                      Orders
-                    </li>
+                  <Link
+                    href="/orders"
+                    className="cursor-pointer py-1 dark:text-white hover:text-indigo-200 text-sm"
+                  >
+                    Orders
                   </Link>
                   <li
                     onClick={logout}
@@ -159,41 +166,27 @@ const Navbar = ({
                   </li>
                 </ul>
               </div>
-            </div>
-          )}
-
+            )}
+          </div>
           {!user.value && (
-            <Link href="/login">
-              <button
-                className="cursor-pointer inline-flex items-center bg-gray-100 border-0 py-4 mr-3 px-4 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0"
-                style={{ marginRight: "1rem", fontWeight: "700" }}
-              >
-                Login
-              </button>
+            <Link
+              href="/login"
+              className="cursor-pointer inline-flex items-center bg-gray-100 border-0 py-2 px-4 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0"
+            >
+              Login
             </Link>
           )}
           <button
             onClick={toggleCart}
-            className="cursor-pointer inline-flex items-center bg-gray-100 border-0 py-4 mr-3 px-4 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0"
+            className="cursor-pointer inline-flex items-center bg-gray-100 border-0 py-2 px-4 focus:outline-none hover:bg-gray-200 rounded text-base mt-0 md:mt-0"
           >
             <i className="fa-solid fa-cart-shopping text-2xl"></i>
-            <svg
-              fill="none"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              className="w-4 h-4 ml-1"
-              viewBox="0 0 24 24"
-            >
-              <path d="M5 12h14M12 5l7 7-7 7"></path>
-            </svg>
           </button>
         </div>
 
         <div
           ref={ref}
-          className={` w-59 h-[100vh] sidecart absolute top-0  bg-blue-100 py-10 px-8 transition-all ${
+          className={`w-80 h-[100vh] sidecart absolute top-0 bg-blue-100 py-10 px-8 transition-all ${
             sidebar ? "right-0" : "-right-96"
           }`}
           style={{ borderRadius: "1rem", zIndex: 400 }}
@@ -207,7 +200,7 @@ const Navbar = ({
           </span>
 
           <ol className="list-decimal">
-            {Object.keys(cart).length == 0 && (
+            {Object.keys(cart).length === 0 && (
               <div className="my-4 text-xl">Cart is Empty!</div>
             )}
             {Object.keys(cart).map((k) => {
@@ -215,7 +208,6 @@ const Navbar = ({
                 <li key={k}>
                   <div className="flex items-center justify-between my-5">
                     <div className="w-2/3">{cart[k].name}</div>
-
                     <div className="w-1/3 flex items-center justify-center">
                       <i
                         onClick={() => {
@@ -228,8 +220,8 @@ const Navbar = ({
                           );
                         }}
                         className="fa-solid fa-square-minus cursor-pointer mx-3"
-                      ></i>{" "}
-                      {cart[k].qty}{" "}
+                      ></i>
+                      {cart[k].qty}
                       <i
                         onClick={() => {
                           addToCart(
@@ -249,17 +241,14 @@ const Navbar = ({
             })}
           </ol>
           <div className="flex">
-            <Link href="/checkout">
-              <button
-                disabled={disable}
-                className="text-white  disabled:bg-indigo-400 flex mx-2 bg-indigo-600 border-0 py-2 px-3 focus:outline-none hover:bg-indigo-700 mt-4 rounded text-lg"
-              >
-                {" "}
-                <span>
-                  <i className="fa-solid fa-bag-shopping mr-3"></i>
-                </span>
-                Checkout
-              </button>
+            <Link
+              href="/checkout"
+              className="text-white disabled:bg-indigo-400 flex mx-2 bg-indigo-600 border-0 py-2 px-3 focus:outline-none hover:bg-indigo-700 mt-4 rounded text-lg"
+            >
+              <span>
+                <i className="fa-solid fa-bag-shopping mr-3"></i>
+              </span>
+              Checkout
             </Link>
             <button
               onClick={ClearCart}
