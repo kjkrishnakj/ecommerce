@@ -6,20 +6,13 @@ import Error from 'next/error'
 import Product from "../../models/Product";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// import next from 'next/types';
 const Post = ({ addToCart,error, product, variants,buyNow }) => {
-    // console.log(product, variants);
     const router = useRouter();
     const { slug } = router.query
-    // console.log(slug);
+ 
     const [pin, setPin] = useState()
     const [service, setService] = useState()
-    // useEffect(()=>{
-    //     if(error==404){
-    //         return<Error statusCode={404}/>
-    //     }
-    // })
-   //pending buynow
+   
     const checkService = async () => {
         let pins = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pincode`)
         let pinJson = await pins.json()
@@ -43,12 +36,13 @@ const Post = ({ addToCart,error, product, variants,buyNow }) => {
         <section className="text-gray-600 body-font overflow-hidden">
            <ToastContainer/>
 
-            <div className="container px-5 py-14 mx-auto">
+            <div className="container px-5 py-24 mx-auto">
                 <div className="lg:w-4/5 mx-auto flex flex-wrap">
               
                     <img src={product.img} alt="" style={{ height: "26rem", width: "25rem", margin: "5rem 0rem" }}></img>
                     <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
                         <h2 className="text-sm title-font text-gray-500 tracking-widest"> </h2>
+                        <h1 className="text-gray-500 text-xl title-font font-medium mb-1"> {product.brand}</h1>
                         <h1 className="text-gray-900 text-3xl title-font font-medium mb-1"> {product.title}</h1>
                         <div className="flex mb-4">
                             <span className="flex items-center">
@@ -111,20 +105,33 @@ const Post = ({ addToCart,error, product, variants,buyNow }) => {
                                     <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
                                 </svg>
                             </button>
+                            
                         </div>
-                        <div className="pin my-5 flex">
-                            <input type="text" onChange={onChangepin} placeholder='Enter Pincode' className=" flex px-2 border-2 border-blue-500  rounded-lg" />
-                            <button onClick={checkService} className="flex ml-2 text-white bg-indigo-600 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-700 rounded">Check</button>
+                        <div className="pin my-5 flex flex-row">
+                            <input type="text" onChange={onChangepin} placeholder='Enter  Pincode' className=" flex px-2 border-2 border-blue-500  rounded-lg" />
+                            <button onClick={checkService} className=" ml-2  text-white bg-indigo-600 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-700 rounded">Check</button>
 
-                        </div>
-                        {!service && service != null && <div className='text-red-900 text-sm mt-3'>
+                        {/* {!service && service != null && <div className='text-red-900 text-sm mt-3'>
                             Sorry! We do not deliver to this pincode
                         </div>}
 
                         {service && service != null && <div className='text-green-900 text-sm mt-3'>
                             Yay! This pincode is serviceable
-                        </div>}
+                        </div>} */}
+                        </div>
+                            <h1 className="text-xl mt-8 text-gray-700  font-bold  mb-2">Details:</h1>
+                            <li className=' mt-2 text-gray-900  pl-10'><span className='font-bold'>Battery: </span>{product.battery}mAh</li>
+                            <li className=' mt-2 text-gray-900  pl-10'><span className='font-bold'>RAM: </span>{product.ram}GB</li>
+                            <li className=' mt-2 text-gray-900  pl-10'><span className='font-bold'>Memory: </span>{product.memory}GB</li>
+                            <li className=' mt-2 text-gray-900  pl-10'><span className='font-bold'>CPU: </span>{product.cpu}</li>
+                            <li className=' mt-2 text-gray-900  pl-10'><span className='font-bold'>Screen Size: </span>{product.screensize} Inches</li>
+
+                            <div>
+                        </div>
+                        
+
                     </div>
+                     
                 </div>
             </div>
         </section >
