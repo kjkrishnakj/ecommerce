@@ -47,7 +47,7 @@ export default function Home({ products }) {
 
     if (response.success) {
       setFoundphone(response.product);
-      console.log(searchText.length);
+      // console.log(searchText.length);  
       if (searchText.length <= 1) {
 
         setDropdown(false);
@@ -56,7 +56,7 @@ export default function Home({ products }) {
         setDropdown(true);
 
       }
-      console.log(foundphone);
+      // console.log(foundphone);
       // setTogglemodal(true);
 
       // toast.success("Quote found 👍", { autoClose: 1000 })
@@ -80,8 +80,8 @@ export default function Home({ products }) {
       <section className="text-gray-600 body-font">
 
         <div className="container px-5 py-24 mx-auto">
-          <div className="relative flex flex-col pt-12 sm:pt-48  items-center justify-center w-full">
-            <div className="relative w-[8cm] mb-4 hidden md:block">
+          <div className="relative flex flex-col pt-12 sm:pt-12 items-center justify-center w-full">
+            <div className="relative w-[8cm] mb-4">
               <form className="flex items-center">
                 <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                   <svg className="w-4 h-4 text-indigo-500 dark:text-indigo-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
@@ -89,7 +89,7 @@ export default function Home({ products }) {
                   </svg>
                   <span className="sr-only">Search icon</span>
                 </div>
-                <input value={searchText} onChange={handleSearchSubmit} type="text" id="search-navbar" className="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-green-500 focus:border-green-500 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Galaxy S24+" />
+                <input value={searchText} onChange={handleSearchChange} type="text" id="search-navbar" className="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-green-500 focus:border-green-500 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Galaxy S24+" />
                 <button onClick={handleSearchSubmit} type="submit" className="ml-2 p-2 text-sm text-white bg-indigo-500 rounded-lg hover:bg-indigo-600 focus:ring-2 focus:ring-indigo-600 focus:ring-opacity-50">
                   Search
                 </button>
@@ -105,6 +105,7 @@ export default function Home({ products }) {
               </div>
             )}
           </div>
+
           <div className="flex flex-wrap -m-4  justify-center" >
             {Object.keys(products).map((item) => {
 
