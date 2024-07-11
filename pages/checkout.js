@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
-
+import { useRouter } from "next/router";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -24,6 +24,13 @@ const Checkout = ({
   const [address, setAddress] = useState("");
   const [pincode, setPincode] = useState("");
   const [disabled, setDisabled] = useState(true);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!user.value) {
+      router.push("/login");
+    }
+  }, [user, router]);
 
   const vname = () => {
     if (myform.name.value.match(/[0-9]/g)) {
