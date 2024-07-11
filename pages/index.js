@@ -56,10 +56,7 @@ export default function Home({ products }) {
         setDropdown(true);
 
       }
-      // console.log(foundphone);
-      // setTogglemodal(true);
-
-      // toast.success("Quote found 👍", { autoClose: 1000 })
+      
 
     }
     else {
@@ -89,7 +86,7 @@ export default function Home({ products }) {
                   </svg>
                   <span className="sr-only">Search icon</span>
                 </div>
-                <input value={searchText} onChange={handleSearchChange} type="text" id="search-navbar" className="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-green-500 focus:border-green-500 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Galaxy S24+" />
+                <input value={searchText} onChange={handleSearchSubmit} type="text" id="search-navbar" className="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-green-500 focus:border-green-500 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Galaxy S24+" />
                 <button onClick={handleSearchSubmit} type="submit" className="ml-2 p-2 text-sm text-white bg-indigo-500 rounded-lg hover:bg-indigo-600 focus:ring-2 focus:ring-indigo-600 focus:ring-opacity-50">
                   Search
                 </button>
