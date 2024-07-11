@@ -80,7 +80,7 @@ export default function Home({ products }) {
       <section className="text-gray-600 body-font">
 
         <div className="container px-5 py-24 mx-auto">
-          <div className="relative flex flex-col pt-12 md:pt-48  items-center justify-center w-full">
+          <div className="relative flex flex-col pt-12 sm:pt-48  items-center justify-center w-full">
             <div className="relative w-[8cm] mb-4 hidden md:block">
               <form className="flex items-center">
                 <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
