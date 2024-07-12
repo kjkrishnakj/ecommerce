@@ -6,6 +6,7 @@ import Error from 'next/error'
 import Product from "../../models/Product";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Head from 'next/head';
 const Post = ({ addToCart,error, product, variants,buyNow }) => {
     const router = useRouter();
     const { slug } = router.query
@@ -33,9 +34,9 @@ const Post = ({ addToCart,error, product, variants,buyNow }) => {
         return<Error statusCode={404}/>
     }
     return <>
+    <Head><title> Amikart | {product.title}</title></Head>
         <section className="text-gray-600 body-font overflow-hidden">
            <ToastContainer/>
-
             <div className="container px-5 py-24 mx-auto">
                 <div className="lg:w-4/5 mx-auto flex flex-wrap">
               
