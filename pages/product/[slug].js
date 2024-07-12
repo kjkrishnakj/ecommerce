@@ -98,8 +98,8 @@ const Post = ({ addToCart,error, product, variants,buyNow }) => {
                         <div className="flex">
                             {product.availableQty<=0?<span className="title-font font-medium text-2xl text-gray-900">Out Of Stock!</span>:
                             <span className="title-font font-medium text-2xl text-gray-900">₹{product.price}</span>}
-                            <button onClick={() => { buyNow(slug, 1, product.price, product.title, product.color,product.img) }} disabled={product.availableQty <=0 ? true:false} className=" ml-10 disabled:bg-indigo-500 text-white  bg-indigo-600 border-0 py-2 px-2 focus:outline-none hover:bg-indigo-700 rounded">Buy now</button>
-                            <button onClick={() => { addToCart(slug, 1, product.price, product.title, product.color,product.img) }} disabled={product.availableQty <=0 ? true:false} className=" ml-4 disabled:bg-indigo-500 text-white bg-indigo-600 border-0 py-2 px-2 focus:outline-none hover:bg-indigo-700 rounded">Add to Cart</button>
+                            <button onClick={() => { buyNow(slug, 1, product.price, product.title, product.color,product.img,product.priceid) }} disabled={product.availableQty <=0 ? true:false} className=" ml-10 disabled:bg-indigo-500 text-white  bg-indigo-600 border-0 py-2 px-2 focus:outline-none hover:bg-indigo-700 rounded">Buy now</button>
+                            <button onClick={() => { addToCart(slug, 1, product.price, product.title, product.color,product.img,product.priceid) }} disabled={product.availableQty <=0 ? true:false} className=" ml-4 disabled:bg-indigo-500 text-white bg-indigo-600 border-0 py-2 px-2 focus:outline-none hover:bg-indigo-700 rounded">Add to Cart</button>
                             
                         {/* </div>
                         <div className="pin my-5 flex flex-row"> */}
