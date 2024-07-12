@@ -1,11 +1,34 @@
 import React, { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/router";
+
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import Head from "next/head";
 import Script from "next/script";
+// import { test } from "./test";
+import { loadStripe } from '@stripe/stripe-js';
+
+let stripePromise = null;
+
+export const test = async ({ lineItems }) => {
+  if (!stripePromise) {
+    stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
+  }
+
+  const stripe = await stripePromise;
+
+  const { error } = await stripe.redirectToCheckout({
+    mode: "payment",
+    lineItems,
+    successUrl: `${window.location.origin}/orders?session_id={CHECKOUT_SESSION_ID}`,
+    cancelUrl: window.location.origin,
+  });
+
+  if (error) {
+    console.error('Error redirecting to checkout:', error);
+  }
+};
 
 const Checkout = ({
   user,
@@ -24,13 +47,6 @@ const Checkout = ({
   const [address, setAddress] = useState("");
   const [pincode, setPincode] = useState("");
   const [disabled, setDisabled] = useState(true);
-  const router = useRouter();
-
-  useEffect(() => {
-    if (!user.value) {
-      router.push("/login");
-    }
-  }, [user, router]);
 
   const vname = () => {
     if (myform.name.value.match(/[0-9]/g)) {
@@ -73,7 +89,7 @@ const Checkout = ({
     ) {
       setDisabled(false);
     } else {
-      setDisabled(true);
+      setDisabled(false);
     }
   }, [name, address, pincode, phone]);
 
@@ -132,30 +148,32 @@ const Checkout = ({
       }
     }
   };
+  
 
   const intiatePayment = async () => {
     let oid = Math.floor(Math.random() * Date.now());
 
     const data = {
       cart,
+      pincode,
       SubTotal,
       oid,
-      email: email,
+      email: "krishnajaswl@gmail.com",
       name,
       address,
-      pincode,
+      city,state,
       phone,
     };
 
     let a = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pretransaction`, {
-      method: "POST",
+      method: "POST", 
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
     });
     let txnRes = await a.json();
-    // console.log(txnRes);
+    console.log("txnRes:",txnRes);
     if (txnRes.success) {
       let txnToken = txnRes.txnToken;
       var config = {
@@ -190,7 +208,7 @@ const Checkout = ({
       ClearCart();
     }
   };
-
+ 
   return (
     <div>
       <ToastContainer />
@@ -199,7 +217,7 @@ const Checkout = ({
           name="viewport"
           content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0"
         />
-        <title>KnowledgeHub | Checkout</title>
+        <title>Amikart | Checkout</title>
       </Head>
 
       <Script
@@ -473,15 +491,23 @@ const Checkout = ({
               <Link href={'/orders'}><button disabled={disabled} onClick={intiatePayment} className="mt-4 mb-8 w-full disabled:bg-indigo-400  bg-indigo-600 border-0 rounded-md hover:bg-indigo-700 px-6 py-3 font-medium text-white">Place Order</button>
               </Link> : <Link href={'/checkout'}><button disabled={disabled} onClick={intiatePayment} className="mt-4 mb-8 w-full disabled:bg-indigo-400  bg-indigo-600 border-0 rounded-md hover:bg-indigo-700 px-6 py-3 font-medium text-white">Place Order</button>
               </Link>  } */}
-            <Link href={"/orders"}>
+            <Link href={""}>
               <button
                 disabled={disabled}
-                onClick={intiatePayment}
+                onClick={() => {
+                  const priceId = localStorage.getItem('priceid');
+                  test({
+                    lineItems: [{ price:priceId, quantity: 1 }],
+                  });
+                }}
+                // onClick={intiatePayment}
                 className="mt-4 mb-8 w-full disabled:bg-indigo-400  bg-indigo-600 border-0 rounded-md hover:bg-indigo-700 px-6 py-3 font-medium text-white"
               >
                 Place Order
               </button>
+          
             </Link>
+            <button className="my-10" ></button>
           </div>
         </div>
       </div>
