@@ -8,6 +8,7 @@ import Head from "next/head";
 import Script from "next/script";
 // import { test } from "./test";
 import { loadStripe } from '@stripe/stripe-js';
+import { useRouter } from "next/router";
 
 let stripePromise = null;
 
@@ -21,7 +22,7 @@ export const test = async ({ lineItems }) => {
   const { error } = await stripe.redirectToCheckout({
     mode: "payment",
     lineItems,
-    successUrl: `${window.location.origin}/orders?session_id={CHECKOUT_SESSION_ID}`,
+    successUrl: `${window.location.origin}/orders`,
     cancelUrl: window.location.origin,
   });
 
@@ -47,7 +48,7 @@ const Checkout = ({
   const [address, setAddress] = useState("");
   const [pincode, setPincode] = useState("");
   const [disabled, setDisabled] = useState(true);
-
+  const router = useRouter();
   const vname = () => {
     if (myform.name.value.match(/[0-9]/g)) {
       toast.error("Enter valid name🥲", { autoClose: 1000 });
@@ -148,7 +149,42 @@ const Checkout = ({
       }
     }
   };
-  
+  const placeorder = async () => {
+    if (!user.value) {
+      toast.warning("Login to checkout", { autoClose: 2000 })
+      router.push(`${process.env.NEXT_PUBLIC_HOST}/login`);
+    }
+    else {
+      const priceId = localStorage.getItem('priceid');
+      test({
+        lineItems: [{ price: priceId, quantity: 1 }],
+      })
+
+      let oid = Math.floor(Math.random() * Date.now());
+
+      const data = {
+        cart,
+        pincode,
+        SubTotal,
+        oid,
+        email: "krishnajaswl@gmail.com",
+        name,
+        address,
+        city, state,
+        phone,
+      };
+
+      let a = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pretransaction`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+     
+    }
+  }
+
 
   const intiatePayment = async () => {
     let oid = Math.floor(Math.random() * Date.now());
@@ -161,19 +197,19 @@ const Checkout = ({
       email: "krishnajaswl@gmail.com",
       name,
       address,
-      city,state,
+      city, state,
       phone,
     };
 
     let a = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pretransaction`, {
-      method: "POST", 
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
     });
     let txnRes = await a.json();
-    console.log("txnRes:",txnRes);
+    console.log("txnRes:", txnRes);
     if (txnRes.success) {
       let txnToken = txnRes.txnToken;
       var config = {
@@ -208,7 +244,7 @@ const Checkout = ({
       ClearCart();
     }
   };
- 
+
   return (
     <div>
       <ToastContainer />
@@ -494,18 +530,12 @@ const Checkout = ({
             <Link href={""}>
               <button
                 disabled={disabled}
-                onClick={() => {
-                  const priceId = localStorage.getItem('priceid');
-                  test({
-                    lineItems: [{ price:priceId, quantity: 1 }],
-                  });
-                }}
-                // onClick={intiatePayment}
+                onClick={placeorder}
                 className="mt-4 mb-8 w-full disabled:bg-indigo-400  bg-indigo-600 border-0 rounded-md hover:bg-indigo-700 px-6 py-3 font-medium text-white"
               >
                 Place Order
               </button>
-          
+
             </Link>
             <button className="my-10" ></button>
           </div>
