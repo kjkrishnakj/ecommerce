@@ -14,7 +14,7 @@ const handler = async (req, res) => {
             return res.status(401).json({ error: "Invalid token" });
         }
 
-        let orders = await Order.find({ email: "krishnajaswl@gmail.com"});
+        let orders = await Order.find({ email: data.email});
 ;
 
         res.status(200).json({ orders });
