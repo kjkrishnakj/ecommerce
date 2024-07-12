@@ -47,7 +47,7 @@ export default function Home({ products }) {
 
     if (response.success) {
       setFoundphone(response.product);
-      // console.log(searchText.length);  
+      console.log(searchText);
       if (searchText.length <= 1) {
 
         setDropdown(false);
@@ -56,7 +56,7 @@ export default function Home({ products }) {
         setDropdown(true);
 
       }
-      
+
 
     }
     else {
@@ -77,6 +77,7 @@ export default function Home({ products }) {
       <section className="text-gray-600 body-font">
 
         <div className="container px-5 py-24 mx-auto">
+            
           <div className="relative flex flex-col pt-12 sm:pt-12 items-center justify-center w-full">
             <div className="relative w-[8cm] mb-4">
               <form className="flex items-center">
