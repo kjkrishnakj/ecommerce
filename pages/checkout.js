@@ -167,7 +167,7 @@ const Checkout = ({
         pincode,
         SubTotal,
         oid,
-        email: "krishnajaswl@gmail.com",
+        email: localStorage.getItem('email'),
         name,
         address,
         city, state,
