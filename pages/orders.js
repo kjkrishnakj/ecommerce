@@ -13,6 +13,7 @@ const Orders = () => {
 
         const fetchOrders = async () => {
             const token=localStorage.getItem('token');
+            const email=localStorage.getItem('email');
         
 
             let a = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/myorders`, {
@@ -20,7 +21,7 @@ const Orders = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ token:token })
+                body: JSON.stringify({ token:token,email:email })
             })
             let res = await a.json()
             setOrders(res.orders);
