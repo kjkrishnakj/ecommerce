@@ -155,13 +155,16 @@ const Checkout = ({
       router.push(`${process.env.NEXT_PUBLIC_HOST}/login`);
     }
     else {
-      const priceId = localStorage.getItem('priceid');
-      test({
-        lineItems: [{ price: priceId, quantity: 1 }],
-      })
+      // const priceId = localStorage.getItem('priceid');
+      const priceIds = JSON.parse(localStorage.getItem('priceids')) || [];
+      const lineItems = priceIds.map(priceId => ({
+        price: priceId,
+        quantity: 1,
+      }));
+      test({ lineItems });
 
       let oid = Math.floor(Math.random() * Date.now());
-
+      
       const data = {
         cart,
         pincode,
@@ -174,7 +177,7 @@ const Checkout = ({
         phone,
       };
 
-      let a = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pretransaction`, {
+      let a = await fetch(`${process. env.NEXT_PUBLIC_HOST}/api/pretransaction`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
