@@ -90,7 +90,7 @@ const Checkout = ({
     ) {
       setDisabled(false);
     } else {
-      setDisabled(false);
+      setDisabled(true);
     }
   }, [name, address, pincode, phone]);
 
