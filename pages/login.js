@@ -1,13 +1,12 @@
 import Image from "next/image";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../public/ak_logo4.png";
 import Link from "next/link";
-
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 const Login = () => {
   const router = useRouter();
   useEffect(() => {
@@ -17,12 +16,12 @@ const Login = () => {
   }, []);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false); // Add loading state
 
   const handleChange = (e) => {
     if (e.target.name == "email") {
       setEmail(e.target.value);
     } else if (e.target.name == "password") {
-      console.log(e.target.value);
       setPassword(e.target.value);
     }
   };
@@ -30,6 +29,8 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = { email, password };
+
+    setLoading(true); // Set loading to true when request starts
 
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/login`, {
@@ -63,6 +64,8 @@ const Login = () => {
     } catch (error) {
       console.error("Login error:", error);
       toast.error("Login failed. Please try again.", { autoClose: 2000 });
+    } finally {
+      setLoading(false); // Set loading to false when request completes
     }
   };
 
@@ -73,7 +76,7 @@ const Login = () => {
         <title>Amikart | Login</title>
       </Head>
       <div className="flex min-h-screen flex-col justify-center px-6 py-12 lg:px-8">
-        <div className="mt-16  sm:mx-auto sm:w-full sm:max-w-sm">
+        <div className="mt-16 sm:mx-auto sm:w-full sm:max-w-sm">
           <Image
             className="mx-auto"
             src={logo}
@@ -143,8 +146,10 @@ const Login = () => {
               <button
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                disabled={loading} // Disable button when loading
               >
-                Login
+                {loading ? <div className="spinner"></div> : "Login"}
+                {/* Show loading text when loading */}
               </button>
             </div>
           </form>

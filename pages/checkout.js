@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Head from "next/head";
 import Script from "next/script";
 // import { test } from "./test";
-import { loadStripe } from '@stripe/stripe-js';
+import { loadStripe } from "@stripe/stripe-js";
 import { useRouter } from "next/router";
 
 let stripePromise = null;
@@ -27,7 +27,7 @@ export const test = async ({ lineItems }) => {
   });
 
   if (error) {
-    console.error('Error redirecting to checkout:', error);
+    console.error("Error redirecting to checkout:", error);
   }
 };
 
@@ -46,6 +46,7 @@ const Checkout = ({
   const [state, setState] = useState("");
   const [city, setCity] = useState("");
   const [address, setAddress] = useState("");
+  const [loading, setLoading] = useState(false);
   const [pincode, setPincode] = useState("");
   const [disabled, setDisabled] = useState(true);
   const router = useRouter();
@@ -149,45 +150,60 @@ const Checkout = ({
       }
     }
   };
+
   const placeorder = async () => {
     if (!user.value) {
-      toast.warning("Login to checkout", { autoClose: 2000 })
+      toast.warning("Login to checkout", { autoClose: 2000 });
       router.push(`${process.env.NEXT_PUBLIC_HOST}/login`);
+    } else {
+      setLoading(true); // Set loading to true when request starts
+
+      try {
+        // const priceId = localStorage.getItem('priceid');
+        const priceIds = JSON.parse(localStorage.getItem("priceids")) || [];
+        const lineItems = priceIds.map((priceId) => ({
+          price: priceId,
+          quantity: 1,
+        }));
+        test({ lineItems });
+
+        let oid = Math.floor(Math.random() * Date.now());
+
+        const data = {
+          cart,
+          pincode,
+          SubTotal,
+          oid,
+          email: localStorage.getItem("email"),
+          name,
+          address,
+          city,
+          state,
+          phone,
+        };
+
+        let a = await fetch(
+          `${process.env.NEXT_PUBLIC_HOST}/api/pretransaction`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          }
+        );
+
+        // handle response here if needed
+      } catch (error) {
+        console.error("Order placement error:", error);
+        toast.error("Order placement failed. Please try again.", {
+          autoClose: 2000,
+        });
+      } finally {
+        setLoading(false); // Set loading to false when request completes
+      }
     }
-    else {
-      // const priceId = localStorage.getItem('priceid');
-      const priceIds = JSON.parse(localStorage.getItem('priceids')) || [];
-      const lineItems = priceIds.map(priceId => ({
-        price: priceId,
-        quantity: 1,
-      }));
-      test({ lineItems });
-
-      let oid = Math.floor(Math.random() * Date.now());
-      
-      const data = {
-        cart,
-        pincode,
-        SubTotal,
-        oid,
-        email: localStorage.getItem('email'),
-        name,
-        address,
-        city, state,
-        phone,
-      };
-
-      let a = await fetch(`${process. env.NEXT_PUBLIC_HOST}/api/pretransaction`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-     
-    }
-  }
-
+  };
 
   const intiatePayment = async () => {
     let oid = Math.floor(Math.random() * Date.now());
@@ -200,7 +216,8 @@ const Checkout = ({
       email: "krishnajaswl@gmail.com",
       name,
       address,
-      city, state,
+      city,
+      state,
       phone,
     };
 
@@ -532,15 +549,15 @@ const Checkout = ({
               </Link>  } */}
             <Link href={""}>
               <button
-                disabled={disabled}
+                disabled={disabled || loading} // Disable the button when loading
                 onClick={placeorder}
                 className="mt-4 mb-8 w-full disabled:bg-indigo-400  bg-indigo-600 border-0 rounded-md hover:bg-indigo-700 px-6 py-3 font-medium text-white"
               >
-                Place Order
+                {loading ? <div className="spinner"></div> : "Place Order"}
               </button>
-
             </Link>
-            <button className="my-10" ></button>
+
+            <button className="my-10"></button>
           </div>
         </div>
       </div>
