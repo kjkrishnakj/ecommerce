@@ -128,17 +128,23 @@ export default function App({ Component, pageProps }: AppProps) {
   }
   const removeFromCart = (itemCode: string, qty: number) => {
     const newCart = { ...cart };
+    let removedPriceIds: string[] = [];
   
     if (itemCode in newCart) {
       newCart[itemCode].qty -= qty;
   
       if (newCart[itemCode]?.qty <= 0) {
-        delete newCart[itemCode];  
+        removedPriceIds = newCart[itemCode].priceids;  
+        delete newCart[itemCode];   
       }
     }
   
     setCart(newCart);
     saveCart(newCart);
+  
+    const priceIds = JSON.parse(localStorage.getItem('priceids') || '[]');
+    const updatedPriceIds = priceIds.filter((id: string) => !removedPriceIds.includes(id));
+    localStorage.setItem('priceids', JSON.stringify(updatedPriceIds));
   };
   
 
