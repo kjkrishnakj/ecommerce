@@ -110,9 +110,18 @@ export default function App({ Component, pageProps }: AppProps) {
   
   const buyNow = (itemCode: string, qty: number, price: number, name: string, variant: string, img: string,priceid:string) => {
     const newCart: Record<string, CartItem> = {};  
+    if (itemCode in cart) {
+      newCart[itemCode].qty = cart[itemCode].qty + qty;
+  
+      if (!newCart[itemCode].priceids.includes(priceid)) {
+        newCart[itemCode].priceids.push(priceid);
+      }
+    } else {
+      newCart[itemCode] = { qty, price, name, variant, img, priceids: [priceid] };
+    }
     // newCart[itemCode] = { qty: 1, price, name, variant, img,priceids };  
-    // setCart(newCart);
-    // saveCart(newCart);
+    setCart(newCart);
+    saveCart(newCart);
     localStorage.setItem('priceid',priceid);
     
     router.push(`/checkout`)
