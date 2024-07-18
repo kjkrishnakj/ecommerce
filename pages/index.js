@@ -28,50 +28,38 @@ export default function Home({ products }) {
 
   const [foundphone, setFoundphone] = useState("");
   const [dropdown, setDropdown] = useState(false);
-  const [loading, setLoading] = useState(false);
+
   const [searchText, setSearchText] = useState("");
-
-  const handleSearchChange = (e) => {
-    setSearchText(e.target.value);
-  };
-
+  const handleSearchChange = (e) => {};
   const handleSearchSubmit = async (e) => {
+    setSearchText(e.target.value);
     e.preventDefault();
-    setLoading(true); // Set loading to true when request starts
-
     const data = { searchText };
+    let res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/getphone`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    let response = await res.json();
 
-    try {
-      let res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/getphone`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-      let response = await res.json();
-
-      if (response.success) {
-        setFoundphone(response.product);
-        console.log(searchText);
-        if (searchText.length <= 1) {
-          setDropdown(false);
-        } else {
-          setDropdown(true);
-        }
+    if (response.success) {
+      setFoundphone(response.product);
+      console.log(searchText);
+      if (searchText.length <= 1) {
+        setDropdown(false);
       } else {
-        console.log("err");
+        setDropdown(true);
       }
-    } catch (error) {
-      console.error("Search error:", error);
-    } finally {
-      setLoading(false); // Set loading to false when request completes
+    } else {
+      console.log("err");
     }
   };
-
   return (
     <>
       <Head>
+        {/* <title>Amikart</title> */}
         <link href="https://fonts.googleapis.com/css?family=Nunito" />
         <title>Amikart | Home</title>
       </Head>
@@ -80,7 +68,7 @@ export default function Home({ products }) {
         <div className="container px-5 py-24 mx-auto">
           <div className="relative flex flex-col pt-12 sm:pt-12 items-center justify-center w-full">
             <div className="relative w-[8cm] mb-4">
-              <form className="flex items-center" onSubmit={handleSearchSubmit}>
+              <form className="flex items-center">
                 <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                   <svg
                     className="w-4 h-4 text-indigo-500 dark:text-indigo-600"
@@ -101,18 +89,18 @@ export default function Home({ products }) {
                 </div>
                 <input
                   value={searchText}
-                  onChange={handleSearchChange}
+                  onChange={handleSearchSubmit}
                   type="text"
                   id="search-navbar"
                   className="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-green-500 focus:border-green-500 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-green-500 dark:focus:border-green-500"
                   placeholder="Galaxy S24+"
                 />
                 <button
+                  onClick={handleSearchSubmit}
                   type="submit"
-                  disabled={loading}
                   className="ml-2 p-2 text-sm text-white bg-indigo-500 rounded-lg hover:bg-indigo-600 focus:ring-2 focus:ring-indigo-600 focus:ring-opacity-50"
                 >
-                  {loading ? <div className="spinner"></div> : "Search"}
+                  Search
                 </button>
               </form>
             </div>
@@ -132,7 +120,7 @@ export default function Home({ products }) {
             )}
           </div>
 
-          <div className="flex flex-wrap -m-4 justify-center">
+          <div className="flex flex-wrap -m-4  justify-center">
             {Object.keys(products).map((item) => {
               return (
                 <Link
@@ -141,7 +129,7 @@ export default function Home({ products }) {
                   href={`/product/${products[item].slug}`}
                 >
                   <div
-                    className="lg:w-1/2 md:w-1/2 p-2"
+                    className=" lg:w-1/2 md:w-1/2 p-2"
                     style={{ width: "6cm", margin: "0.5cm 2cm" }}
                   >
                     <img
@@ -151,7 +139,7 @@ export default function Home({ products }) {
                       style={{ height: "16rem", width: "16rem" }}
                     />
                     <div className="mt-4">
-                      <h3 className="text-gray-500 text-s tracking-widest title-font mb-1">
+                      <h3 className="text-gray-500 text-s  tracking-widest title-font mb-1">
                         {products[item].brand}
                       </h3>
                       <h2 className="text-gray-900 title-font text-lg font-medium">
@@ -162,7 +150,7 @@ export default function Home({ products }) {
                     <div className="mt-1">
                       <div className="flex">
                         {products[item].color.includes("blue") && (
-                          <button className="border-2 border-blue-200 bg-blue-700 rounded-full w-6 h-6 focus:outline-none"></button>
+                          <button className="border-2 border-blue-200  bg-blue-700 rounded-full w-6 h-6 focus:outline-none"></button>
                         )}
                         {products[item].color.includes("orange") && (
                           <button className="border-2 border-blue-200 bg-orange-700 rounded-full w-6 h-6 focus:outline-none"></button>
@@ -194,7 +182,7 @@ export default function Home({ products }) {
           </div>
         </div>
       </section>
-      <section className="text-indigo-500 body-font">
+      <section className="text-indigo-500  body-font">
         <div className="container px-5 py-1 mx-auto">
           <h1 className="text-2xl font-bold mt mb-2">Featured Products </h1>
 
@@ -212,7 +200,7 @@ export default function Home({ products }) {
                   href={`/product/${products[item].slug}`}
                 >
                   <div
-                    className="lg:w-1/2 md:w-1/2 p-2"
+                    className=" lg:w-1/2 md:w-1/2 p-2"
                     style={{ width: "6cm", margin: "0.5cm 2cm" }}
                   >
                     <img
@@ -226,13 +214,13 @@ export default function Home({ products }) {
                       }}
                     />
                     <div className="mt-4">
-                      <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">
+                      <h3 className="text-gray-500 text-xs  tracking-widest title-font mb-1">
                         {products[item].brand}
                       </h3>
                       <h2 className="text-gray-900 title-font text-lg font-medium">
                         {products[item].title}
                       </h2>
-                      <p className="text-gray-900 mt-1">
+                      <p className=" text-gray-900 mt-1">
                         ₹{products[item].price}
                       </p>
                     </div>
@@ -246,7 +234,6 @@ export default function Home({ products }) {
     </>
   );
 }
-
 export async function getServerSideProps(context) {
   if (!mongoose.connections[0].readyState) {
     await mongoose.connect(process.env.MONGO_URI);
