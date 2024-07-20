@@ -15,6 +15,7 @@ type CartItem = {
   price: number;
   name: string;
   variant: string;
+  priceids:string[];  
   img: string;
 };
 
@@ -71,43 +72,81 @@ export default function App({ Component, pageProps }: AppProps) {
     }
     setSubTotal(subt);
   };
-
-  const addToCart = (itemCode: string, qty: number, price: number, name: string, variant: string, img: string) => {
-    // toast.success("Added to cart👍",{autoClose:1000,position:'bottom-center'})
-    if(Object.keys(cart).length==0){
-      
-      setKey(Math.random())
+  const addToCart = (
+    itemCode: string,
+    qty: number,
+    price: number,
+    name: string,
+    variant: string,
+    img: string,
+    priceid: string
+  ) => {
+    if (Object.keys(cart).length === 0) {
+      setKey(Math.random());
     }
+  
     const newCart = { ...cart };
+  
     if (itemCode in cart) {
       newCart[itemCode].qty = cart[itemCode].qty + qty;
+  
+      if (!newCart[itemCode].priceids.includes(priceid)) {
+        newCart[itemCode].priceids.push(priceid);
+      }
     } else {
-      newCart[itemCode] = { qty: 1, price, name, variant, img };
+      newCart[itemCode] = { qty, price, name, variant, img, priceids: [priceid] };
     }
+  
     setCart(newCart);
     saveCart(newCart);
-    
+  
+    const priceIds = JSON.parse(localStorage.getItem('priceids') || '[]');
+    if (!priceIds.includes(priceid)) {
+      priceIds.push(priceid);
+      localStorage.setItem('priceids', JSON.stringify(priceIds));
+    }
   };
   
-  const buyNow = (itemCode: string, qty: number, price: number, name: string, variant: string, img: string) => {
+  
+  const buyNow = (itemCode: string, qty: number, price: number, name: string, variant: string, img: string,priceid:string) => {
     const newCart: Record<string, CartItem> = {};  
-    newCart[itemCode] = { qty: 1, price, name, variant, img };  
+    if (itemCode in cart) {
+      newCart[itemCode].qty = cart[itemCode].qty + qty;
+  
+      if (!newCart[itemCode].priceids.includes(priceid)) {
+        newCart[itemCode].priceids.push(priceid);
+      }
+    } else {
+      newCart[itemCode] = { qty, price, name, variant, img, priceids: [priceid] };
+    }
+    // newCart[itemCode] = { qty: 1, price, name, variant, img,priceids };  
     setCart(newCart);
     saveCart(newCart);
+    localStorage.setItem('priceid',priceid);
+    
     router.push(`/checkout`)
   }
-
-  const removeFromCart = (itemCode: string, qty: number, price: number, name: string, variant: string, img: string) => {
-    const newCart = { ...cart }; 
-    if (itemCode in cart) {
-      newCart[itemCode].qty = cart[itemCode].qty - qty;
+  const removeFromCart = (itemCode: string, qty: number) => {
+    const newCart = { ...cart };
+    let removedPriceIds: string[] = [];
+  
+    if (itemCode in newCart) {
+      newCart[itemCode].qty -= qty;
+  
+      if (newCart[itemCode]?.qty <= 0) {
+        removedPriceIds = newCart[itemCode].priceids;  
+        delete newCart[itemCode];   
+      }
     }
-    if (newCart[itemCode]?.qty <= 0) {
-      delete newCart[itemCode];
-    }
+  
     setCart(newCart);
     saveCart(newCart);
+  
+    const priceIds = JSON.parse(localStorage.getItem('priceids') || '[]');
+    const updatedPriceIds = priceIds.filter((id: string) => !removedPriceIds.includes(id));
+    localStorage.setItem('priceids', JSON.stringify(updatedPriceIds));
   };
+  
 
   const clearCart = () => {
     setCart({});
