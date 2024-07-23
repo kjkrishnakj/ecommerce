@@ -122,7 +122,12 @@ export default function App({ Component, pageProps }: AppProps) {
     // newCart[itemCode] = { qty: 1, price, name, variant, img,priceids };  
     setCart(newCart);
     saveCart(newCart);
-    localStorage.setItem('priceid',priceid);
+    // localStorage.setItem('priceid',priceid);
+    const priceIds = JSON.parse(localStorage.getItem('priceids') || '[]');
+    if (!priceIds.includes(priceid)) {
+      priceIds.push(priceid);
+      localStorage.setItem('priceids', JSON.stringify(priceIds));
+    }
     
     router.push(`/checkout`)
   }
