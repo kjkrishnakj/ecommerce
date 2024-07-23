@@ -23,8 +23,8 @@ const About = () => {
             and excellent customer service.
           </p>
           <p className="text-lg mb-4">
-            Whether you're looking for the latest flagship smartphones or
-            budget-friendly options, we've got you covered. Explore our
+            Whether you are looking for the latest flagship smartphones or
+            budget-friendly options, we have got you covered. Explore our
             collection and find the perfect smartphone to suit your needs.
           </p>
           <h2 className="text-xl font-semibold text-gray-800 mt-6 mb-4">
@@ -33,7 +33,7 @@ const About = () => {
           <ul className="list-disc list-inside text-lg space-y-2">
             <li>
               Extensive Selection: We carry a diverse range of smartphones from
-              leading brands, ensuring that you'll find the perfect device for
+              leading brands, ensuring that you will find the perfect device for
               your lifestyle and budget.
             </li>
             <li>
