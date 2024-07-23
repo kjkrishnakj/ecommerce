@@ -6,10 +6,12 @@ import { useRouter } from 'next/router';
 
 import Head from "next/head";
 import Link from 'next/link';
-const Orders = () => {
+const Orders = ({ClearCart}) => {
     const [orders, setOrders] = useState([])
     const router = useRouter();
     useEffect(() => {
+        ClearCart();
+        
 
         const fetchOrders = async () => {
             const token=localStorage.getItem('token');

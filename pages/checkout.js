@@ -16,7 +16,7 @@ export const test = async ({ lineItems }) => {
   if (!stripePromise) {
     stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
   }
-
+  
   const stripe = await stripePromise;
 
   const { error } = await stripe.redirectToCheckout({

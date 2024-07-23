@@ -147,10 +147,12 @@ export default function App({ Component, pageProps }: AppProps) {
     localStorage.setItem('priceids', JSON.stringify(updatedPriceIds));
   };
   
-
+  
   const clearCart = () => {
     setCart({});
     saveCart({});
+    localStorage.removeItem('priceids');
+    
   };
 
 
