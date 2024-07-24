@@ -2,6 +2,8 @@ import Image from 'next/image'
 import React, { useEffect } from 'react'
 import logo from "../public/ak_logo4.png"
 import Link from 'next/link'
+import "aos/dist/aos.css";
+import AOS from "aos";
 
 import Head from "next/head";
 import { useRouter } from 'next/router'
@@ -11,6 +13,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const Login = () => {
   const router = useRouter()
   useEffect(() => {
+    AOS.init();
     if (localStorage.getItem('token')) {
       router.push('/')
     }
@@ -69,10 +72,10 @@ const Login = () => {
       <div className="flex min-h-screen flex-col justify-center px-6 py-12 lg:px-8">
         <div className="mt-16  sm:mx-auto sm:w-full sm:max-w-sm">
           <Image className='mx-auto' src={logo} alt="" style={{ height: "4rem", width: "6rem" }}></Image>
-          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Log in to your account</h2>
+          <h2 data-aos="zoom-in" className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Log in to your account</h2>
         </div>
 
-        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm" data-aos="zoom-in">
           <form onSubmit={handleSubmit} className="space-y-6" method="POST">
             <div>
               <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">Email address</label>
