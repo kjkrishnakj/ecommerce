@@ -5,8 +5,14 @@ import Link from "next/link";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { useState } from "react";
+import React, { useEffect } from 'react';
+import "aos/dist/aos.css";
+import AOS from "aos";
 
 export default function Home({ products }) {
+  useEffect(() => {
+    AOS.init();
+  }, []);
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 1024 },
@@ -109,8 +115,8 @@ export default function Home({ products }) {
 
               return <Link passHref={true} key={products[item]._id} href={`/product/${products[item].slug}`}>
                 <div className=" lg:w-1/2 md:w-1/2 p-2" style={{ width: "6cm", margin: "0.5cm 2cm" }}>
-                  <img src={products[item].img} alt="" className="w-full h-full rounded overflow-hidden transform transition-transform duration-300 ease-in-out hover:scale-105 object-cover" style={{ height: "16rem", width: "16rem" }} />
-                  <div className="mt-4">
+                  <img src={products[item].img} data-aos="zoom-in" alt="" className="w-full h-full rounded overflow-hidden transform transition-transform duration-300 ease-in-out hover:scale-105 object-cover" style={{ height: "16rem", width: "16rem" }} />
+                  <div className="mt-4" data-aos="fade-right">
                     <h3 className="text-gray-500 text-s  tracking-widest title-font mb-1">{products[item].brand}</h3>
                     <h2 className="text-gray-900 title-font text-lg font-medium">{products[item].title}</h2>
                     <p className="mt-1">₹{products[item].price}</p>
