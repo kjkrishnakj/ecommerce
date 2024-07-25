@@ -9,25 +9,27 @@ import 'react-toastify/dist/ReactToastify.css';
 import Head from 'next/head';
 import "aos/dist/aos.css";
 import AOS from "aos";
+import Review from '../../models/Review';
+import Link from 'next/link';
 
-const Post = ({ addToCart,error, product, variants,buyNow }) => {
-    useEffect(() =>{
+const Post = ({ addToCart, error, product, variants, buyNow, review }) => {
+    useEffect(() => {
         AOS.init();
-      },[]);
+    }, []);
     const router = useRouter();
     const { slug } = router.query
- 
+
     const [pin, setPin] = useState()
     const [service, setService] = useState()
-   
+
     const checkService = async () => {
         let pins = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pincode`)
         let pinJson = await pins.json()
         if (Object.keys(pinJson).includes((pin))) {
-            toast.success("Pincode is Serviceable!",{autoClose:1000,position:'bottom-center'})
+            toast.success("Pincode is Serviceable!", { autoClose: 1000, position: 'bottom-center' })
             setService(true)
         } else {
-            toast.error("sorry! Pincode is not Serviceable",{autoClose:1000,position:'bottom-center'})
+            toast.error("sorry! Pincode is not Serviceable", { autoClose: 1000, position: 'bottom-center' })
             setService(false)
 
         }
@@ -36,16 +38,16 @@ const Post = ({ addToCart,error, product, variants,buyNow }) => {
         setPin(e.target.value)
     }
 
-    if(error==404){ 
-        return<Error statusCode={404}/>
+    if (error == 404) {
+        return <Error statusCode={404} />
     }
     return <>
-    <Head><title> Amikart | {product.title}</title></Head>
+        <Head><title> Amikart | {product.title}</title></Head>
         <section className="text-gray-600 body-font overflow-hidden">
-           <ToastContainer/>
+            <ToastContainer />
             <div className="container px-5 py-24 mx-auto">
                 <div className="lg:w-4/5 mx-auto flex flex-wrap">
-              
+
                     <img data-aos="fade-right" src={product.img} alt="" style={{ height: "26rem", width: "25rem", margin: "5rem 0rem" }}></img>
                     <div data-aos="fade-left" className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
                         <h2 className="text-sm title-font text-gray-500 tracking-widest"> </h2>
@@ -103,40 +105,84 @@ const Post = ({ addToCart,error, product, variants,buyNow }) => {
 
                         </div>
                         <div className="flex">
-                            {product.availableQty<=0?<span className="title-font font-medium text-2xl text-gray-900">Out Of Stock!</span>:
-                            <span className="title-font font-medium text-2xl text-gray-900">₹{product.price}</span>}
-                            <button onClick={() => { buyNow(slug, 1, product.price, product.title, product.color,product.img,product.priceid) }} disabled={product.availableQty <=0 ? true:false} className=" ml-10 disabled:bg-indigo-500 text-white  bg-indigo-600 border-0 py-2 px-2 focus:outline-none hover:bg-indigo-700 rounded">Buy now</button>
-                            <button onClick={() => { addToCart(slug, 1, product.price, product.title, product.color,product.img,product.priceid) }} disabled={product.availableQty <=0 ? true:false} className=" ml-4 disabled:bg-indigo-500 text-white bg-indigo-600 border-0 py-2 px-2 focus:outline-none hover:bg-indigo-700 rounded">Add to Cart</button>
-                            
-                        {/* </div>
-                        <div className="pin my-5 flex flex-row"> */}
-                            {/* <input type="text" onChange={onChangepin} placeholder='Enter  Pincode' className=" flex px-2 border-2 border-blue-500  rounded-lg" />
-                            <button onClick={checkService} className=" ml-2  text-white bg-indigo-600 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-700 rounded">Check</button> */}
+                            {product.availableQty <= 0 ? <span className="title-font font-medium text-2xl text-gray-900">Out Of Stock!</span> :
+                                <span className="title-font font-medium text-2xl text-gray-900">₹{product.price}</span>}
+                            <button onClick={() => { buyNow(slug, 1, product.price, product.title, product.color, product.img, product.priceid) }} disabled={product.availableQty <= 0 ? true : false} className=" ml-10 disabled:bg-indigo-500 text-white  bg-indigo-600 border-0 py-2 px-2 focus:outline-none hover:bg-indigo-700 rounded">Buy now</button>
+                            <button onClick={() => { addToCart(slug, 1, product.price, product.title, product.color, product.img, product.priceid) }} disabled={product.availableQty <= 0 ? true : false} className=" ml-4 disabled:bg-indigo-500 text-white bg-indigo-600 border-0 py-2 px-2 focus:outline-none hover:bg-indigo-700 rounded">Add to Cart</button>
 
-                        {/* {!service && service != null && <div className='text-red-900 text-sm mt-3'>
-                            Sorry! We do not deliver to this pincode
-                        </div>}
-
-                        {service && service != null && <div className='text-green-900 text-sm mt-3'>
-                            Yay! This pincode is serviceable
-                        </div>} */}
                         </div>
-                            <h1 className="text-xl mt-8 text-gray-700  font-bold  mb-2">Details:</h1>
-                            <li className=' mt-2 text-gray-900  pl-10'><span className='font-bold'>Battery: </span>{product.battery}mAh</li>
-                            <li className=' mt-2 text-gray-900  pl-10'><span className='font-bold'>RAM: </span>{product.ram}GB</li>
-                            <li className=' mt-2 text-gray-900  pl-10'><span className='font-bold'>Memory: </span>{product.memory}GB</li>
-                            <li className=' mt-2 text-gray-900  pl-10'><span className='font-bold'>CPU: </span>{product.cpu}</li>
-                            <li className=' mt-2 text-gray-900  pl-10'><span className='font-bold'>Screen Size: </span>{product.screensize} Inches</li>
+                        <h1 className="text-xl mt-8 text-gray-700  font-bold  mb-2">Details:</h1>
+                        <li className=' mt-2 text-gray-900  pl-10'><span className='font-bold'>Battery: </span>{product.battery}mAh</li>
+                        <li className=' mt-2 text-gray-900  pl-10'><span className='font-bold'>RAM: </span>{product.ram}GB</li>
+                        <li className=' mt-2 text-gray-900  pl-10'><span className='font-bold'>Memory: </span>{product.memory}GB</li>
+                        <li className=' mt-2 text-gray-900  pl-10'><span className='font-bold'>CPU: </span>{product.cpu}</li>
+                        <li className=' mt-2 text-gray-900  pl-10'><span className='font-bold'>Screen Size: </span>{product.screensize} Inches</li>
 
-                            <div>
+                        <div>
                         </div>
-                        
+
 
                     </div>
-                     
+
                 </div>
             </div>
         </section >
+
+        <div className="my-10">
+
+            <h1>
+            
+                <Link href="../review">
+                <div className="flex items-center space-x-2 text-gray-100 font-bold m-10 ">
+                    <button className="text-gray-100 transition-transform transform hover:scale-110  font-bold rounded-full bg-indigo-600 "><svg
+                        fill="none"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        className="w-6 h-6"
+                        viewBox="0 0 24 24"
+                    >
+                        <path d="M12 5v14M5 12h14"></path>
+                    </svg></button>
+                    <p className="text-gray-700">Add Review</p></div>
+                    </Link>
+            </h1>
+
+            {review.map((k) => (
+                <div className="flex items-start mb-6" key={k._id}>
+                    <div className="flex-shrink-0">
+                        <div className="inline-block relative">
+                            <div className="relative w-16 h-16 rounded-full overflow-hidden">
+                                <img className="absolute top-0 left-0 w-full h-full bg-cover object-fit object-cover" src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png" alt="Profile picture" />
+
+                                <div className="absolute top-0 left-0 w-full h-full rounded-full shadow-inner"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div className="ml-6">
+                        <p className="flex items-baseline">
+                            <span className="text-gray-600 font-bold">{k.name}</span>
+                        </p>
+                        <div className="flex items-center mt-1">
+                            <svg className="w-4 h-4 fill-current text-yellow-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" /></svg>
+                            <svg className="w-4 h-4 fill-current text-yellow-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" /></svg>
+                            <svg className="w-4 h-4 fill-current text-yellow-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" /></svg>
+                            <svg className="w-4 h-4 fill-current text-yellow-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" /></svg>
+                            <svg className="w-4 h-4 fill-current text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" /></svg>
+                        </div>
+
+                        <div className="mt-3">
+                            <span className="font-bold">{k.heading}</span>
+                            <p className="mt-1">{k.decr}.</p>
+                        </div>
+                    </div>
+                </div>
+            ))}
+        </div>
+
     </>
 }
 
@@ -151,25 +197,28 @@ export async function getServerSideProps(context) {
 
     let product = await Product.findOne({ slug: context.query.slug })
     let variants = await Product.find({ title: product.title })
+    let review = await Review.find({ title: { $regex: new RegExp(product.title, "i") } });
+
     let colorSlug = {}
-    let error=null;
-    if(product==null){
+    let error = null;
+    if (product == null) {
         return {
-            props: {error:404}
+            props: { error: 404 }
         }
     }
     for (let item of variants) {
         if (Object.keys(colorSlug).includes(item.color)) {
             colorSlug[item.color] = { slug: item.slug }
-        }       
+        }
         else {
             colorSlug[item.color] = {}
- 
+
             colorSlug[item.color] = { slug: item.slug }
         }
     }
 
+
     return {
-        props: {error:error, product: JSON.parse(JSON.stringify(product)), variants: JSON.parse(JSON.stringify(colorSlug)) }
+        props: { error: error, product: JSON.parse(JSON.stringify(product)), variants: JSON.parse(JSON.stringify(colorSlug)), review: JSON.parse(JSON.stringify(review)) }
     }
 }
