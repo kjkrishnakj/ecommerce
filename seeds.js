@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 const fs = require("fs");
 const path = require("path");
-const Product = require("./models/Product.js");
-const User = require("./models/User.js"); // Import the User model
+const Product = require("./models/products.js");
+const User = require("./models/users.js"); // Import the User model
 require('dotenv').config();
 
 // Connect to MongoDB
