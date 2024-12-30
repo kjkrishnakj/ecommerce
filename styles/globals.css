@@ -87,3 +87,61 @@ body {
 
 
 
+/* Only target the first carousel with .custom-carousel */
+.custom-carousel .slick-prev,
+.custom-carousel .slick-next {
+  width: 1cm;
+  height: 40px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  font-size: 20px;
+  transition: background-color 0.3s ease;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.custom-carousel .slick-prev:hover,
+.custom-carousel .slick-next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.custom-carousel .slick-prev {
+  left: 10px;
+}
+
+.custom-carousel .slick-next {
+  right: 10px;
+}
+
+.custom-carousel .slick-dots li button:before {
+  color: #000;
+}
+
+.custom-carousel .slick-dots li.slick-active button:before {
+  color: #555;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .custom-carousel .slick-prev,
+  .custom-carousel .slick-next {
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 576px) {
+  .custom-carousel .slick-prev,
+  .custom-carousel .slick-next {
+    width: 25px;
+    height: 25px;
+    font-size: 14px;
+  }
+}
