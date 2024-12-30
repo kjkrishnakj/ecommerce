@@ -99,40 +99,40 @@ export default function Home({ products }) {
         itemClass="carousel-item"
       >
         <div className="h-[55vh] mt-20 w-full">
-  <a href="/product/OnePlus115g">
+  <Link href="/product/OnePlus115g">
     <img
       src="/img/OnePlusposter.webp"
       alt="image 1"
       className="h-full w-full object-fill"
     />
-  </a>
+  </Link>
 </div>
 <div className="h-[55vh] mt-20 w-full">
-  <a href="/product/IQOONEO7PRO5G">
+  <Link href="/product/IQOONEO7PRO5G">
     <img
       src="/img/iqoo_poster.jpg"
       alt="image 2"
       className="h-full w-full object-fill"
     />
-  </a>
+  </Link>
 </div>
 <div className="h-[55vh] mt-20 w-full">
-  <a href="/product/realme12pro5g">
+  <Link href="/product/realme12pro5g">
     <img
       src="/img/realme12pro_poster.jpg"
       alt="image 3"
       className="h-full w-full object-fill"
     />
-  </a>
+  </Link>
 </div>
 <div className="h-[55vh] mt-20 w-full">
-  <a href="/product/samsaunggalaxys24+">
+  <Link href="/product/samsaunggalaxys24+">
     <img
       src="/img/s24_poster.webp"
       alt="image 4"
       className="h-full w-full object-fill"
     />
-  </a>
+  </Link>
 </div>
 
       
