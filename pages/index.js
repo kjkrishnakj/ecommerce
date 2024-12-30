@@ -80,9 +80,71 @@ export default function Home({ products }) {
 
       </Head>
 
+
+
+
+
+      <Carousel
+        responsive={{
+          superLargeDesktop: { breakpoint: { max: 4000, min: 1024 }, items: 1 },
+          desktop: { breakpoint: { max: 1024, min: 768 }, items: 1 },
+          tablet: { breakpoint: { max: 768, min: 464 }, items: 1 },
+          mobile: { breakpoint: { max: 464, min: 0 }, items: 1 },
+        }}
+        autoPlay={true}
+        autoPlaySpeed={2000}
+        infinite={true}
+        className="custom-carousel rounded-lg shadow-lg"
+        containerClass="carousel-container"
+        itemClass="carousel-item"
+      >
+        <div className="h-[55vh] mt-20 w-full">
+  <a href="/product/OnePlus115g">
+    <img
+      src="/img/OnePlusposter.webp"
+      alt="image 1"
+      className="h-full w-full object-fill"
+    />
+  </a>
+</div>
+<div className="h-[55vh] mt-20 w-full">
+  <a href="/product/IQOONEO7PRO5G">
+    <img
+      src="/img/iqoo_poster.jpg"
+      alt="image 2"
+      className="h-full w-full object-fill"
+    />
+  </a>
+</div>
+<div className="h-[55vh] mt-20 w-full">
+  <a href="/product/realme12pro5g">
+    <img
+      src="/img/realme12pro_poster.jpg"
+      alt="image 3"
+      className="h-full w-full object-fill"
+    />
+  </a>
+</div>
+<div className="h-[55vh] mt-20 w-full">
+  <a href="/product/samsaunggalaxys24+">
+    <img
+      src="/img/s24_poster.webp"
+      alt="image 4"
+      className="h-full w-full object-fill"
+    />
+  </a>
+</div>
+
+      
+      </Carousel>
+
+
+
+
+
       <section className="text-gray-600 body-font">
 
-        <div className="container px-5 py-24 mx-auto">
+        <div className="container px-5 mx-auto">
 
           <div className="relative flex flex-col pt-12 sm:pt-12 items-center justify-center w-full">
             <div className="relative w-[8cm] mb-4">
@@ -115,7 +177,7 @@ export default function Home({ products }) {
 
               return <Link passHref={true} key={products[item]._id} href={`/product/${products[item].slug}`}>
                 <div className=" lg:w-1/2 md:w-1/2 p-2" style={{ width: "6cm", margin: "0.5cm 2cm" }}>
-                  <img src={products[item].img} data-aos="zoom-in" alt="" className="w-full h-full rounded overflow-hidden transform transition-transform duration-300 ease-in-out hover:scale-105 object-cover" style={{ height: "16rem", width: "16rem" }} />
+                  <img src={products[item].img} data-aos="zoom-in" alt="" className="w-full h-full rounded overflow-hidden transform transition-transform duration-300 ease-in-out hover:scale-105 object-contain" style={{ height: "16rem", width: "16rem" }} />
                   <div className="mt-4" data-aos="fade-right">
                     <h3 className="text-gray-500 text-s  tracking-widest title-font mb-1">{products[item].brand}</h3>
                     <h2 className="text-gray-900 title-font text-lg font-medium">{products[item].title}</h2>
