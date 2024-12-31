@@ -94,12 +94,12 @@ export default function Home({ products }) {
         autoPlay={true}
         autoPlaySpeed={2000}
         infinite={true}
-        className="custom-carousel rounded-lg shadow-lg"
+        className="custom-carousel shadow-lg"
         containerClass="carousel-container"
         itemClass="carousel-item"
         arrows={false}
       >
-      <div className="h-[30vh]  aspect-w-16 aspect-h-9  sm:h-[55vh]  mt-20 w-full">
+        <div className="h-[30vh] sm:h-[55vh] mt-20 ">
   <Link href="/product/OnePlus115g">
     <img
       src="/img/OnePlusposter.webp"
@@ -108,7 +108,26 @@ export default function Home({ products }) {
     />
   </Link>
 </div>
-<div className="h-[30vh]  aspect-w-16 aspect-h-9  sm:h-[55vh] mt-20 w-full">
+<div className="h-[30vh] sm:h-[55vh] mt-20 ">
+  <Link href="/product/realmenarzo70x5g">
+    <img
+      src="/img/realmenarzo70x_poster.webp"
+      alt="image 2"
+      className="h-full w-full object-fill"
+    />
+  </Link>
+</div>
+
+<div className="h-[30vh] sm:h-[55vh] mt-20 ">
+  <Link href="/product/redminote13peo5g">
+    <img
+      src="/img/redminote135g_poster.jpg"
+      alt="image 2"
+      className="h-full w-full object-fill"
+    />
+  </Link>
+</div>
+<div className="h-[30vh] sm:h-[55vh] mt-20 ">
   <Link href="/product/IQOONEO7PRO5G">
     <img
       src="/img/iqoo_poster.jpg"
@@ -117,7 +136,7 @@ export default function Home({ products }) {
     />
   </Link>
 </div>
-<div className="h-[30vh]  aspect-w-16 aspect-h-9  sm:h-[55vh] mt-20 w-full">
+<div className="h-[30vh] sm:h-[55vh] mt-20 ">
   <Link href="/product/realme12pro5g">
     <img
       src="/img/realme12pro_poster.jpg"
@@ -126,7 +145,7 @@ export default function Home({ products }) {
     />
   </Link>
 </div>
-<div className="h-[30vh]  aspect-w-16 aspect-h-9  sm:h-[55vh] mt-20 w-full">
+<div className="h-[30vh] sm:h-[55vh] mt-20 ">
   <Link href="/product/samsaunggalaxys24+">
     <img
       src="/img/s24_poster.webp"
@@ -135,17 +154,6 @@ export default function Home({ products }) {
     />
   </Link>
 </div>
-<div className="h-[30vh]  aspect-w-16 aspect-h-9  sm:h-[55vh] mt-20 w-full">
-  <Link href="/product/samsaunggalaxys24+">
-    <img
-      src="/img/redminote135g_poster.jpg"
-      alt="image 4"
-      className="h-full w-full object-fill"
-    />
-  </Link>
-</div>
-
-
 
       
       </Carousel>
@@ -188,8 +196,8 @@ export default function Home({ products }) {
             {Object.keys(products).map((item) => {
 
               return <Link passHref={true} key={products[item]._id} href={`/product/${products[item].slug}`}>
-                <div className=" lg:w-1/2 md:w-1/2 p-2" style={{ width: "8cm", margin: "0.5cm 2cm" }}>
-                  <img src={products[item].img} data-aos="zoom-in" alt="" className="w-full h-full rounded overflow-hidden transform transition-transform duration-300 ease-in-out hover:scale-105 object-fill" style={{ height: "18rem", width: "16rem" }} />
+                <div className=" lg:w-1/2 md:w-1/2 p-2" style={{ width: "6cm", margin: "0.5cm 2cm" }}>
+                  <img src={products[item].img} data-aos="zoom-in" alt="" className="w-full h-full rounded overflow-hidden transform transition-transform duration-300 ease-in-out hover:scale-105 object-contain" style={{ height: "16rem", width: "16rem" }} />
                   <div className="mt-4" data-aos="fade-right">
                     <h3 className="text-gray-500 text-s  tracking-widest title-font mb-1">{products[item].brand}</h3>
                     <h2 className="text-gray-900 title-font text-lg font-medium">{products[item].title}</h2>
@@ -201,7 +209,7 @@ export default function Home({ products }) {
                       {products[item].color.includes('blue') && <button className="border-2 border-blue-200 bg-blue-700 rounded-full w-6 h-6 focus:outline-none"></button>}
                       {products[item].color.includes('orange') && <button className="border-2 border-blue-200 bg-orange-700 rounded-full w-6 h-6 focus:outline-none"></button>}
                       {products[item].color.includes('purple') && <button className="border-2 border-blue-200 bg-purple-700 rounded-full w-6 h-6 focus:outline-none"></button>}
-                      {products[item].color.includes('black') && <button className="border-2 border-blue-200 bg-black rounded-full w-6 h-6 focus:outline-none"></button>}
+                      {products[item].color.includes('black') && <button className="border-2 border-blue-200 bg-black-700 rounded-full w-6 h-6 focus:outline-none"></button>}
                       {products[item].color.includes('white') && <button className="border-2 border-blue-200 bg-white-700 rounded-full w-6 h-6 focus:outline-none"></button>}
                       {products[item].color.includes('pink') && <button className="border-2 border-blue-200 bg-pink-300 rounded-full w-6 h-6 focus:outline-none"></button>}
                       {products[item].color.includes('yellow') && <button className="border-2 border-blue-200 bg-yellow-700 rounded-full w-6 h-6 focus:outline-none"></button>}
@@ -290,4 +298,3 @@ export async function getServerSideProps(context) {
     props: { products: JSON.parse(JSON.stringify(phones)) }
   }
 }
-
