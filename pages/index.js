@@ -97,8 +97,9 @@ export default function Home({ products }) {
         className="custom-carousel rounded-lg shadow-lg"
         containerClass="carousel-container"
         itemClass="carousel-item"
+        arrows={false}
       >
-        <div className="h-[55vh] mt-20 w-full">
+      <div className="h-[30vh] sm:h-[55vh] mt-20 w-full">
   <Link href="/product/OnePlus115g">
     <img
       src="/img/OnePlusposter.webp"
@@ -107,7 +108,7 @@ export default function Home({ products }) {
     />
   </Link>
 </div>
-<div className="h-[55vh] mt-20 w-full">
+<div className="h-[30vh] sm:h-[55vh] mt-20 w-full">
   <Link href="/product/IQOONEO7PRO5G">
     <img
       src="/img/iqoo_poster.jpg"
@@ -116,7 +117,7 @@ export default function Home({ products }) {
     />
   </Link>
 </div>
-<div className="h-[55vh] mt-20 w-full">
+<div className="h-[30vh] sm:h-[55vh] mt-20 w-full">
   <Link href="/product/realme12pro5g">
     <img
       src="/img/realme12pro_poster.jpg"
@@ -125,7 +126,7 @@ export default function Home({ products }) {
     />
   </Link>
 </div>
-<div className="h-[55vh] mt-20 w-full">
+<div className="h-[30vh] sm:h-[55vh] mt-20 w-full">
   <Link href="/product/samsaunggalaxys24+">
     <img
       src="/img/s24_poster.webp"
@@ -134,6 +135,8 @@ export default function Home({ products }) {
     />
   </Link>
 </div>
+
+
 
       
       </Carousel>
