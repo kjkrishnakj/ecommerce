@@ -250,7 +250,7 @@ export default function Home({ products }) {
             {Object.keys(products).map((item) => {
 
               return <Link passHref={true} key={products[item]._id} href={`/product/${products[item].slug}`}>
-                <div className=" lg:w-1/2 md:w-1/2 p-2" style={{ width: "6cm", margin: "0.5cm 2cm" }}>
+                <div className=" lg:w-1/2 md:w-1/2 p-2" style={{ width: "6cm", margin: "0.5cm " }}>
                   <img src={products[item].img} alt="" className="w-full h-full object-fill" style={{ height: "14rem", width: "11rem", margin: "auto" }} />
                   <div className="mt-4">
                     <h3 className="text-gray-500 text-xs  tracking-widest title-font mb-1">{products[item].brand}</h3>
