@@ -48,7 +48,7 @@ const Post = ({ addToCart, error, product, variants, buyNow, review }) => {
             <div className="container px-5 py-24 mx-auto">
                 <div className="lg:w-4/5 mx-auto flex flex-wrap">
 
-                    <img data-aos="fade-right" src={product.img} alt="" style={{ height: "20rem", width: "23rem", margin: "3rem 0rem" }}></img>
+                    <img data-aos="fade-right" src={product.img} alt="" style={{ height: "28rem", width: "23rem", margin: "3rem 0rem" }}></img>
                     <div data-aos="fade-left" className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
                         <h2 className="text-sm title-font text-gray-500 tracking-widest"> </h2>
                         <h1 className="text-gray-500 text-xl title-font font-medium mb-1"> {product.brand}</h1>
@@ -115,7 +115,7 @@ const Post = ({ addToCart, error, product, variants, buyNow, review }) => {
                         <li className=' mt-2 text-gray-900  pl-10'><span className='font-bold'>Battery: </span>{product.battery}mAh</li>
                         <li className=' mt-2 text-gray-900  pl-10'><span className='font-bold'>RAM: </span>{product.ram}GB</li>
                         <li className=' mt-2 text-gray-900  pl-10'><span className='font-bold'>Memory: </span>{product.memory}GB</li>
-                        <li className=' mt-2 text-gray-900  pl-10'><span className='font-bold'>CPU: </span>{product.cpu}</li>
+                        <li className=' mt-2 text-gray-900  pl-10'><span className='font-bold'>CPU: </span>{product.cpu}GHz</li>
                         <li className=' mt-2 text-gray-900  pl-10'><span className='font-bold'>Screen Size: </span>{product.screensize} Inches</li>
 
                         <div>
