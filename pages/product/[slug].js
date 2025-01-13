@@ -97,7 +97,7 @@ const Post = ({ addToCart, error, product, variants, buyNow, review }) => {
                                 {product.color && Object.keys(variants).includes('blue') && <button className="border-2 border-blue-200  bg-blue-700 rounded-full w-6 h-6 focus:outline-none"></button>}
                                 {product.color && Object.keys(variants).includes('orange') && <button className="border-2 border-blue-200 bg-orange-700 rounded-full w-6 h-6 focus:outline-none"></button>}
                                 {product.color && Object.keys(variants).includes('purple') && <button className="border-2 border-blue-200 bg-purple-700 rounded-full w-6 h-6 focus:outline-none"></button>}
-                                {product.color && Object.keys(variants).includes('black') && <button className="border-2 border-blue-200 bg-black-700 rounded-full w-6 h-6 focus:outline-none"></button>}
+                                {product.color && Object.keys(variants).includes('black') && <button className="border-2 border-blue-200 bg-black rounded-full w-6 h-6 focus:outline-none"></button>}
                                 {product.color && Object.keys(variants).includes('white') && <button className="border-2 border-blue-200 bg-white-700 rounded-full w-6 h-6 focus:outline-none"></button>}
                                 {product.color && Object.keys(variants).includes('pink') && <button className="border-2 border-blue-200 bg-pink-300 rounded-full w-6 h-6 focus:outline-none"></button>}
                                 {product.color && Object.keys(variants).includes('yellow') && <button className="border-2 border-blue-200 bg-yellow-700 rounded-full w-6 h-6 focus:outline-none"></button>}
