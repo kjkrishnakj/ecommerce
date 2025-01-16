@@ -74,27 +74,24 @@ export default function Home({ products }) {
     }
   };
   const handleSearchSubmit3 = async (e) => {
-    const relatedTarget = e.relatedTarget;
-    const container = document.querySelector(".flex.flex-col.items-center");
-  
-    if (container && container.contains(relatedTarget)) {
-      // Prevent hiding if cursor moves within the container
-      return;
-    }
-  
     setDropdown2(false);
     const filter = document.getElementById("filter");
     if (filter) {
       filter.classList.add("opacity-0"); // Start fading out
-      filter.classList.add("hidden"); // Hide after animation
-    }
+      
+        filter.classList.add("hidden"); // Hide after animation
+ 
+    } 
     const catalog = document.getElementById("catalog");
     if (catalog) {
       catalog.classList.remove("hidden"); // Show immediately
-      catalog.classList.remove("opacity-0"); // Fade in
+     
+        catalog.classList.remove("opacity-0"); // Fade in
+      
     }
-  };
-  
+  }
+ 
+
   const handleSearchSubmit2 = async (e, imgId) => {
     setSearchBrand(imgId);
 
@@ -116,19 +113,19 @@ export default function Home({ products }) {
       if (!foundbrand) {
 
         setDropdown2(false);
-      } 
+      }
       else {
         const filter = document.getElementById("filter");
-    if (filter) {
-      filter.classList.remove("hidden"); // Show immediately
-      filter.classList.remove("opacity-0"); // Fade in
-       
-    }
+        if (filter) {
+          filter.classList.remove("hidden"); // Show immediately
+          filter.classList.remove("opacity-0"); // Fade in
+
+        }
         const catalog = document.getElementById("catalog");
         if (catalog) {
           catalog.classList.add("opacity-0"); // Start fading out
           catalog.classList.add("hidden"); // Hide after animation
-       
+
         }
         setDropdown2(false);
 
@@ -236,48 +233,52 @@ export default function Home({ products }) {
       <section className="text-gray-600 body-font">
         <div class="hidden lg:flex flex-wrap justify-center items-center gap-6 p-6 bg-gradient-to-r from-gray-100 via-gray-200 to-gray-300 rounded-lg shadow-lg">
           <div class="flex flex-wrap justify-center items-center gap-6">
-     
-            <div className="flex flex-col items-center space-y-4" id="realme"  onMouseOver={(e) => handleSearchSubmit2(e, e.target.id)} onMouseLeave={handleSearchSubmit3}>
-              <img  src="/img/realme logo.webp" alt="Realme Logo" class="w-20 h-20 sm:w-28 sm:h-28 my-2 mx-4 object-fill rounded-full shadow-md hover:shadow-xl hover:scale-110 transition-transform duration-300 ease-out" />
-               
+
+            <div className="flex flex-col items-center space-y-4" id="realme" onMouseOver={(e) => handleSearchSubmit2(e, e.target.id)} onMouseLeave={handleSearchSubmit3}>
+            <img
+  src="/img/realme logo.webp"
+  alt="Realme Logo"
+  class="w-20 h-20 sm:w-28 sm:h-28 my-2 mx-4 object-fill rounded-full shadow-md hover:shadow-xl hover:scale-110 hover:translate-y-[-20px] transition-transform duration-300 ease-out"
+/>
+
             </div>
 
 
             <div className="flex flex-col items-center space-y-4" id="Apple" onMouseOver={(e) => handleSearchSubmit2(e, e.target.id)} onMouseLeave={handleSearchSubmit3}>
-              <img src="/img/apple logo.jpg" alt="Realme Logo" class="w-20 h-20 sm:w-28 sm:h-28 my-2 mx-4 object-fill rounded-full shadow-md hover:shadow-xl hover:scale-110 transition-transform duration-300 ease-out" />
-      
+              <img src="/img/apple logo.jpg" alt="Realme Logo" class="w-20 h-20 sm:w-28 sm:h-28 my-2 mx-4 object-fill rounded-full hover:translate-y-[-20px] shadow-md hover:shadow-xl hover:scale-110 transition-transform duration-300 ease-out" />
+
             </div>
             <div className="flex flex-col items-center space-y-4" id="Redmi" onMouseOver={(e) => handleSearchSubmit2(e, e.target.id)} onMouseLeave={handleSearchSubmit3}>
-              <img src="/img/redmilogo.jpeg" alt="Realme Logo" class="w-20 h-20 sm:w-28 sm:h-28 my-2 mx-4 object-fill rounded-full shadow-md hover:shadow-xl hover:scale-110 transition-transform duration-300 ease-out" />
-      
+              <img src="/img/redmilogo.jpeg" alt="Realme Logo" class="w-20 h-20 sm:w-28 sm:h-28 my-2 mx-4 object-fill rounded-full hover:translate-y-[-20px] shadow-md hover:shadow-xl hover:scale-110 transition-transform duration-300 ease-out" />
+
             </div>
-     
+
             <div className="flex flex-col items-center space-y-4" id="OnePlus" onMouseOver={(e) => handleSearchSubmit2(e, e.target.id)} onMouseLeave={handleSearchSubmit3}>
-              <img src="/img/oneplus logo.jpg" alt="Realme Logo" class="w-20 h-20 sm:w-28 sm:h-28 my-2 mx-4 object-fill rounded-full shadow-md hover:shadow-xl hover:scale-110 transition-transform duration-300 ease-out" />
-      
+              <img src="/img/oneplus logo.jpg" alt="Realme Logo" class="w-20 h-20 sm:w-28 sm:h-28 my-2 mx-4 object-fill rounded-full hover:translate-y-[-20px] shadow-md hover:shadow-xl hover:scale-110 transition-transform duration-300 ease-out" />
+
             </div>
 
             <div className="flex flex-col items-center space-y-4" id="IQOO" onMouseOver={(e) => handleSearchSubmit2(e, e.target.id)} onMouseLeave={handleSearchSubmit3}>
-              <img src="/img/iqoo logo.jpg" alt="Realme Logo" class="w-20 h-20 sm:w-28 sm:h-28 my-2 mx-4 object-fill rounded-full shadow-md hover:shadow-xl hover:scale-110 transition-transform duration-300 ease-out" />
-      
+              <img src="/img/iqoo logo.jpg" alt="Realme Logo" class="w-20 h-20 sm:w-28 sm:h-28 my-2 mx-4 object-fill rounded-full hover:translate-y-[-20px] shadow-md hover:shadow-xl hover:scale-110 transition-transform duration-300 ease-out" />
+
             </div>
 
             <div className="flex flex-col items-center space-y-4" id="Samsung" onMouseOver={(e) => handleSearchSubmit2(e, e.target.id)} onMouseLeave={handleSearchSubmit3}>
-              <img src="/img/samsung logo.jpg" alt="Realme Logo" class="w-20 h-20 sm:w-28 sm:h-28 my-2 mx-4 object-fill rounded-full shadow-md hover:shadow-xl hover:scale-110 transition-transform duration-300 ease-out" />
-      
+              <img src="/img/samsung logo.jpg" alt="Realme Logo" class="w-20 h-20 sm:w-28 sm:h-28 my-2 mx-4 object-fill rounded-full hover:translate-y-[-20px] shadow-md hover:shadow-xl hover:scale-110 transition-transform duration-300 ease-out" />
+
             </div>
 
             <div className="flex flex-col items-center space-y-4" id="POCO" onMouseOver={(e) => handleSearchSubmit2(e, e.target.id)} onMouseLeave={handleSearchSubmit3}>
-              <img src="/img/poco logo.jpg" alt="Realme Logo" class="w-20 h-20 sm:w-28 sm:h-28 my-2 mx-4 object-fill rounded-full shadow-md hover:shadow-xl hover:scale-110 transition-transform duration-300 ease-out" />
-      
+              <img src="/img/poco logo.jpg" alt="Realme Logo" class="w-20 h-20 sm:w-28 sm:h-28 my-2 mx-4 object-fill rounded-full hover:translate-y-[-20px] shadow-md hover:shadow-xl hover:scale-110 transition-transform duration-300 ease-out" />
+
             </div>
             <div className="flex flex-col items-center space-y-4" id="Google" onMouseOver={(e) => handleSearchSubmit2(e, e.target.id)} onMouseLeave={handleSearchSubmit3}>
-              <img src="/img/google logo.jpg" alt="Realme Logo" class="w-20 h-20 sm:w-28 sm:h-28 my-2 mx-4 object-fill rounded-full shadow-md hover:shadow-xl hover:scale-110 transition-transform duration-300 ease-out" />
-      
+              <img src="/img/google logo.jpg" alt="Realme Logo" class="w-20 h-20 sm:w-28 sm:h-28 my-2 mx-4 object-fill rounded-full hover:translate-y-[-20px] shadow-md hover:shadow-xl hover:scale-110 transition-transform duration-300 ease-out" />
+
             </div>
 
 
-                </div>
+          </div>
         </div>
 
 
@@ -352,44 +353,44 @@ export default function Home({ products }) {
           </div>
           <div className="flex flex-wrap -m-4  justify-center" id="filter">
 
-          {Object.keys(foundbrand).map((item) => {
+            {Object.keys(foundbrand).map((item) => {
 
-return <Link passHref={true} key={foundbrand[item]._id} href={`/product/${foundbrand[item].slug}`}>
-  <div className=" lg:w-1/2  md:w-1/2 p-2" style={{ width: "8cm", margin: "0.5cm" }}>
-    <img src={foundbrand[item].img} data-aos="zoom-in" alt="" className="w-full h-full rounded overflow-hidden transform transition-transform duration-300 ease-in-out hover:scale-105 object-contain" style={{ height: "16rem", width: "16rem" }} />
-    <div className="mt-4" data-aos="fade-right">
-      <h3 className="text-gray-500 text-s  tracking-widest title-font mb-1">{foundbrand[item].brand}</h3>
-      <h2 className="text-gray-900 title-font text-lg font-medium">{foundbrand[item].title}</h2>
-      <p className="mt-1">₹{foundbrand[item].price}</p>
-    </div>
-    <div className="mt-1">
-      <div className="flex">
+              return <Link passHref={true} key={foundbrand[item]._id} href={`/product/${foundbrand[item].slug}`}>
+                <div className=" lg:w-1/2  md:w-1/2 p-2" style={{ width: "8cm", margin: "0.5cm" }}>
+                  <img src={foundbrand[item].img} data-aos="zoom-in" alt="" className="w-full h-full rounded overflow-hidden transform transition-transform duration-300 ease-in-out hover:scale-105 object-contain" style={{ height: "16rem", width: "16rem" }} />
+                  <div className="mt-4" data-aos="fade-right">
+                    <h3 className="text-gray-500 text-s  tracking-widest title-font mb-1">{foundbrand[item].brand}</h3>
+                    <h2 className="text-gray-900 title-font text-lg font-medium">{foundbrand[item].title}</h2>
+                    <p className="mt-1">₹{foundbrand[item].price}</p>
+                  </div>
+                  <div className="mt-1">
+                    <div className="flex">
 
-        {foundbrand[item].color.includes('blue') && <button className="border-2 border-blue-200 bg-blue-700 rounded-full w-6 h-6 focus:outline-none"></button>}
-        {foundbrand[item].color.includes('orange') && <button className="border-2 border-blue-200 bg-orange-700 rounded-full w-6 h-6 focus:outline-none"></button>}
-        {foundbrand[item].color.includes('purple') && <button className="border-2 border-blue-200 bg-purple-700 rounded-full w-6 h-6 focus:outline-none"></button>}
-        {foundbrand[item].color.includes('black') && <button className="border-2 border-blue-200 bg-black rounded-full w-6 h-6 focus:outline-none"></button>}
-        {foundbrand[item].color.includes('white') && <button className="border-2 border-blue-200 bg-white-700 rounded-full w-6 h-6 focus:outline-none"></button>}
-        {foundbrand[item].color.includes('pink') && <button className="border-2 border-blue-200 bg-pink-300 rounded-full w-6 h-6 focus:outline-none"></button>}
-        {foundbrand[item].color.includes('yellow') && <button className="border-2 border-blue-200 bg-yellow-700 rounded-full w-6 h-6 focus:outline-none"></button>}
-        {foundbrand[item].color.includes('green') && <button className="border-2 border-blue-200 bg-green-700 rounded-full w-6 h-6 focus:outline-none"></button>}
-        {foundbrand[item].color.includes('red') && <button className="border-2 border-blue-200 bg-red-700 rounded-full w-6 h-6 focus:outline-none"></button>}
-        {foundbrand[item].color.includes('cyan') && <button className="border-2 border-blue-200 bg-cyan-700 rounded-full w-6 h-6 focus:outline-none"></button>}
-        {foundbrand[item].color.includes('teal') && <button className="border-2 border-blue-200 bg-teal-700 rounded-full w-6 h-6 focus:outline-none"></button>}
-        {foundbrand[item].color.includes('lime') && <button className="border-2 border-blue-200 bg-lime-700 rounded-full w-6 h-6 focus:outline-none"></button>}
-        {foundbrand[item].color.includes('amber') && <button className="border-2 border-blue-200 bg-amber-700 rounded-full w-6 h-6 focus:outline-none"></button>}
-        {foundbrand[item].color.includes('indigo') && <button className="border-2 border-blue-200 bg-indigo-700 rounded-full w-6 h-6 focus:outline-none"></button>}
-        {foundbrand[item].color.includes('rose') && <button className="border-2 border-blue-200 bg-rose-700 rounded-full w-6 h-6 focus:outline-none"></button>}
-        {foundbrand[item].color.includes('emerald') && <button className="border-2 border-blue-200 bg-emerald-700 rounded-full w-6 h-6 focus:outline-none"></button>}
-        {foundbrand[item].color.includes('fuchsia') && <button className="border-2 border-blue-200 bg-fuchsia-700 rounded-full w-6 h-6 focus:outline-none"></button>}
-        {foundbrand[item].color.includes('gray') && <button className="border-2 border-blue-200 bg-gray-700 rounded-full w-6 h-6 focus:outline-none"></button>}
-        {foundbrand[item].color.includes('brown') && <button className="border-2 border-blue-200 bg-brown-700 rounded-full w-6 h-6 focus:outline-none"></button>}
-      </div>
-    </div>
-  </div>
-</Link>
-})
-}
+                      {foundbrand[item].color.includes('blue') && <button className="border-2 border-blue-200 bg-blue-700 rounded-full w-6 h-6 focus:outline-none"></button>}
+                      {foundbrand[item].color.includes('orange') && <button className="border-2 border-blue-200 bg-orange-700 rounded-full w-6 h-6 focus:outline-none"></button>}
+                      {foundbrand[item].color.includes('purple') && <button className="border-2 border-blue-200 bg-purple-700 rounded-full w-6 h-6 focus:outline-none"></button>}
+                      {foundbrand[item].color.includes('black') && <button className="border-2 border-blue-200 bg-black rounded-full w-6 h-6 focus:outline-none"></button>}
+                      {foundbrand[item].color.includes('white') && <button className="border-2 border-blue-200 bg-white-700 rounded-full w-6 h-6 focus:outline-none"></button>}
+                      {foundbrand[item].color.includes('pink') && <button className="border-2 border-blue-200 bg-pink-300 rounded-full w-6 h-6 focus:outline-none"></button>}
+                      {foundbrand[item].color.includes('yellow') && <button className="border-2 border-blue-200 bg-yellow-700 rounded-full w-6 h-6 focus:outline-none"></button>}
+                      {foundbrand[item].color.includes('green') && <button className="border-2 border-blue-200 bg-green-700 rounded-full w-6 h-6 focus:outline-none"></button>}
+                      {foundbrand[item].color.includes('red') && <button className="border-2 border-blue-200 bg-red-700 rounded-full w-6 h-6 focus:outline-none"></button>}
+                      {foundbrand[item].color.includes('cyan') && <button className="border-2 border-blue-200 bg-cyan-700 rounded-full w-6 h-6 focus:outline-none"></button>}
+                      {foundbrand[item].color.includes('teal') && <button className="border-2 border-blue-200 bg-teal-700 rounded-full w-6 h-6 focus:outline-none"></button>}
+                      {foundbrand[item].color.includes('lime') && <button className="border-2 border-blue-200 bg-lime-700 rounded-full w-6 h-6 focus:outline-none"></button>}
+                      {foundbrand[item].color.includes('amber') && <button className="border-2 border-blue-200 bg-amber-700 rounded-full w-6 h-6 focus:outline-none"></button>}
+                      {foundbrand[item].color.includes('indigo') && <button className="border-2 border-blue-200 bg-indigo-700 rounded-full w-6 h-6 focus:outline-none"></button>}
+                      {foundbrand[item].color.includes('rose') && <button className="border-2 border-blue-200 bg-rose-700 rounded-full w-6 h-6 focus:outline-none"></button>}
+                      {foundbrand[item].color.includes('emerald') && <button className="border-2 border-blue-200 bg-emerald-700 rounded-full w-6 h-6 focus:outline-none"></button>}
+                      {foundbrand[item].color.includes('fuchsia') && <button className="border-2 border-blue-200 bg-fuchsia-700 rounded-full w-6 h-6 focus:outline-none"></button>}
+                      {foundbrand[item].color.includes('gray') && <button className="border-2 border-blue-200 bg-gray-700 rounded-full w-6 h-6 focus:outline-none"></button>}
+                      {foundbrand[item].color.includes('brown') && <button className="border-2 border-blue-200 bg-brown-700 rounded-full w-6 h-6 focus:outline-none"></button>}
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            })
+            }
             {/* <div className=" lg:w-1/2  md:w-1/2 p-2" style={{ width: "8cm", margin: "0.5cm" }}>
               <div className="border rounded-md px-5 w-[16rem] bg-white mt-4">
                 <Link passHref={true} href={`/product/${foundbrand.slug}`}>
