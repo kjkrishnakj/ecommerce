@@ -149,49 +149,92 @@ const Checkout = ({
       }
     }
   };
+  // const placeorder = async () => {
+  //   if (!user.value) {
+  //     toast.warning("Login to checkout", { autoClose: 2000 })
+  //     router.push(`${process.env.NEXT_PUBLIC_HOST}/login`);
+  //   }
+  //   else {
+  //     // const priceId = localStorage.getItem('priceid');
+  //     const priceIds = JSON.parse(localStorage.getItem('priceids')) || [];
+  //     const lineItems = priceIds.map(priceId => ({
+  //       price: priceId,
+  //       quantity: 1,
+  //     }));
+  //     test({ lineItems });
+
+  //     let oid = Math.floor(Math.random() * Date.now());
+      
+  //     const data = {
+  //       cart,
+  //       pincode,
+  //       SubTotal,
+  //       oid,
+  //       email: localStorage.getItem('email'),
+  //       name,
+  //       address,
+  //       city, state,
+  //       phone,
+  //     };
+
+  //     let a = await fetch(`${process. env.NEXT_PUBLIC_HOST}/api/pretransaction`, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify(data),
+  //     });
+  //     if(a.success){
+  //       ClearCart();
+  //     }
+     
+  //   }
+  // }
+
   const placeorder = async () => {
     if (!user.value) {
-      toast.warning("Login to checkout", { autoClose: 2000 })
+      toast.warning("Login to checkout", { autoClose: 2000 });
       router.push(`${process.env.NEXT_PUBLIC_HOST}/login`);
+      return;
     }
-    else {
-      // const priceId = localStorage.getItem('priceid');
-      const priceIds = JSON.parse(localStorage.getItem('priceids')) || [];
-      const lineItems = priceIds.map(priceId => ({
-        price: priceId,
-        quantity: 1,
-      }));
-      test({ lineItems });
-
-      let oid = Math.floor(Math.random() * Date.now());
-      
-      const data = {
-        cart,
-        pincode,
-        SubTotal,
-        oid,
-        email: localStorage.getItem('email'),
-        name,
-        address,
-        city, state,
-        phone,
-      };
-
-      let a = await fetch(`${process. env.NEXT_PUBLIC_HOST}/api/pretransaction`, {
+  
+    const oid = Math.floor(Math.random() * Date.now());
+  
+    const data = {
+      cart,
+      pincode,
+      SubTotal,
+      oid,
+      email: localStorage.getItem("email"),
+      name,
+      address,
+      city,
+      state,
+      phone,
+    };
+  
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pretransaction`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
       });
-      if(a.success){
-        ClearCart();
+  
+      const json = await res.json();
+      if (json.url) {
+        ClearCart(); // optionally clear cart before redirect
+        window.location.href = json.url; // redirect to Stripe Checkout
+      } else {
+        toast.error("Payment session creation failed");
       }
-     
+    } catch (err) {
+      console.error("Error initiating payment:", err);
+      toast.error("Something went wrong");
     }
-  }
-
-
+  };
+  
   const intiatePayment = async () => {
     let oid = Math.floor(Math.random() * Date.now());
 
